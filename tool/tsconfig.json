@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",
+    "incremental": true,
+    "tsBuildInfoFile": "./.tsbuildinfo",
+    // "rootDir": "./",
+    // "moduleResolution": "node10",
+    // "baseUrl": "./",
+    // "outFile": "./",
+    // "outDir": "./",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true
+  }
+}
