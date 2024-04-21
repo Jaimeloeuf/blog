@@ -10,9 +10,12 @@ import { postsDirPath } from "./postsDirPath";
 /**
  * Builds a post's static HTML file from its markdown contents.
  */
-export async function buildPost(buildOutputFolderPath: string, folder: string) {
+export async function buildPost(
+  buildOutputFolderPath: string,
+  folderPath: string
+) {
   const file = await readFile(
-    path.resolve(postsDirPath, `${folder}/index.md`),
+    path.resolve(postsDirPath, `${folderPath}/index.md`),
     { encoding: "utf8" }
   );
 
@@ -42,10 +45,9 @@ export async function buildPost(buildOutputFolderPath: string, folder: string) {
     htmlContent
   );
 
-  const folderPath = path.resolve(buildOutputFolderPath, folder);
-  const htmlFilePath = path.resolve(folderPath, `index.html`);
+  const newFolderPath = path.resolve(buildOutputFolderPath, folderPath);
+  await createFolderIfDoesNotExist(newFolderPath);
 
-  await createFolderIfDoesNotExist(folderPath);
-
+  const htmlFilePath = path.resolve(newFolderPath, `index.html`);
   await writeFile(htmlFilePath, fullHtmlPage, { flag: "w" });
 }
