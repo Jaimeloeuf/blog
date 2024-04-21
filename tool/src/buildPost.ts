@@ -16,19 +16,36 @@ export async function buildPost(buildOutputFolderPath: string, folder: string) {
     { encoding: "utf8" }
   );
 
-  const { body: postContent } = fm(file);
+  const { attributes, body: postContent } = fm(file);
+
+  // @todo Add zod validation
+  const postAttributes = attributes as {
+    title: string;
+    date: Date;
+    tags: Array<string>;
+  };
 
   // Ensure that minutes is at least 1 min to prevent showing 0
   const minutes = Math.max(1, readingTime(file, 180).minutes);
   const timeToRead = `${minutes} ${minutes > 1 ? "minutes" : "minute"} read`;
 
   const parsedHTML = await marked.parse(postContent);
-  const htmlContent = generateHtml("title", parsedHTML);
+
+  // Add in post title, date and time to read header items.
+  const htmlContent =
+    `<h1 style="margin-bottom: 0">${postAttributes.title}</h1>` +
+    `<p style="font-size: 1rem">${postAttributes.date.toDateString()}, &nbsp;${timeToRead}</p>` +
+    parsedHTML;
+
+  const fullHtmlPage = generateHtml(
+    `JJ's blog - ${postAttributes.title}`,
+    htmlContent
+  );
 
   const folderPath = path.resolve(buildOutputFolderPath, folder);
   const htmlFilePath = path.resolve(folderPath, `index.html`);
 
   await createFolderIfDoesNotExist(folderPath);
 
-  await writeFile(htmlFilePath, htmlContent, { flag: "w" });
+  await writeFile(htmlFilePath, fullHtmlPage, { flag: "w" });
 }
