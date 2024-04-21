@@ -7,7 +7,12 @@ const htmlTemplate = readFileSync(
   { encoding: "utf8" }
 );
 
-export const generateHtml = (title: string, postContent: string) =>
+export const generateHtml = (
+  title: string,
+  timeToRead: string,
+  postContent: string
+) =>
   htmlTemplate
     .replace("${title}", title)
+    .replace("${timeToRead}", timeToRead)
     .replace("${postContent}", postContent);
