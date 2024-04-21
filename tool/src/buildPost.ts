@@ -23,7 +23,7 @@ export async function buildPost(buildOutputFolderPath: string, folder: string) {
   const timeToRead = `${minutes} ${minutes > 1 ? "minutes" : "minute"} read`;
 
   const parsedHTML = await marked.parse(postContent);
-  const htmlContent = generateHtml("title", timeToRead, parsedHTML);
+  const htmlContent = generateHtml("title", parsedHTML);
 
   const folderPath = path.resolve(buildOutputFolderPath, folder);
   const htmlFilePath = path.resolve(folderPath, `index.html`);
