@@ -1,5 +1,5 @@
 import path from "path";
-import { readFile, writeFile } from "fs/promises";
+import { readFile, writeFile, readdir, copyFile } from "fs/promises";
 import { marked } from "marked";
 import fm from "front-matter";
 import { readingTime } from "reading-time-estimator";
@@ -21,10 +21,11 @@ export async function buildPost(
   buildOutputFolderPath: string,
   folderPath: string
 ) {
-  const file = await readFile(
-    path.resolve(postsDirPath, `${folderPath}/index.md`),
-    { encoding: "utf8" }
-  );
+  const postFolderPath = path.resolve(postsDirPath, folderPath);
+
+  const file = await readFile(path.resolve(postFolderPath, "index.md"), {
+    encoding: "utf8",
+  });
 
   const { attributes, body: postContent } = fm(file);
 
@@ -60,4 +61,17 @@ export async function buildPost(
 
   const htmlFilePath = path.resolve(newFolderPath, `index.html`);
   await writeFile(htmlFilePath, fullHtmlPage, { flag: "w" });
+
+  // Copy over all other supporting assets like images and attachments.
+  const folderContents = await readdir(postFolderPath, {
+    encoding: "utf8",
+  });
+  for (const folderContent of folderContents) {
+    if (folderContent !== "index.md") {
+      await copyFile(
+        path.resolve(postFolderPath, folderContent),
+        path.resolve(newFolderPath, folderContent)
+      );
+    }
+  }
 }
