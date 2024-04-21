@@ -6,6 +6,13 @@ import { readingTime } from "reading-time-estimator";
 import { generateHtml } from "../../layout/index";
 import { createFolderIfDoesNotExist } from "./createFolderIfDoesNotExist";
 import { postsDirPath } from "./postsDirPath";
+import { z } from "zod";
+
+const PostAttributes = z.object({
+  title: z.string(),
+  date: z.date(),
+  tags: z.array(z.string()),
+});
 
 /**
  * Builds a post's static HTML file from its markdown contents.
@@ -21,12 +28,15 @@ export async function buildPost(
 
   const { attributes, body: postContent } = fm(file);
 
-  // @todo Add zod validation
-  const postAttributes = attributes as {
-    title: string;
-    date: Date;
-    tags: Array<string>;
-  };
+  const postAttributesParseResult = PostAttributes.safeParse(attributes);
+  if (!postAttributesParseResult.success) {
+    console.error(
+      `Invalid post attributes in frontmatter of: '${folderPath}'`,
+      postAttributesParseResult.error.message
+    );
+    return;
+  }
+  const postAttributes = postAttributesParseResult.data;
 
   // Ensure that minutes is at least 1 min to prevent showing 0
   const minutes = Math.max(1, readingTime(file, 180).minutes);
