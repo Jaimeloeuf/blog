@@ -43,6 +43,15 @@
         p {
             padding-bottom: 0.5rem;
         }
+
+        pre>code {
+            display: block;
+            padding: 1rem;
+            overflow-x: auto;
+            /* background-color: #f4f4f5; */
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+        }
     </style>
 
 
@@ -69,6 +78,11 @@
     <div id="content-container">
         <div id="content">${postContent}</div>
     </div>
+
+    <!-- Load highlight.js after content has loaded. -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/a11y-light.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
 </body>
 
 </html>
