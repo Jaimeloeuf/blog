@@ -5,9 +5,11 @@ import { mkdir } from "fs/promises";
  * Creates a folder using the given path if it does not already exists and
  * returns boolean to indicate if the folder was created.
  */
-export function createFolderIfDoesNotExist(folderPath: string): boolean {
+export async function createFolderIfDoesNotExist(
+  folderPath: string
+): Promise<boolean> {
   if (!existsSync(folderPath)) {
-    mkdir(folderPath);
+    await mkdir(folderPath);
     return true;
   }
 

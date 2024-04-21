@@ -23,7 +23,7 @@ export async function buildPost(buildOutputFolderPath: string, folder: string) {
   const folderPath = path.resolve(buildOutputFolderPath, folder);
   const htmlFilePath = path.resolve(folderPath, `index.html`);
 
-  createFolderIfDoesNotExist(folderPath);
+  await createFolderIfDoesNotExist(folderPath);
 
   await writeFile(htmlFilePath, htmlContent, { flag: "w" });
 }

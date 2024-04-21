@@ -7,7 +7,7 @@ import { postsDirPath } from "./postsDirPath";
 async function main() {
   console.time("Build time");
 
-  const buildOutputFolderPath = createBuildOutputFolder();
+  const buildOutputFolderPath = await createBuildOutputFolder();
 
   const postFolders = await readdir(postsDirPath);
 
