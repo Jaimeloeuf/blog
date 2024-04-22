@@ -1,7 +1,6 @@
 import { readdir } from "fs/promises";
 import { createBuildOutputFolder } from "./createBuildOutputFolder";
-import { isInvalidPostFolder } from "./isInvalidPostFolder";
-import { buildPost } from "./buildPost";
+import { buildPosts } from "./buildPosts";
 import { postsDirPath } from "./postsDirPath";
 import { buildHomePage } from "./buildHomePage";
 
@@ -12,13 +11,7 @@ async function main() {
 
   const postFolders = await readdir(postsDirPath);
 
-  for (const item of postFolders) {
-    if (await isInvalidPostFolder(item)) {
-      continue;
-    }
-
-    await buildPost(buildOutputFolderPath, item);
-  }
+  await buildPosts(buildOutputFolderPath, postFolders);
 
   await buildHomePage(buildOutputFolderPath, postFolders);
 
