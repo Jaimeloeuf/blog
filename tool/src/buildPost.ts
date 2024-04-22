@@ -3,7 +3,7 @@ import { readFile, writeFile, readdir, copyFile } from "fs/promises";
 import { marked } from "marked";
 import fm from "front-matter";
 import { readingTime } from "reading-time-estimator";
-import { generateHtml } from "../../layout/index";
+import { generatePostHtml } from "../../layout/index";
 import { createFolderIfDoesNotExist } from "./createFolderIfDoesNotExist";
 import { postsDirPath } from "./postsDirPath";
 import { z } from "zod";
@@ -51,7 +51,7 @@ export async function buildPost(
     `<p style="font-size: 1rem">${postAttributes.date.toDateString()}, &nbsp;${timeToRead}</p>` +
     parsedHTML;
 
-  const fullHtmlPage = generateHtml(
+  const fullHtmlPage = generatePostHtml(
     `JJ's blog - ${postAttributes.title}`,
     htmlContent
   );

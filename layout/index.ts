@@ -1,13 +1,13 @@
 import { readFileSync } from "fs";
 import { resolve } from "path";
 
-const htmlTemplate = readFileSync(
+const postTemplate = readFileSync(
   // Path should be relative to /tool/
-  resolve("../layout/index.html"),
+  resolve("../layout/post.html"),
   { encoding: "utf8" }
 );
 
-export const generateHtml = (title: string, postContent: string) =>
-  htmlTemplate
+export const generatePostHtml = (title: string, postContent: string) =>
+  postTemplate
     .replace("${title}", title)
     .replace("${postContent}", postContent);
