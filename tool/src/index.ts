@@ -3,6 +3,7 @@ import { createBuildOutputFolder } from "./createBuildOutputFolder";
 import { isInvalidPostFolder } from "./isInvalidPostFolder";
 import { buildPost } from "./buildPost";
 import { postsDirPath } from "./postsDirPath";
+import { buildHomePage } from "./buildHomePage";
 
 async function main() {
   console.time("Build time");
@@ -18,6 +19,8 @@ async function main() {
 
     await buildPost(buildOutputFolderPath, item);
   }
+
+  await buildHomePage(buildOutputFolderPath, postFolders);
 
   console.timeEnd("Build time");
 }
