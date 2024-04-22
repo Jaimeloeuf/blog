@@ -8,11 +8,16 @@ export async function buildPosts(
   buildOutputFolderPath: string,
   postFolders: Array<string>
 ) {
+  const validPosts: Array<string> = [];
+
   for (const item of postFolders) {
     if (await isInvalidPostFolder(item)) {
       continue;
     }
 
     await buildPost(buildOutputFolderPath, item);
+    validPosts.push(item);
   }
+
+  return validPosts;
 }

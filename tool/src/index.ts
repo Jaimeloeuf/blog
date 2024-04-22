@@ -11,9 +11,9 @@ async function main() {
 
   const postFolders = await readdir(postsDirPath);
 
-  await buildPosts(buildOutputFolderPath, postFolders);
+  const validPosts = await buildPosts(buildOutputFolderPath, postFolders);
 
-  await buildHomePage(buildOutputFolderPath, postFolders);
+  await buildHomePage(buildOutputFolderPath, validPosts);
 
   console.timeEnd("Build time");
 }
