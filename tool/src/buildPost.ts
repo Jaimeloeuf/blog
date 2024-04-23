@@ -6,16 +6,11 @@ import { readingTime } from "reading-time-estimator";
 import { generatePostHtml } from "../../layout/index";
 import { createFolderIfDoesNotExist } from "./createFolderIfDoesNotExist";
 import { postsDirPath } from "./postsDirPath";
-import { z } from "zod";
-
-const PostAttributes = z.object({
-  title: z.string(),
-  date: z.date(),
-  tags: z.array(z.string()),
-});
+import { PostSchema } from "./Post";
 
 /**
- * Builds a post's static HTML file from its markdown contents.
+ * Builds a post's static HTML file from its markdown contents and return the
+ * `post` object.
  */
 export async function buildPost(
   buildOutputFolderPath: string,
@@ -29,7 +24,7 @@ export async function buildPost(
 
   const { attributes, body: postContent } = fm(file);
 
-  const postAttributesParseResult = PostAttributes.safeParse(attributes);
+  const postAttributesParseResult = PostSchema.safeParse(attributes);
   if (!postAttributesParseResult.success) {
     console.error(
       `Invalid post attributes in frontmatter of: '${folderPath}'`,
@@ -37,7 +32,7 @@ export async function buildPost(
     );
     return;
   }
-  const postAttributes = postAttributesParseResult.data;
+  const post = postAttributesParseResult.data;
 
   // Ensure that minutes is at least 1 min to prevent showing 0
   const minutes = Math.max(1, readingTime(file, 180).minutes);
@@ -47,12 +42,12 @@ export async function buildPost(
 
   // Add in post title, date and time to read header items.
   const htmlContent =
-    `<h1 style="margin-bottom: 0">${postAttributes.title}</h1>` +
-    `<p style="font-size: 1rem">${postAttributes.date.toDateString()}, &nbsp;${timeToRead}</p>` +
+    `<h1 style="margin-bottom: 0">${post.title}</h1>` +
+    `<p style="font-size: 1rem">${post.date.toDateString()}, &nbsp;${timeToRead}</p>` +
     parsedHTML;
 
   const fullHtmlPage = generatePostHtml(
-    `JJ's blog - ${postAttributes.title}`,
+    `JJ's blog - ${post.title}`,
     htmlContent
   );
 
@@ -75,5 +70,5 @@ export async function buildPost(
     }
   }
 
-  return postAttributes;
+  return post;
 }
