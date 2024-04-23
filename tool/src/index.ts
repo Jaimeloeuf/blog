@@ -10,20 +10,15 @@ async function main() {
 
   const buildOutputFolderPath = await createBuildOutputFolder();
 
-  const postFolders = await readdir(postsDirPath);
+  const postFolderItems = await readdir(postsDirPath);
 
-  const validPostAttributes = await buildPosts(
-    buildOutputFolderPath,
-    postFolders
-  );
+  // Generate the posts' static sites and sort them by newest first
+  const posts = await buildPosts(buildOutputFolderPath, postFolderItems);
+  posts.sort((a, b) => b.date.getTime() - a.date.getTime());
 
-  const validPosts = validPostAttributes
-    .sort((a, b) => b.date.getTime() - a.date.getTime())
-    .map((validPostAttribute) => validPostAttribute.title);
+  await buildHomePage(buildOutputFolderPath, posts);
 
-  await buildHomePage(buildOutputFolderPath, validPosts);
-
-  await deleteRemovedFilesInOutputFolder(validPosts, buildOutputFolderPath);
+  // await deleteRemovedFilesInOutputFolder(posts, buildOutputFolderPath);
 
   console.timeEnd("Build time");
 }
