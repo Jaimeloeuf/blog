@@ -74,4 +74,6 @@ export async function buildPost(
       );
     }
   }
+
+  return postAttributes;
 }

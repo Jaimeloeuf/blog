@@ -8,15 +8,19 @@ export async function buildPosts(
   buildOutputFolderPath: string,
   postFolders: Array<string>
 ) {
-  const validPosts: Array<string> = [];
+  const validPosts: Array<
+    Exclude<Awaited<ReturnType<typeof buildPost>>, undefined>
+  > = [];
 
   for (const item of postFolders) {
     if (await isInvalidPostFolder(item)) {
       continue;
     }
 
-    await buildPost(buildOutputFolderPath, item);
-    validPosts.push(item);
+    const postAttributes = await buildPost(buildOutputFolderPath, item);
+    if (postAttributes !== undefined) {
+      validPosts.push(postAttributes);
+    }
   }
 
   return validPosts;

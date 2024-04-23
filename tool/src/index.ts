@@ -12,7 +12,14 @@ async function main() {
 
   const postFolders = await readdir(postsDirPath);
 
-  const validPosts = await buildPosts(buildOutputFolderPath, postFolders);
+  const validPostAttributes = await buildPosts(
+    buildOutputFolderPath,
+    postFolders
+  );
+
+  const validPosts = validPostAttributes
+    .sort((a, b) => b.date.getTime() - a.date.getTime())
+    .map((validPostAttribute) => validPostAttribute.title);
 
   await buildHomePage(buildOutputFolderPath, validPosts);
 
