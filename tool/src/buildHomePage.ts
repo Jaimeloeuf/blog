@@ -9,7 +9,7 @@ export async function buildHomePage(
 ) {
   let links = "";
   for (const post of posts) {
-    links += `<a href="/${post.title}/index.html"><p>${post.title}</p></a>`;
+    links += `<a href="/${post.folderName}/index.html"><p>${post.title}</p></a>`;
   }
 
   const fullHtmlPage = generateHomeHtml(links);

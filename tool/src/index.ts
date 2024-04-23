@@ -18,7 +18,7 @@ async function main() {
 
   await buildHomePage(buildOutputFolderPath, posts);
 
-  // await deleteRemovedFilesInOutputFolder(posts, buildOutputFolderPath);
+  await deleteRemovedFilesInOutputFolder(posts, buildOutputFolderPath);
 
   console.timeEnd("Build time");
 }

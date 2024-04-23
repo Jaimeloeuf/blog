@@ -6,4 +6,11 @@ export const PostSchema = z.object({
   tags: z.array(z.string()),
 });
 
-export type Post = z.infer<typeof PostSchema>;
+export type PostSchemaType = z.infer<typeof PostSchema>;
+
+export interface Post extends PostSchemaType {
+  /**
+   * Name of the folder, not the full path!
+   */
+  folderName: string;
+}
