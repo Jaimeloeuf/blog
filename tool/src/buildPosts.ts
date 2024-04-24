@@ -18,7 +18,7 @@ export async function buildPosts(
 
     const post = await buildPost(buildOutputFolderPath, item);
     if (post !== undefined) {
-      validPosts.push({ ...post, folderName: item });
+      validPosts.push(post);
     }
   }
 

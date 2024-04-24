@@ -6,7 +6,8 @@ import { readingTime } from "reading-time-estimator";
 import { generatePostHtml } from "../../layout/index";
 import { createFolderIfDoesNotExist } from "./createFolderIfDoesNotExist";
 import { postsDirPath } from "./postsDirPath";
-import { PostSchema } from "./Post";
+import { getOutputFolderName } from "./getOutputFolderName";
+import { PostSchema, type Post } from "./Post";
 
 /**
  * Builds a post's static HTML file from its markdown contents and return the
@@ -15,7 +16,7 @@ import { PostSchema } from "./Post";
 export async function buildPost(
   buildOutputFolderPath: string,
   folderPath: string
-) {
+): Promise<Post | void> {
   const postFolderPath = path.resolve(postsDirPath, folderPath);
 
   const file = await readFile(path.resolve(postFolderPath, "index.md"), {
@@ -51,7 +52,8 @@ export async function buildPost(
     htmlContent
   );
 
-  const newFolderPath = path.resolve(buildOutputFolderPath, folderPath);
+  const newFolderPathName = getOutputFolderName(post, folderPath);
+  const newFolderPath = path.resolve(buildOutputFolderPath, newFolderPathName);
   await createFolderIfDoesNotExist(newFolderPath);
 
   const htmlFilePath = path.resolve(newFolderPath, `index.html`);
@@ -70,5 +72,5 @@ export async function buildPost(
     }
   }
 
-  return post;
+  return { ...post, folderName: newFolderPathName };
 }
