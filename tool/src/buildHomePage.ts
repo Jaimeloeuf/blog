@@ -1,6 +1,6 @@
 import path from "path";
 import { writeFile } from "fs/promises";
-import { generateHomeHtml } from "../../layout/index";
+import { generateHomeHtml } from "./layout/index";
 import type { Post } from "./Post";
 
 export async function buildHomePage(

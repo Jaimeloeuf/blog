@@ -3,7 +3,7 @@ import { readFile, writeFile, readdir, copyFile } from "fs/promises";
 import { marked } from "marked";
 import fm from "front-matter";
 import { readingTime } from "reading-time-estimator";
-import { generatePostHtml } from "../../layout/index";
+import { generatePostHtml } from "./layout/index";
 import { createFolderIfDoesNotExist } from "./createFolderIfDoesNotExist";
 import { postsDirPath } from "./postsDirPath";
 import { getOutputFolderName } from "./getOutputFolderName";
