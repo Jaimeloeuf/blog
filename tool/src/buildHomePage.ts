@@ -5,7 +5,7 @@ import type { Post } from "./Post";
 
 export async function buildHomePage(
   buildOutputFolderPath: string,
-  posts: Array<Post>
+  posts: Array<Post>,
 ) {
   let links = "";
   for (const post of posts) {
@@ -17,6 +17,6 @@ export async function buildHomePage(
   await writeFile(
     path.resolve(buildOutputFolderPath, "index.html"),
     fullHtmlPage,
-    { flag: "w" }
+    { flag: "w" },
   );
 }

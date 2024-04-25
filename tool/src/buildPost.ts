@@ -15,7 +15,7 @@ import { PostSchema, type Post } from "./Post";
  */
 export async function buildPost(
   buildOutputFolderPath: string,
-  folderPath: string
+  folderPath: string,
 ): Promise<Post | void> {
   const postFolderPath = path.resolve(postsDirPath, folderPath);
 
@@ -29,7 +29,7 @@ export async function buildPost(
   if (!postAttributesParseResult.success) {
     console.error(
       `Invalid post attributes in frontmatter of: '${folderPath}'`,
-      postAttributesParseResult.error.message
+      postAttributesParseResult.error.message,
     );
     return;
   }
@@ -49,7 +49,7 @@ export async function buildPost(
 
   const fullHtmlPage = generatePostHtml(
     `JJ's blog - ${post.title}`,
-    htmlContent
+    htmlContent,
   );
 
   const newFolderPathName = getOutputFolderName(post, folderPath);
@@ -67,7 +67,7 @@ export async function buildPost(
     if (folderContent !== "index.md") {
       await copyFile(
         path.resolve(postFolderPath, folderContent),
-        path.resolve(newFolderPath, folderContent)
+        path.resolve(newFolderPath, folderContent),
       );
     }
   }

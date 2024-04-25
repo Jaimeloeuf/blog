@@ -7,7 +7,7 @@ import type { Post } from "./Post";
  */
 export async function buildPosts(
   buildOutputFolderPath: string,
-  postFolders: Array<string>
+  postFolders: Array<string>,
 ) {
   const validPosts: Array<Post> = [];
 

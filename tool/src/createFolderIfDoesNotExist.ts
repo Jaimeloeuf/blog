@@ -6,7 +6,7 @@ import { mkdir } from "fs/promises";
  * returns boolean to indicate if the folder was created.
  */
 export async function createFolderIfDoesNotExist(
-  folderPath: string
+  folderPath: string,
 ): Promise<boolean> {
   if (!existsSync(folderPath)) {
     await mkdir(folderPath);

@@ -8,10 +8,10 @@ import type { Post } from "./Post";
  */
 export async function deleteRemovedFilesInOutputFolder(
   posts: Array<Post>,
-  buildOutputFolderPath: string
+  buildOutputFolderPath: string,
 ) {
   const validPaths = new Set(posts.map((post) => post.folderName)).add(
-    "index.html"
+    "index.html",
   );
 
   // Remove delete posts or posts whose titles/folder-name have changed

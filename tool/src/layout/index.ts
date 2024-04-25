@@ -4,7 +4,7 @@ import { resolve } from "path";
 const homeTemplate = readFileSync(
   // Path should be relative to /tool/
   resolve("./src/layout/home.html"),
-  { encoding: "utf8" }
+  { encoding: "utf8" },
 );
 
 export const generateHomeHtml = (content: string) =>
@@ -13,7 +13,7 @@ export const generateHomeHtml = (content: string) =>
 const postTemplate = readFileSync(
   // Path should be relative to /tool/
   resolve("./src/layout/post.html"),
-  { encoding: "utf8" }
+  { encoding: "utf8" },
 );
 
 export const generatePostHtml = (title: string, postContent: string) =>
