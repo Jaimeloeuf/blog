@@ -47,10 +47,7 @@ export async function buildPost(
     `<p style="padding-bottom: 1rem; font-size: 1rem">${post.date.toDateString()}, &nbsp;${timeToRead}</p>` +
     parsedHTML;
 
-  const fullHtmlPage = generatePostHtml(
-    `JJ's blog - ${post.title}`,
-    htmlContent,
-  );
+  const fullHtmlPage = generatePostHtml(post.title, htmlContent);
 
   const newFolderPathName = getOutputFolderName(post, folderPath);
   const newFolderPath = path.resolve(buildOutputFolderPath, newFolderPathName);
