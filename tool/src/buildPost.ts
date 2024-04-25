@@ -43,8 +43,8 @@ export async function buildPost(
 
   // Add in post title, date and time to read header items.
   const htmlContent =
-    `<h1 style="margin-bottom: 0">${post.title}</h1>` +
-    `<p style="font-size: 1rem">${post.date.toDateString()}, &nbsp;${timeToRead}</p>` +
+    `<h1 style="padding-bottom: 1rem; padding-top: 0">${post.title}</h1>` +
+    `<p style="padding-bottom: 1rem; font-size: 1rem">${post.date.toDateString()}, &nbsp;${timeToRead}</p>` +
     parsedHTML;
 
   const fullHtmlPage = generatePostHtml(

@@ -1,93 +1,29 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>${title}</title>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-        rel="stylesheet">
+    <!-- Generated styles from input.css and the tailwind classes used -->
+    <link rel="stylesheet" href="/style.css" />
+  </head>
 
-
-    <!-- Tag CSS -->
-    <style>
-        body {
-            font-size: 1.15rem;
-            font-family: Roboto, sans-serif;
-
-            /* Add wider spacing */
-            letter-spacing: 0.025rem;
-            line-height: 1.8rem;
-        }
-
-        h1 {
-            font-size: 2.8rem;
-        }
-
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            padding-top: 1.2rem;
-            font-weight: 600;
-            line-height: 1.2;
-        }
-
-        p {
-            padding-bottom: 0.5rem;
-        }
-
-        pre>code {
-            display: block;
-            padding: 1rem;
-            overflow-x: auto;
-            /* background-color: #f4f4f5; */
-            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-        }
-
-        /* Same max-width as #content */
-        img {
-            width: 100%;
-            max-width: 768px;
-        }
-    </style>
-
-
-    <!-- ID targetting CSS -->
-    <style>
-        #content-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-        }
-
-        #content {
-            /* tailwind: max-width-screen-md */
-            max-width: 768px;
-
-            /* Add padding to allow scroll past */
-            padding-bottom: 4rem;
-        }
-    </style>
-</head>
-
-<body>
-    <div id="content-container">
-        <div id="content">${postContent}</div>
+  <body>
+    <div class="p-4 lg:p-12">
+      <div class="flex w-full flex-col items-center">
+        <div class="w-full max-w-screen-md pb-8">${postContent}</div>
+      </div>
     </div>
 
     <!-- Load highlight.js after content has loaded. -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/a11y-light.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/a11y-light.min.css"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
-</body>
-
+    <script>
+      hljs.highlightAll();
+    </script>
+  </body>
 </html>

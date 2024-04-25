@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+    Tailwind is used for the layout stuff.
+
+    This is used for markdown content.
+    Since the raw HTML content generated from markdown files cant be styled with
+    class names, the base layer here is used to style the blog post through the
+    tags directly, where some of these styling "resets" the "tailwind preflight
+    reset".
+*/
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply pt-6 font-semibold leading-5;
+  }
+
+  h1 {
+    @apply text-3xl sm:text-5xl;
+  }
+
+  h2 {
+    @apply text-2xl;
+  }
+
+  h3 {
+    @apply text-xl;
+  }
+
+  h4 {
+    @apply text-lg;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    @apply pb-2;
+  }
+
+  pre > code {
+    @apply mb-6 mt-2 block overflow-x-auto rounded-md border border-zinc-200 p-4;
+  }
+
+  a {
+    @apply break-words underline decoration-1 underline-offset-2;
+  }
+
+  ol {
+    @apply list-decimal;
+  }
+
+  ul {
+    @apply list-disc;
+  }
+
+  ol,
+  ul {
+    @apply pl-6;
+  }
+}

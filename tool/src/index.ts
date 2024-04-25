@@ -1,6 +1,7 @@
 import { readdir } from "fs/promises";
 import { createBuildOutputFolder } from "./createBuildOutputFolder";
 import { postsDirPath } from "./postsDirPath";
+import { generateOutputCSS } from "./processTailwindCSS";
 import { buildPosts } from "./buildPosts";
 import { buildHomePage } from "./buildHomePage";
 import { deleteRemovedFilesInOutputFolder } from "./deleteRemovedFilesInOutputFolder";
@@ -19,6 +20,8 @@ async function main() {
   await buildHomePage(buildOutputFolderPath, posts);
 
   await deleteRemovedFilesInOutputFolder(posts, buildOutputFolderPath);
+
+  generateOutputCSS();
 
   console.timeEnd("Build time");
 }
