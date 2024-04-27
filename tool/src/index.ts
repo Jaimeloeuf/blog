@@ -22,9 +22,9 @@ async function main() {
 
   await buildNotFoundPage(buildOutputFolderPath);
 
-  await deleteRemovedFilesInOutputFolder(posts, buildOutputFolderPath);
+  await generateOutputCSS();
 
-  generateOutputCSS();
+  await deleteRemovedFilesInOutputFolder(posts, buildOutputFolderPath);
 
   console.timeEnd("Build time");
 }

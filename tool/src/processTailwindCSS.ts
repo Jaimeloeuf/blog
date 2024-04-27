@@ -1,21 +1,18 @@
+import util from "util";
 import { exec } from "child_process";
+
+const asyncExec = util.promisify(exec);
 
 /**
  * Uses tailwind CLI to generate CSS for all the HTML layout files and writes it
  * to the docs/ dist folder.
  */
-export function generateOutputCSS() {
-  exec(
+export async function generateOutputCSS() {
+  const { stdout, stderr } = await asyncExec(
     "npx tailwindcss -i ./src/layout/input.css -o ../docs/style.css --minify",
-    (err, stdout, stderr) => {
-      // node couldn't execute the command
-      if (err) {
-        return;
-      }
-
-      // the *entire* stdout and stderr (buffered)
-      console.log(`[tailwind] stdout: ${stdout}`);
-      console.log(`[tailwind] stderr: ${stderr}`);
-    },
   );
+
+  // Print out *entire* stdout and stderr (buffered) if any
+  stdout !== "" && console.log(`[tailwind-stdout] ${stdout}`);
+  stderr !== "" && console.log(`[tailwind-stderr] ${stderr}`);
 }
