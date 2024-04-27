@@ -4,6 +4,7 @@ import { marked } from "marked";
 import fm from "front-matter";
 import { readingTime } from "reading-time-estimator";
 import { generatePostHtml } from "./layout/post";
+import { generatePostTagsHtml } from "./layout/components/postTags";
 import { createFolderIfDoesNotExist } from "./createFolderIfDoesNotExist";
 import { postsDirPath } from "./postsDirPath";
 import { getOutputFolderName } from "./getOutputFolderName";
@@ -41,10 +42,13 @@ export async function buildPost(
 
   const parsedHTML = await marked.parse(postContent);
 
+  const tagHtml = post.tags.map((tag) => generatePostTagsHtml(tag)).join("");
+
   const fullHtmlPage = generatePostHtml(
     post.title,
     post.date.toDateString(),
     timeToRead,
+    tagHtml,
     parsedHTML,
   );
 
