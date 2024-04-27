@@ -7,8 +7,8 @@ const homeTemplate = readFileSync(
   { encoding: "utf8" },
 );
 
-export const generateHomeHtml = (content: string) =>
-  homeTemplate.replace("${content}", content);
+export const generateHomeHtml = (postLinks: string) =>
+  homeTemplate.replace("${postLinks}", postLinks);
 
 const postTemplate = readFileSync(
   // Path should be relative to /tool/
