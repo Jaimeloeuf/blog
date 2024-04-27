@@ -3,7 +3,8 @@ import { buildPost } from "./buildPost";
 import type { Post } from "./Post";
 
 /**
- * Builds all the posts and return the list of valid posts.
+ * Builds all the posts' static sites and return the list of valid (posts +
+ * attributes) sorted by newest first.
  */
 export async function buildPosts(
   buildOutputFolderPath: string,
@@ -22,5 +23,5 @@ export async function buildPosts(
     }
   }
 
-  return validPosts;
+  return validPosts.sort((a, b) => b.date.getTime() - a.date.getTime());
 }
