@@ -4,6 +4,7 @@ import { postsDirPath } from "./postsDirPath";
 import { generateOutputCSS } from "./processTailwindCSS";
 import { buildPosts } from "./buildPosts";
 import { buildHomePage } from "./buildHomePage";
+import { buildNotFoundPage } from "./buildNotFoundPage";
 import { deleteRemovedFilesInOutputFolder } from "./deleteRemovedFilesInOutputFolder";
 
 async function main() {
@@ -18,6 +19,8 @@ async function main() {
   posts.sort((a, b) => b.date.getTime() - a.date.getTime());
 
   await buildHomePage(buildOutputFolderPath, posts);
+
+  await buildNotFoundPage(buildOutputFolderPath);
 
   await deleteRemovedFilesInOutputFolder(posts, buildOutputFolderPath);
 
