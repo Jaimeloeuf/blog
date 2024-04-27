@@ -1,6 +1,6 @@
 import path from "path";
 import { writeFile } from "fs/promises";
-import { generateNotFoundHtml } from "./layout/index";
+import { generateNotFoundHtml } from "./layout/404";
 
 export async function buildNotFoundPage(buildOutputFolderPath: string) {
   await writeFile(

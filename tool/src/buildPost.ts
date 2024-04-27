@@ -3,7 +3,7 @@ import { readFile, writeFile, readdir, copyFile } from "fs/promises";
 import { marked } from "marked";
 import fm from "front-matter";
 import { readingTime } from "reading-time-estimator";
-import { generatePostHtml } from "./layout/index";
+import { generatePostHtml } from "./layout/post";
 import { createFolderIfDoesNotExist } from "./createFolderIfDoesNotExist";
 import { postsDirPath } from "./postsDirPath";
 import { getOutputFolderName } from "./getOutputFolderName";
@@ -41,13 +41,12 @@ export async function buildPost(
 
   const parsedHTML = await marked.parse(postContent);
 
-  // Add in post title, date and time to read header items.
-  const htmlContent =
-    `<h1 style="padding-bottom: 1rem; padding-top: 0">${post.title}</h1>` +
-    `<p style="padding-bottom: 1rem; font-size: 1rem">${post.date.toDateString()}, &nbsp;${timeToRead}</p>` +
-    parsedHTML;
-
-  const fullHtmlPage = generatePostHtml(post.title, htmlContent);
+  const fullHtmlPage = generatePostHtml(
+    post.title,
+    post.date.toDateString(),
+    timeToRead,
+    parsedHTML,
+  );
 
   const newFolderPathName = getOutputFolderName(post, folderPath);
   const newFolderPath = path.resolve(buildOutputFolderPath, newFolderPathName);

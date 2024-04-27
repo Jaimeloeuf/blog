@@ -1,6 +1,6 @@
 import path from "path";
 import { writeFile } from "fs/promises";
-import { generateHomeHtml } from "./layout/index";
+import { generateHomeHtml } from "./layout/home";
 import { generateHomePostCardHtml } from "./layout/components/homePostCard";
 import type { Post } from "./Post";
 
