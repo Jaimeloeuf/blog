@@ -4,6 +4,7 @@ import { postsDirPath } from "./postsDirPath";
 import { generateOutputCSS } from "./processTailwindCSS";
 import { buildPosts } from "./buildPosts";
 import { buildHomePage } from "./buildHomePage";
+import { buildTags } from "./buildTags";
 import { buildNotFoundPage } from "./buildNotFoundPage";
 import { deleteRemovedFilesInOutputFolder } from "./deleteRemovedFilesInOutputFolder";
 
@@ -15,6 +16,7 @@ async function main() {
   const posts = await buildPosts(buildOutputFolderPath, postFolderItems);
 
   await buildHomePage(buildOutputFolderPath, posts);
+  await buildTags(buildOutputFolderPath, posts);
   await buildNotFoundPage(buildOutputFolderPath);
   await generateOutputCSS();
   await deleteRemovedFilesInOutputFolder(posts, buildOutputFolderPath);

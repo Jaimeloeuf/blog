@@ -13,7 +13,8 @@ export async function deleteRemovedFilesInOutputFolder(
   const validPaths = new Set(posts.map((post) => post.folderName))
     .add("index.html")
     .add("404.html")
-    .add("style.css");
+    .add("style.css")
+    .add("tags");
 
   // Remove delete posts or posts whose titles/folder-name have changed
   const buildOutputFolderItems = await readdir(buildOutputFolderPath);

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JJ's blog</title>
+    <title>JJ's blog - Tags</title>
 
     <!-- Generated styles from input.css and the tailwind classes used -->
     <link rel="stylesheet" href="/style.css" />
@@ -17,17 +17,17 @@
 
       <div class="flex w-full flex-col items-center">
         <div class="w-full max-w-screen-md pb-8">
-          <div class="flex flex-row gap-6">
-            <p class="cursor-pointer text-xl font-bold text-zinc-800">Posts</p>
-            <a
-              href="/tags/"
-              class="text-xl font-light text-zinc-600 no-underline"
-            >
-              Tags
+          <div class="flex flex-row gap-6 border-b border-zinc-200">
+            <a href="/" class="text-xl font-light text-zinc-600 no-underline">
+              Posts
             </a>
+            <p class="cursor-pointer text-xl font-bold text-zinc-800">Tags</p>
           </div>
 
-          <div>${postLinks}</div>
+          <p class="pb-2 pt-6 text-sm font-thin italic text-zinc-700">
+            Sorted Alphabetically
+          </p>
+          <div>${tags}</div>
         </div>
       </div>
     </div>
