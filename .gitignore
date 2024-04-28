@@ -1,8 +1,5 @@
 # Ignore special folders
 __*/
 
-# Ignore docs for github pages deployment
-docs/
-
 # Deps
 node_modules/
