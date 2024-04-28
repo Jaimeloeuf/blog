@@ -7,5 +7,5 @@ const postTagsTemplate = readFileSync(
   { encoding: "utf8" },
 );
 
-export const generatePostTagsHtml = (tag: string) =>
-  postTagsTemplate.replaceAll("${tag}", tag);
+export const generatePostTagsHtml = (tag: string, rawTag: string) =>
+  postTagsTemplate.replace("${tag}", tag).replace("${rawTag}", rawTag);

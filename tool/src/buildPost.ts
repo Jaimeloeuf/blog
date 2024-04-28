@@ -7,6 +7,7 @@ import { generatePostHtml } from "./layout/post";
 import { generatePostTagsHtml } from "./layout/components/postTags";
 import { createFolderIfDoesNotExist } from "./createFolderIfDoesNotExist";
 import { postsDirPath } from "./postsDirPath";
+import { getSafeTagName } from "./getSafeTagName";
 import { getOutputFolderName } from "./getOutputFolderName";
 import { PostSchema, type Post } from "./Post";
 
@@ -42,7 +43,14 @@ export async function buildPost(
 
   const parsedHTML = await marked.parse(postContent);
 
-  const tagHtml = post.tags.map((tag) => generatePostTagsHtml(tag)).join("");
+  const tags = post.tags.map((rawTag) => ({
+    rawTag,
+    tag: getSafeTagName(rawTag),
+  }));
+
+  const tagHtml = tags
+    .map(({ tag, rawTag }) => generatePostTagsHtml(tag, rawTag))
+    .join("");
 
   const fullHtmlPage = generatePostHtml(
     post.title,
@@ -52,8 +60,8 @@ export async function buildPost(
     parsedHTML,
   );
 
-  const newFolderPathName = getOutputFolderName(post, folderPath);
-  const newFolderPath = path.resolve(buildOutputFolderPath, newFolderPathName);
+  const folderName = getOutputFolderName(post, folderPath);
+  const newFolderPath = path.resolve(buildOutputFolderPath, folderName);
   await createFolderIfDoesNotExist(newFolderPath);
 
   const htmlFilePath = path.resolve(newFolderPath, `index.html`);
@@ -72,5 +80,9 @@ export async function buildPost(
     }
   }
 
-  return { ...post, folderName: newFolderPathName };
+  return {
+    ...post,
+    folderName,
+    tags,
+  };
 }
