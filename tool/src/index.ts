@@ -6,6 +6,7 @@ import { buildPosts } from "./buildPosts";
 import { buildHomePage } from "./buildHomePage";
 import { buildTags } from "./buildTags";
 import { buildNotFoundPage } from "./buildNotFoundPage";
+import { buildAssets } from "./buildAssets";
 import { deleteRemovedFilesInOutputFolder } from "./deleteRemovedFilesInOutputFolder";
 
 async function main() {
@@ -18,6 +19,7 @@ async function main() {
   const homePage = await buildHomePage(buildOutputFolderPath, posts);
   await buildTags(buildOutputFolderPath, posts);
   const notFound = await buildNotFoundPage(buildOutputFolderPath);
+  const staticAssets = await buildAssets(buildOutputFolderPath);
   const styleSheet = await generateOutputCSS();
 
   await deleteRemovedFilesInOutputFolder(
@@ -28,6 +30,7 @@ async function main() {
     "tags",
     notFound,
     styleSheet,
+    ...staticAssets,
     ...posts.map((post) => post.folderName),
   );
 
