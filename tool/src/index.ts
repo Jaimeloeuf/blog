@@ -1,7 +1,7 @@
 import { readdir } from "fs/promises";
 import { createBuildOutputFolder } from "./createBuildOutputFolder";
 import { postsDirPath } from "./postsDirPath";
-import { generateOutputCSS } from "./processTailwindCSS";
+import { buildStyleSheet } from "./buildStyleSheet";
 import { buildPosts } from "./buildPosts";
 import { buildHomePage } from "./buildHomePage";
 import { buildTags } from "./buildTags";
@@ -21,7 +21,7 @@ async function main() {
   await buildTags(buildOutputFolderPath, posts);
   const notFoundPagePath = await buildNotFoundPage(buildOutputFolderPath);
   const assetFilePaths = await buildAssets(buildOutputFolderPath);
-  const styleSheetPath = await generateOutputCSS(buildOutputFolderPath);
+  const styleSheetPath = await buildStyleSheet(buildOutputFolderPath);
 
   await deleteRemovedFilesInOutputFolder(
     buildOutputFolderPath,

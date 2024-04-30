@@ -8,7 +8,7 @@ const asyncExec = util.promisify(exec);
  * Uses tailwind CLI to generate CSS for all the HTML layout files and writes it
  * to the docs/ dist folder.
  */
-export async function generateOutputCSS(buildOutputFolderPath: string) {
+export async function buildStyleSheet(buildOutputFolderPath: string) {
   const outputItemName = "style.css";
 
   const { stdout, stderr } = await asyncExec(
