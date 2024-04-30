@@ -15,23 +15,19 @@ async function main() {
   const postFolderItems = await readdir(postsDirPath);
   const posts = await buildPosts(buildOutputFolderPath, postFolderItems);
 
-  await buildHomePage(buildOutputFolderPath, posts);
+  const homePage = await buildHomePage(buildOutputFolderPath, posts);
   await buildTags(buildOutputFolderPath, posts);
-  await buildNotFoundPage(buildOutputFolderPath);
-  await generateOutputCSS();
+  const notFound = await buildNotFoundPage(buildOutputFolderPath);
+  const styleSheet = await generateOutputCSS();
 
   await deleteRemovedFilesInOutputFolder(
     buildOutputFolderPath,
 
     /* All the valid paths to keep */
-
-    // Static valid paths
-    "index.html",
-    "404.html",
-    "style.css",
+    homePage,
     "tags",
-
-    // Dynamically generated items that are valid
+    notFound,
+    styleSheet,
     ...posts.map((post) => post.folderName),
   );
 

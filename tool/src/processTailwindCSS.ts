@@ -8,11 +8,15 @@ const asyncExec = util.promisify(exec);
  * to the docs/ dist folder.
  */
 export async function generateOutputCSS() {
+  const outputItemName = "style.css";
+
   const { stdout, stderr } = await asyncExec(
-    "npx tailwindcss -i ./src/layout/input.css -o ../docs/style.css --minify",
+    `npx tailwindcss -i ./src/layout/input.css -o ../docs/${outputItemName} --minify`,
   );
 
   // Print out *entire* stdout and stderr (buffered) if any
   stdout !== "" && console.log(`[tailwind-stdout] ${stdout}`);
   stderr !== "" && console.log(`[tailwind-stderr] ${stderr}`);
+
+  return outputItemName;
 }
