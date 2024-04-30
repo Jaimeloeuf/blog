@@ -19,13 +19,8 @@ export async function buildHomePage(
 
   const fullHtmlPage = generateHomeHtml(links);
 
-  const outputItemName = "index.html";
+  const homePagePath = path.resolve(buildOutputFolderPath, "index.html");
+  await writeFile(homePagePath, fullHtmlPage, { flag: "w" });
 
-  await writeFile(
-    path.resolve(buildOutputFolderPath, outputItemName),
-    fullHtmlPage,
-    { flag: "w" },
-  );
-
-  return outputItemName;
+  return homePagePath;
 }

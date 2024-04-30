@@ -11,12 +11,19 @@ export async function buildAssets(buildOutputFolderPath: string) {
   const folderContents = await readdir(assetsFolderPath, {
     encoding: "utf8",
   });
+
+  const assetFilePaths: Array<string> = [];
+
   for (const folderContent of folderContents) {
+    const outputPath = path.resolve(buildOutputFolderPath, folderContent);
+
     await copyFile(
       path.resolve(assetsFolderPath, folderContent),
       path.resolve(buildOutputFolderPath, folderContent),
     );
+
+    assetFilePaths.push(outputPath);
   }
 
-  return folderContents;
+  return assetFilePaths;
 }

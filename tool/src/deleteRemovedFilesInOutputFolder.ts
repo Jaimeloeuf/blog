@@ -14,7 +14,8 @@ export async function deleteRemovedFilesInOutputFolder(
   // Remove delete posts or posts whose titles/folder-name have changed
   const buildOutputFolderItems = await readdir(buildOutputFolderPath);
   for (const item of buildOutputFolderItems) {
-    if (!validItems.has(item)) {
+    const itemPath = resolve(buildOutputFolderPath, item);
+    if (!validItems.has(itemPath)) {
       await rm(resolve(buildOutputFolderPath, item), { recursive: true });
     }
   }
