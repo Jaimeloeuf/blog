@@ -19,7 +19,21 @@ async function main() {
   await buildTags(buildOutputFolderPath, posts);
   await buildNotFoundPage(buildOutputFolderPath);
   await generateOutputCSS();
-  await deleteRemovedFilesInOutputFolder(posts, buildOutputFolderPath);
+
+  await deleteRemovedFilesInOutputFolder(
+    buildOutputFolderPath,
+
+    /* All the valid paths to keep */
+
+    // Static valid paths
+    "index.html",
+    "404.html",
+    "style.css",
+    "tags",
+
+    // Dynamically generated items that are valid
+    ...posts.map((post) => post.folderName),
+  );
 
   console.timeEnd("Build time");
 }

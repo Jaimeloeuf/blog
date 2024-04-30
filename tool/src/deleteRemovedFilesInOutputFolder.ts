@@ -1,25 +1,20 @@
 import { readdir, rm } from "fs/promises";
 import { resolve } from "path";
-import type { Post } from "./Post";
 
 /**
- * Deletes all the unused files/folders found in output folder once the list of
- * generated valid folder paths are found.
+ * Deletes all the unused files/folders found in output folder that are not part
+ * of the list of valid items.
  */
 export async function deleteRemovedFilesInOutputFolder(
-  posts: Array<Post>,
   buildOutputFolderPath: string,
+  ...validItemNames: Array<string>
 ) {
-  const validPaths = new Set(posts.map((post) => post.folderName))
-    .add("index.html")
-    .add("404.html")
-    .add("style.css")
-    .add("tags");
+  const validItems = new Set(validItemNames);
 
   // Remove delete posts or posts whose titles/folder-name have changed
   const buildOutputFolderItems = await readdir(buildOutputFolderPath);
   for (const item of buildOutputFolderItems) {
-    if (!validPaths.has(item)) {
+    if (!validItems.has(item)) {
       await rm(resolve(buildOutputFolderPath, item), { recursive: true });
     }
   }
