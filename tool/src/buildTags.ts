@@ -18,9 +18,10 @@ async function buildAllTags(tagsFolderPath: string, tags: Tags) {
     .join("");
 
   const allTagHTML = generateAllTagsHtml(tagCardHTML);
-  await writeFile(path.resolve(tagsFolderPath, `index.html`), allTagHTML, {
-    flag: "w",
-  });
+  const allTagPath = path.resolve(tagsFolderPath, `index.html`);
+  await writeFile(allTagPath, allTagHTML, { flag: "w" });
+
+  return allTagPath;
 }
 
 async function buildIndividualTagPage(
@@ -28,6 +29,8 @@ async function buildIndividualTagPage(
   posts: Array<Post>,
   tags: Tags,
 ) {
+  const tagPagePaths: Array<string> = [];
+
   // Generate a page for every single tag, to show all posts with that tag
   for (const [tag, { rawTag, count }] of tags) {
     const postCardHTML = posts
@@ -45,7 +48,11 @@ async function buildIndividualTagPage(
 
     const htmlFilePath = path.resolve(tagsFolderPath, `${tag}.html`);
     await writeFile(htmlFilePath, tagHTML, { flag: "w" });
+
+    tagPagePaths.push(htmlFilePath);
   }
+
+  return tagPagePaths;
 }
 
 export async function buildTags(
@@ -64,6 +71,10 @@ export async function buildTags(
       return map.set(tag, tagObject);
     }, new Map<string, { rawTag: string; count: number }>());
 
-  await buildAllTags(tagsFolderPath, tags);
-  await buildIndividualTagPage(tagsFolderPath, posts, tags);
+  const allTagsPath = await buildAllTags(tagsFolderPath, tags);
+  const tagPaths = await buildIndividualTagPage(tagsFolderPath, posts, tags);
+
+  tagPaths.push(allTagsPath);
+
+  return tagPaths;
 }

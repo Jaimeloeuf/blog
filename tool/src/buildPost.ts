@@ -67,22 +67,24 @@ export async function buildPost(
   const htmlFilePath = path.resolve(newFolderPath, `index.html`);
   await writeFile(htmlFilePath, fullHtmlPage, { flag: "w" });
 
+  const outputPaths: Array<string> = [htmlFilePath];
+
   // Copy over all other supporting assets like images and attachments.
   const folderContents = await readdir(postFolderPath, {
     encoding: "utf8",
   });
   for (const folderContent of folderContents) {
     if (folderContent !== "index.md") {
-      await copyFile(
-        path.resolve(postFolderPath, folderContent),
-        path.resolve(newFolderPath, folderContent),
-      );
+      const outputPath = path.resolve(newFolderPath, folderContent);
+      await copyFile(path.resolve(postFolderPath, folderContent), outputPath);
+      outputPaths.push(outputPath);
     }
   }
 
   return {
     ...post,
     folderName,
+    outputPaths,
     tags,
   };
 }

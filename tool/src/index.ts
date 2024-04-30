@@ -8,7 +8,6 @@ import { buildTags } from "./buildTags";
 import { buildNotFoundPage } from "./buildNotFoundPage";
 import { buildAssets } from "./buildAssets";
 import { deleteRemovedFilesInOutputFolder } from "./deleteRemovedFilesInOutputFolder";
-import path from "path";
 
 async function main() {
   console.time("Build time");
@@ -18,7 +17,7 @@ async function main() {
   const posts = await buildPosts(buildOutputFolderPath, postFolderItems);
 
   const homePagePath = await buildHomePage(buildOutputFolderPath, posts);
-  await buildTags(buildOutputFolderPath, posts);
+  const tagPagePaths = await buildTags(buildOutputFolderPath, posts);
   const notFoundPagePath = await buildNotFoundPage(buildOutputFolderPath);
   const assetFilePaths = await buildAssets(buildOutputFolderPath);
   const styleSheetPath = await buildStyleSheet(buildOutputFolderPath);
@@ -28,13 +27,11 @@ async function main() {
 
     /* All the valid paths to keep */
     homePagePath,
-    path.resolve(buildOutputFolderPath, "tags"),
     notFoundPagePath,
     styleSheetPath,
+    ...tagPagePaths,
     ...assetFilePaths,
-    ...posts.map((post) =>
-      path.resolve(buildOutputFolderPath, post.folderName),
-    ),
+    ...posts.map((post) => post.outputPaths).flat(),
   );
 
   console.timeEnd("Build time");
