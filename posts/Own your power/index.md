@@ -7,7 +7,9 @@ tags:
     - Reflection
     - Video Thoughts
 ---
-This is my reflection and learnings from watching [Carla Harris at the 2017 Pennsylvania Conference for Women](https://www.youtube.com/watch?v=ygibRq7YGGM).
+This is my reflection and learnings from watching [Carla Harris at the 2017 Pennsylvania Conference for Women](https://www.youtube.com/watch?v=ygibRq7YGGM). Thanks to my friend for sharing this vid with me!
+
+<iframe src="https://www.youtube.com/embed/ygibRq7YGGM?si=isSZNDnynBEMOtbV" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## Take Charge
 Own your power, dont ever doubt what you have in you, because once you start doubting you give away your power.

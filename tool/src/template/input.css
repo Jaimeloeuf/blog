@@ -67,4 +67,8 @@
   ul {
     @apply pl-6;
   }
+
+  iframe {
+    @apply my-6 aspect-video w-full;
+  }
 }
