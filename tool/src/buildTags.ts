@@ -1,25 +1,26 @@
 import path from "path";
 import { writeFile } from "fs/promises";
-import { generateHomeTagCardHtml } from "./layout/components/homeTagCard";
-import { generateAllTagsHtml } from "./layout/allTags";
-import { generateTagsHtml } from "./layout/tag";
-import { generateHomePostCardHtml } from "./layout/components/homePostCard";
+import {
+  generateHomeTagCardFragment,
+  generatePostCardFragment,
+} from "./generateFragment";
+import { generateAllTagsPage, generateTagsPage } from "./generatePage";
 import { createFolderIfDoesNotExist } from "./createFolderIfDoesNotExist";
 import type { Post } from "./Post";
 
 type Tags = Map<string, { rawTag: string; count: number }>;
 
 async function buildAllTags(tagsFolderPath: string, tags: Tags) {
-  const tagCardHTML = new Array(...tags)
+  const tagCardFragment = new Array(...tags)
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([tag, { rawTag, count }]) =>
-      generateHomeTagCardHtml(tag, rawTag, count),
+      generateHomeTagCardFragment(tag, rawTag, count),
     )
     .join("");
 
-  const allTagHTML = generateAllTagsHtml(tagCardHTML);
+  const allTagPage = generateAllTagsPage(tagCardFragment);
   const allTagPath = path.resolve(tagsFolderPath, `index.html`);
-  await writeFile(allTagPath, allTagHTML, { flag: "w" });
+  await writeFile(allTagPath, allTagPage, { flag: "w" });
 
   return allTagPath;
 }
@@ -33,10 +34,10 @@ async function buildIndividualTagPage(
 
   // Generate a page for every single tag, to show all posts with that tag
   for (const [tag, { rawTag, count }] of tags) {
-    const postCardHTML = posts
+    const postCardFragment = posts
       .filter((post) => post.tags.some((postTag) => postTag.tag === tag))
       .map((post) =>
-        generateHomePostCardHtml(
+        generatePostCardFragment(
           post.folderName,
           post.title,
           post.date.toDateString(),
@@ -44,7 +45,7 @@ async function buildIndividualTagPage(
       )
       .join("");
 
-    const tagHTML = generateTagsHtml(rawTag, count, postCardHTML);
+    const tagHTML = generateTagsPage(rawTag, count, postCardFragment);
 
     const htmlFilePath = path.resolve(tagsFolderPath, `${tag}.html`);
     await writeFile(htmlFilePath, tagHTML, { flag: "w" });

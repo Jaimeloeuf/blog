@@ -1,11 +1,11 @@
 import path from "path";
 import { writeFile } from "fs/promises";
-import { generateNotFoundHtml } from "./layout/404";
+import { generateNotFoundPage } from "./generatePage";
 
 // @todo Might make this a copy operation instead
 export async function buildNotFoundPage(buildOutputFolderPath: string) {
   const notFoundPagePath = path.resolve(buildOutputFolderPath, "404.html");
-  await writeFile(notFoundPagePath, generateNotFoundHtml(), { flag: "w" });
+  await writeFile(notFoundPagePath, generateNotFoundPage(), { flag: "w" });
 
   return notFoundPagePath;
 }

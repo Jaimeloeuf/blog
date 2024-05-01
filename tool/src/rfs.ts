@@ -6,7 +6,7 @@ const cache = new Map<string, string>();
 /**
  * idempotent `readFileSync` wrapper that caches after the first call.
  *
- * File name should be relative to `/tool/src/layout/__FILE_NAME__`
+ * File name should be relative to `/tool/src/template/__FILE_NAME__`
  */
 export function rfs(file: string) {
   let content = cache.get(file);
@@ -15,7 +15,7 @@ export function rfs(file: string) {
     return content;
   }
 
-  content = readFileSync(resolve("./src/layout", file), { encoding: "utf8" });
+  content = readFileSync(resolve("./src/template", file), { encoding: "utf8" });
   cache.set(file, content);
 
   return content;

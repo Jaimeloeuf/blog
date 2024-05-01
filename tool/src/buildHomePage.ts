@@ -1,23 +1,23 @@
 import path from "path";
 import { writeFile } from "fs/promises";
-import { generateHomeHtml } from "./layout/home";
-import { generateHomePostCardHtml } from "./layout/components/homePostCard";
+import { generateHomePage } from "./generatePage";
+import { generatePostCardFragment } from "./generateFragment";
 import type { Post } from "./Post";
 
 export async function buildHomePage(
   buildOutputFolderPath: string,
   posts: Array<Post>,
 ) {
-  let links = "";
+  let postCardFragment = "";
   for (const post of posts) {
-    links += generateHomePostCardHtml(
+    postCardFragment += generatePostCardFragment(
       post.folderName,
       post.title,
       post.date.toDateString(),
     );
   }
 
-  const fullHtmlPage = generateHomeHtml(links);
+  const fullHtmlPage = generateHomePage(postCardFragment);
 
   const homePagePath = path.resolve(buildOutputFolderPath, "index.html");
   await writeFile(homePagePath, fullHtmlPage, { flag: "w" });

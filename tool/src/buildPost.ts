@@ -3,8 +3,8 @@ import { readFile, writeFile, readdir, copyFile } from "fs/promises";
 import { marked } from "marked";
 import fm from "front-matter";
 import { readingTime } from "reading-time-estimator";
-import { generatePostHtml } from "./layout/post";
-import { generatePostTagsHtml } from "./layout/components/postTags";
+import { generatePostPage } from "./generatePage";
+import { generatePostTagsFragment } from "./generateFragment";
 import { createFolderIfDoesNotExist } from "./createFolderIfDoesNotExist";
 import { postsDirPath } from "./postsDirPath";
 import { getSafeTagName } from "./getSafeTagName";
@@ -48,17 +48,17 @@ export async function buildPost(
     tag: getSafeTagName(rawTag),
   }));
 
-  const tagHtml = tags
-    .map(({ tag, rawTag }) => generatePostTagsHtml(tag, rawTag))
+  const tagFragment = tags
+    .map(({ tag, rawTag }) => generatePostTagsFragment(tag, rawTag))
     .join("");
 
   const postContainsCodeblock = parsedHTML.includes('<code class="language-');
 
-  const fullHtmlPage = generatePostHtml(
+  const fullHtmlPage = generatePostPage(
     post.title,
     post.date.toDateString(),
     timeToRead,
-    tagHtml,
+    tagFragment,
     parsedHTML,
     postContainsCodeblock,
   );
