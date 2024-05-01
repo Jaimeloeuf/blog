@@ -1,12 +1,5 @@
-import { readFileSync } from "fs";
-import { resolve } from "path";
-import { generateHighlightJsHtml } from "./highlightJS";
-
-const postTemplate = readFileSync(
-  // Path should be relative to /tool/
-  resolve("./src/layout/post.html"),
-  { encoding: "utf8" },
-);
+import { rfs } from "./rfs";
+import { generateHighlightJsHtml } from "./components/highlightJS";
 
 export const generatePostHtml = (
   title: string,
@@ -16,7 +9,7 @@ export const generatePostHtml = (
   postContent: string,
   postContainsCodeblock: boolean,
 ) =>
-  postTemplate
+  rfs("post.html")
     .replaceAll("${title}", title)
     .replace(
       "${highlightJS}",

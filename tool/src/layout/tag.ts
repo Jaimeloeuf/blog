@@ -1,18 +1,11 @@
-import { readFileSync } from "fs";
-import { resolve } from "path";
-
-const tagTemplate = readFileSync(
-  // Path should be relative to /tool/
-  resolve("./src/layout/tag.html"),
-  { encoding: "utf8" },
-);
+import { rfs } from "./rfs";
 
 export const generateTagsHtml = (
   rawTag: string,
   count: number,
   posts: string,
 ) =>
-  tagTemplate
+  rfs("tag.html")
     .replaceAll("${tag}", rawTag)
     .replace("${count}", count.toString())
     .replace("${posts}", posts);

@@ -1,18 +1,11 @@
-import { readFileSync } from "fs";
-import { resolve } from "path";
-
-const homePostCardTemplate = readFileSync(
-  // Path should be relative to /tool/
-  resolve("./src/layout/components/homePostCard.html"),
-  { encoding: "utf8" },
-);
+import { rfs } from "../rfs";
 
 export const generateHomePostCardHtml = (
   folderName: string,
   title: string,
   postDate: string,
 ) =>
-  homePostCardTemplate
+  rfs("components/homePostCard.html")
     .replace("${folderName}", folderName)
     .replace("${title}", title)
     .replace("${postDate}", postDate);

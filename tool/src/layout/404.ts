@@ -1,10 +1,3 @@
-import { readFileSync } from "fs";
-import { resolve } from "path";
+import { rfs } from "./rfs";
 
-const notFoundHtmlFile = readFileSync(
-  // Path should be relative to /tool/
-  resolve("./src/layout/404.html"),
-  { encoding: "utf8" },
-);
-
-export const generateNotFoundHtml = () => notFoundHtmlFile;
+export const generateNotFoundHtml = () => rfs("404.html");
