@@ -52,12 +52,15 @@ export async function buildPost(
     .map(({ tag, rawTag }) => generatePostTagsHtml(tag, rawTag))
     .join("");
 
+  const postContainsCodeblock = parsedHTML.includes('<code class="language-');
+
   const fullHtmlPage = generatePostHtml(
     post.title,
     post.date.toDateString(),
     timeToRead,
     tagHtml,
     parsedHTML,
+    postContainsCodeblock,
   );
 
   const folderName = getOutputFolderName(post, folderPath);

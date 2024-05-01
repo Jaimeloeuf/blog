@@ -25,14 +25,7 @@
       </div>
     </div>
 
-    <!-- Load highlight.js after content has loaded. -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/a11y-light.min.css"
-    />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    <script>
-      hljs.highlightAll();
-    </script>
+    <!-- Conditionally load highlight.js if there is code blocks in the markdown file, after content has loaded. -->
+    ${highlightJS}
   </body>
 </html>
