@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "serve": "npx vite --port 8080"
+    "serve": "npx vite --port 8080 --host"
   },
   "devDependencies": {
     "@vitejs/plugin-basic-ssl": "^1.1.0",
