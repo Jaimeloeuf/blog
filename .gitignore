@@ -1,5 +1,2 @@
-# Ignore special folders
-__*/
-
 # Deps
 node_modules/
