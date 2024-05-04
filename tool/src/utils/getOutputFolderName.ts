@@ -1,4 +1,4 @@
-import { PostSchemaType } from "./Post";
+import { PostSchemaType } from "../types/Post";
 
 /**
  * Get the output folder name generated from the original path and post date,

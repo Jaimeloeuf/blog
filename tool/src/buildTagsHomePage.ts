@@ -2,7 +2,7 @@ import { resolve } from "path";
 import { writeFile } from "fs/promises";
 import { generateHomeTagCardFragment } from "./generateFragment";
 import { generateAllTagsPage } from "./generatePage";
-import type { Tags } from "./Tags";
+import type { Tags } from "./types/Tags";
 
 export async function buildTagsHomePage(tagsFolderPath: string, tags: Tags) {
   const tagCardFragment = new Array(...tags)

@@ -5,11 +5,11 @@ import fm from "front-matter";
 import { readingTime } from "reading-time-estimator";
 import { generatePostPage } from "./generatePage";
 import { generatePostTagsFragment } from "./generateFragment";
-import { createFolderIfDoesNotExist } from "./createFolderIfDoesNotExist";
-import { postsDirPath } from "./postsDirPath";
-import { getSafeTagName } from "./getSafeTagName";
-import { getOutputFolderName } from "./getOutputFolderName";
-import { PostSchema, type Post } from "./Post";
+import { createFolderIfDoesNotExist } from "./utils/createFolderIfDoesNotExist";
+import { postsDirPath } from "./utils/postsDirPath";
+import { getSafeTagName } from "./utils/getSafeTagName";
+import { getOutputFolderName } from "./utils/getOutputFolderName";
+import { PostSchema, type Post } from "./types/Post";
 
 /**
  * Builds a post's static HTML file from its markdown contents and return the

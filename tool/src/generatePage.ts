@@ -1,4 +1,4 @@
-import { rfs } from "./rfs";
+import { rfs } from "./utils/rfs";
 import { generateHighlightJsFragment } from "./generateFragment";
 
 export const generateNotFoundPage = () => rfs("pages/404.html");

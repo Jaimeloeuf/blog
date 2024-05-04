@@ -1,4 +1,4 @@
-import { rfs } from "./rfs";
+import { rfs } from "./utils/rfs";
 
 export const generateHighlightJsFragment = () =>
   rfs("fragments/highlightJS.html");

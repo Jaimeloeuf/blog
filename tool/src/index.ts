@@ -1,6 +1,6 @@
 import { readdir } from "fs/promises";
-import { createBuildOutputFolder } from "./createBuildOutputFolder";
-import { postsDirPath } from "./postsDirPath";
+import { createBuildOutputFolder } from "./utils/createBuildOutputFolder";
+import { postsDirPath } from "./utils/postsDirPath";
 import { buildStyleSheet } from "./buildStyleSheet";
 import { buildPosts } from "./buildPosts";
 import { buildHomePage } from "./buildHomePage";

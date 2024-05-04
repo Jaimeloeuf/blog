@@ -2,7 +2,7 @@ import path from "path";
 import { writeFile } from "fs/promises";
 import { generateHomePage } from "./generatePage";
 import { generatePostCardFragment } from "./generateFragment";
-import type { Post } from "./Post";
+import type { Post } from "./types/Post";
 
 export async function buildHomePage(
   buildOutputFolderPath: string,

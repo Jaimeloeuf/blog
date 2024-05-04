@@ -1,6 +1,6 @@
-import { isInvalidPostFolder } from "./isInvalidPostFolder";
+import { isInvalidPostFolder } from "./utils/isInvalidPostFolder";
 import { buildPost } from "./buildPost";
-import type { Post } from "./Post";
+import type { Post } from "./types/Post";
 
 /**
  * Builds all the posts' static sites and return the list of valid (posts +

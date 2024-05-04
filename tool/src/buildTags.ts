@@ -1,8 +1,8 @@
 import { resolve } from "path";
 import { buildTagsHomePage } from "./buildTagsHomePage";
 import { buildTagsIndividualPages } from "./buildTagsIndividualPages";
-import { createFolderIfDoesNotExist } from "./createFolderIfDoesNotExist";
-import type { Post } from "./Post";
+import { createFolderIfDoesNotExist } from "./utils/createFolderIfDoesNotExist";
+import type { Post } from "./types/Post";
 
 export async function buildTags(
   buildOutputFolderPath: string,
