@@ -77,6 +77,10 @@
     @apply pb-1;
   }
 
+  img {
+    @apply w-full py-6;
+  }
+
   iframe {
     @apply my-6 aspect-video w-full;
   }
