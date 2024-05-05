@@ -1,13 +1,21 @@
 import { rfs } from "./utils/rfs";
-import { generateHighlightJsFragment } from "./generateFragment";
+import {
+  generateHeaderFragment,
+  generateHighlightJsFragment,
+} from "./generateFragment";
 
-export const generateNotFoundPage = () => rfs("pages/404.html");
+export const generateNotFoundPage = () =>
+  rfs("pages/404.html").replace("${headerFragment}", generateHeaderFragment());
 
 export const generateAllTagsPage = (tagCardFragment: string) =>
-  rfs("pages/allTags.html").replace("${tags}", tagCardFragment);
+  rfs("pages/allTags.html")
+    .replace("${tags}", tagCardFragment)
+    .replace("${headerFragment}", generateHeaderFragment());
 
 export const generateHomePage = (postCardFragment: string) =>
-  rfs("pages/home.html").replace("${postLinks}", postCardFragment);
+  rfs("pages/home.html")
+    .replace("${postLinks}", postCardFragment)
+    .replace("${headerFragment}", generateHeaderFragment());
 
 export const generatePostPage = (
   title: string,
@@ -26,7 +34,8 @@ export const generatePostPage = (
     .replace("${postContent}", postContent)
     .replace("${tags}", tagFragment)
     .replace("${timeToRead}", timeToRead)
-    .replace("${date}", date);
+    .replace("${date}", date)
+    .replace("${headerFragment}", generateHeaderFragment());
 
 export const generateTagsPage = (
   rawTag: string,
@@ -36,4 +45,5 @@ export const generateTagsPage = (
   rfs("pages/tag.html")
     .replaceAll("${tag}", rawTag)
     .replace("${count}", count.toString())
-    .replace("${posts}", postCardFragment);
+    .replace("${posts}", postCardFragment)
+    .replace("${headerFragment}", generateHeaderFragment());
