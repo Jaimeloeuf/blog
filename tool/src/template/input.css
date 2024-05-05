@@ -53,7 +53,7 @@
   }
 
   code {
-    @apply bg-zinc-100;
+    @apply rounded bg-zinc-100 px-1 font-thin text-black;
   }
 
   a {
