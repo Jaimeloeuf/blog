@@ -64,7 +64,15 @@ function HelloComponent() {
 }
 ```
 
-This can happen and diving deeper, it is becauase it's difficult to figure out what is being imported when a module only has a default import. If you are using an unfamiliar module or file, it can be difficult to figure out what is returned like `const list = require("./list");`. In this context, what would you expect list to be? It's unlikely to be a primitive value but it could logically be a function, class, or other type of object and how will you know for sure? You need to make a side trip by either opening the file and looking for the export or opening the documentation for it. In either case, this now becomes an extra bit of information you need in your brain to avoid a second side trip penalty when you need to import from `list.js` again. If you are importing a lot of defaults from modules then either your cognitive overhead increases or the number of side trips increases. Both of which are suboptimal and frustrating.
+This can happen and diving deeper, it is becauase it's difficult to figure out what is being imported when a module only has a default import.
+
+Just imagine using an unfamiliar module like `const list = require("./list")`, in this context, what would you expect `list` to be? It's unlikely to be a primitive value but it could logically be a function, class, or other type of object and how will you know for sure?
+
+You need to make a side trip by either opening the file and looking for the export or opening the documentation for it.
+
+In either case, this now becomes an extra bit of information you need in your brain to avoid a second side trip penalty when you need to import from `list.js` again.
+
+If you are importing a lot of defaults from modules then either your cognitive overhead increases or the number of side trips increases. Both of which are suboptimal and frustrating.
 
 Names should be consistent throughout all files. If something is an Apple in one file, it shouldn't be called Orange in another file. An Apple should always be an Apple.
 
@@ -142,7 +150,11 @@ export { Title, Navigation };
 
 
 ### Name matching problems
-Named exports require consuming modules to at least specify the name what they are importing from a module, allowing us to easily search symbols like `LinkedList` for example, and once found, should refer to the same LinkedList everywhere. Default exports do not enforce their imported names, this means that naming imports increases your cognitive load as you need to determine the correct naming convention and make sure that every other developer working on the same application will use the same name for the same thing. (You can, of course, allow each developer to use different names for the same thing, but that introduces more cognitive overhead for the team)
+Named exports require consuming modules to at least specify the name what they are importing from a module, allowing us to easily search symbols like `LinkedList` for example, and once found, should refer to the same LinkedList everywhere.
+
+Default exports do not enforce their imported names, this means that naming imports increases your cognitive load as you need to determine the correct naming convention and make sure that every other developer working on the same application will use the same name for the same thing.
+
+You can, of course, allow each developer to use different names for the same thing, but that introduces more cognitive overhead for the team
 
 Importing a named export means at least referencing the canonical name of a thing everywhere that it's used and even if you choose to rename an import, it is done explicitly where the canonical name is first referenced:
 ```javascript
@@ -158,7 +170,9 @@ It is also possible but alot more difficult, complicated and error-prone to do t
 
 
 ### Importing the wrong thing
-Named exports in JavaScript modules have a particular advantage over default exports in that an error is thrown when attempting to import something that doesn't exist in the module. Consider this code:
+Named exports in JavaScript modules have a particular advantage over default exports in that an error is thrown when attempting to import something that doesn't exist in the module.
+
+Consider this code:
 ```javascript
 import { LinkedList } from "./list.js";
 ```
