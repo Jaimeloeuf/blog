@@ -19,6 +19,31 @@
           <p class="pb-4 text-base">${date}, &nbsp;${timeToRead}</p>
           <div class="pb-4">${tags}</div>
           <div>${postContent}</div>
+
+          <div class="pr-8 pt-4 text-right">
+            <button
+              id="back-to-top-btn"
+              title="Back to top"
+              class="rounded-full border border-zinc-200 p-2 shadow-2xl shadow-black"
+            >
+              <svg
+                width="24"
+                height="24"
+                xmlns="http://www.w3.org/2000/svg"
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+              >
+                <path
+                  d="M11 2.206l-6.235 7.528-.765-.645 7.521-9 7.479 9-.764.646-6.236-7.53v21.884h-1v-21.883z"
+                />
+              </svg>
+            </button>
+            <script>
+              document.getElementById("back-to-top-btn").onclick = function () {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              };
+            </script>
+          </div>
         </div>
       </div>
     </div>
