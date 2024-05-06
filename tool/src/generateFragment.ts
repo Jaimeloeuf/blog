@@ -29,3 +29,6 @@ export const generatePostTagsFragment = (tag: string, rawTag: string) =>
   rfs("fragments/postTags.html")
     .replace("${tag}", tag)
     .replace("${rawTag}", rawTag);
+
+export const generateScrollToTopButtonFragment = () =>
+  rfs("fragments/scrollToTopButton.html");

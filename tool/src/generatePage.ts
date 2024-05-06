@@ -2,6 +2,7 @@ import { rfs } from "./utils/rfs";
 import {
   generateHeaderFragment,
   generateHighlightJsFragment,
+  generateScrollToTopButtonFragment,
 } from "./generateFragment";
 
 export const generateNotFoundPage = () =>
@@ -31,6 +32,7 @@ export const generatePostPage = (
       "${highlightJS}",
       postContainsCodeblock ? generateHighlightJsFragment() : "",
     )
+    .replace("${scrollToTopButton}", generateScrollToTopButtonFragment())
     .replace("${postContent}", postContent)
     .replace("${tags}", tagFragment)
     .replace("${timeToRead}", timeToRead)
