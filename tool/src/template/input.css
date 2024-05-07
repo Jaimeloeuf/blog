@@ -81,6 +81,14 @@
     @apply w-full py-6;
   }
 
+  blockquote {
+    @apply px-6 pb-8 pt-4 sm:px-8 sm:pb-10 sm:pt-6;
+  }
+
+  blockquote > p {
+    @apply py-0 text-xl font-extralight leading-8 text-zinc-800 sm:text-2xl sm:leading-10;
+  }
+
   iframe {
     @apply my-6 aspect-video w-full;
   }
