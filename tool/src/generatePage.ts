@@ -10,11 +10,13 @@ export const generateNotFoundPage = () =>
 
 export const generateAllTagsPage = (tagCardFragment: string) =>
   rfs("pages/allTags.html")
+    .replace("${scrollToTopButton}", generateScrollToTopButtonFragment())
     .replace("${tags}", tagCardFragment)
     .replace("${headerFragment}", generateHeaderFragment());
 
 export const generateHomePage = (postCardFragment: string) =>
   rfs("pages/home.html")
+    .replace("${scrollToTopButton}", generateScrollToTopButtonFragment())
     .replace("${postLinks}", postCardFragment)
     .replace("${headerFragment}", generateHeaderFragment());
 
@@ -46,6 +48,7 @@ export const generateTagsPage = (
 ) =>
   rfs("pages/tag.html")
     .replaceAll("${tag}", rawTag)
+    .replace("${scrollToTopButton}", generateScrollToTopButtonFragment())
     .replace("${count}", count.toString())
     .replace("${posts}", postCardFragment)
     .replace("${headerFragment}", generateHeaderFragment());
