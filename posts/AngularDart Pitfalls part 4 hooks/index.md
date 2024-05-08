@@ -12,7 +12,7 @@ In this post, we will make sense of hooks (lifecycle hooks / router hooks / thir
 
 Let's start with, What the hell are hooks…
 
-> Hooks are function invocation that are run at specific points on the timeline of a component’s creation.
+> *Hooks are function invocation that are run at specific points on the timeline of a component’s creation.*
 
 Okay, what you just read is the official definition, but I know, it might be pretty confusing and hard to understand when you don’t have that much experience dealing with stuff like that.
 
