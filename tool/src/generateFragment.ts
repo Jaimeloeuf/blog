@@ -25,6 +25,8 @@ export const generateHomeTagCardFragment = (
     .replace("${rawTag}", rawTag)
     .replace("${count}", count.toString());
 
+export const generateHrFragment = () => rfs("fragments/hr.html");
+
 export const generatePostTagsFragment = (tag: string, rawTag: string) =>
   rfs("fragments/postTags.html")
     .replace("${tag}", tag)
