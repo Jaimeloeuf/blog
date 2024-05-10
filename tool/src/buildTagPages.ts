@@ -14,9 +14,13 @@ export async function buildTagPages(
   await createFolderIfDoesNotExist(tagsFolderPath);
 
   const allTagsPath = await buildTagsHomePage(tagsFolderPath, tags);
-  const tagPaths = await buildTagsIndividualPages(tagsFolderPath, posts, tags);
+  const tagPagePaths = await buildTagsIndividualPages(
+    tagsFolderPath,
+    posts,
+    tags,
+  );
 
-  tagPaths.push(allTagsPath);
+  tagPagePaths.push(allTagsPath);
 
-  return tagPaths;
+  return tagPagePaths;
 }
