@@ -19,7 +19,7 @@ async function main() {
   const posts = await buildPosts(buildOutputFolderPath, postFolderItems);
   const tags = buildTags(posts);
 
-  const homePagePath = await buildHomePage(buildOutputFolderPath, posts);
+  const homePagePath = await buildHomePage(buildOutputFolderPath, posts, tags);
   const tagPagePaths = await buildTagPages(buildOutputFolderPath, posts, tags);
   const notFoundPagePath = await buildNotFoundPage(buildOutputFolderPath);
   const assetFilePaths = await buildAssets(buildOutputFolderPath);
