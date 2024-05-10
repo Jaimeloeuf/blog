@@ -20,11 +20,12 @@ export const generateAllTagsPage = (
     .replace("${postCount}", postCount.toString())
     .replace("${tagCount}", tagCount.toString());
 
-export const generateHomePage = (postCardFragment: string) =>
+export const generateHomePage = (postCardFragment: string, postCount: number) =>
   rfs("pages/home.html")
     .replace("${scrollToTopButton}", generateScrollToTopButtonFragment())
     .replace("${postLinks}", postCardFragment)
-    .replace("${headerFragment}", generateHeaderFragment());
+    .replace("${headerFragment}", generateHeaderFragment())
+    .replace("${postCount}", postCount.toString());
 
 export const generatePostPage = (
   title: string,

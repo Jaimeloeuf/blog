@@ -17,7 +17,7 @@ export async function buildHomePage(
     );
   }
 
-  const fullHtmlPage = generateHomePage(postCardFragment);
+  const fullHtmlPage = generateHomePage(postCardFragment, posts.length);
 
   const homePagePath = path.resolve(buildOutputFolderPath, "index.html");
   await writeFile(homePagePath, fullHtmlPage, { flag: "w" });
