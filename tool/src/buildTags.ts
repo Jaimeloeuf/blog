@@ -1,16 +1,6 @@
-import { resolve } from "path";
-import { buildTagsHomePage } from "./buildTagsHomePage";
-import { buildTagsIndividualPages } from "./buildTagsIndividualPages";
-import { createFolderIfDoesNotExist } from "./utils/createFolderIfDoesNotExist";
 import type { Post } from "./types/Post";
 
-export async function buildTags(
-  buildOutputFolderPath: string,
-  posts: Array<Post>,
-) {
-  const tagsFolderPath = resolve(buildOutputFolderPath, "tags");
-  await createFolderIfDoesNotExist(tagsFolderPath);
-
+export function buildTags(posts: Array<Post>) {
   const tags = Object.values(posts)
     .map((post) => post.tags)
     .flat()
@@ -20,10 +10,5 @@ export async function buildTags(
       return map.set(tag, tagObject);
     }, new Map<string, { rawTag: string; count: number }>());
 
-  const allTagsPath = await buildTagsHomePage(tagsFolderPath, tags);
-  const tagPaths = await buildTagsIndividualPages(tagsFolderPath, posts, tags);
-
-  tagPaths.push(allTagsPath);
-
-  return tagPaths;
+  return tags;
 }
