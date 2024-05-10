@@ -11,12 +11,14 @@ export const generateNotFoundPage = () =>
 export const generateAllTagsPage = (
   tagCardFragment: string,
   postCount: number,
+  tagCount: number,
 ) =>
   rfs("pages/allTags.html")
     .replace("${scrollToTopButton}", generateScrollToTopButtonFragment())
     .replace("${tags}", tagCardFragment)
     .replace("${headerFragment}", generateHeaderFragment())
-    .replace("${postCount}", postCount.toString());
+    .replace("${postCount}", postCount.toString())
+    .replace("${tagCount}", tagCount.toString());
 
 export const generateHomePage = (postCardFragment: string) =>
   rfs("pages/home.html")
