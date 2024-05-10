@@ -8,11 +8,15 @@ import {
 export const generateNotFoundPage = () =>
   rfs("pages/404.html").replace("${headerFragment}", generateHeaderFragment());
 
-export const generateAllTagsPage = (tagCardFragment: string) =>
+export const generateAllTagsPage = (
+  tagCardFragment: string,
+  postCount: number,
+) =>
   rfs("pages/allTags.html")
     .replace("${scrollToTopButton}", generateScrollToTopButtonFragment())
     .replace("${tags}", tagCardFragment)
-    .replace("${headerFragment}", generateHeaderFragment());
+    .replace("${headerFragment}", generateHeaderFragment())
+    .replace("${postCount}", postCount.toString());
 
 export const generateHomePage = (postCardFragment: string) =>
   rfs("pages/home.html")

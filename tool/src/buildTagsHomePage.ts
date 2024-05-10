@@ -4,7 +4,11 @@ import { generateHomeTagCardFragment } from "./generateFragment";
 import { generateAllTagsPage } from "./generatePage";
 import type { Tags } from "./types/Tags";
 
-export async function buildTagsHomePage(tagsFolderPath: string, tags: Tags) {
+export async function buildTagsHomePage(
+  tagsFolderPath: string,
+  tags: Tags,
+  postCount: number,
+) {
   const tagCardFragment = new Array(...tags)
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([tag, { rawTag, count }]) =>
@@ -12,7 +16,7 @@ export async function buildTagsHomePage(tagsFolderPath: string, tags: Tags) {
     )
     .join("");
 
-  const allTagPage = generateAllTagsPage(tagCardFragment);
+  const allTagPage = generateAllTagsPage(tagCardFragment, postCount);
   const allTagPath = resolve(tagsFolderPath, `index.html`);
   await writeFile(allTagPath, allTagPage, { flag: "w" });
 

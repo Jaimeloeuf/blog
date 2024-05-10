@@ -13,7 +13,11 @@ export async function buildTagPages(
   const tagsFolderPath = resolve(buildOutputFolderPath, "tags");
   await createFolderIfDoesNotExist(tagsFolderPath);
 
-  const allTagsPath = await buildTagsHomePage(tagsFolderPath, tags);
+  const allTagsPath = await buildTagsHomePage(
+    tagsFolderPath,
+    tags,
+    posts.length,
+  );
   const tagPagePaths = await buildTagsIndividualPages(
     tagsFolderPath,
     posts,
