@@ -1,2 +1,13 @@
-# blog.jjss.quest
+# blog
 My blog at <https://blog.jjss.quest>
+
+
+## dirs
+1. [.github](./.github/)
+    1. Holds the github action workflow to run [tool/](./tool/) to build and deploy the site.
+1. [docs-server](./docs-server/)
+    1. Local development server.
+1. [posts](./posts/)
+    1. Dir for all the blog posts written in markdown.
+1. [tool](./tool/)
+    1. Custom TypeScript build tool that builds the blog page like a static site generator.
