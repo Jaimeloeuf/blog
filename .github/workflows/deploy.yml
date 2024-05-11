@@ -30,6 +30,7 @@ jobs:
       - name: Install and Build 🔧
         run: |
           cd tool
+          NODE_ENV=production
           npm ci
           npm run build
 
