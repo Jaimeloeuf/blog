@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "serve": "npx nodemon -x 'npm run build' -w './' -w '../posts/**/*' -e ts,md",
+    "serve": "node ./serve.js",
     "build": "npx ts-node ./src/index.ts"
   },
   "dependencies": {
