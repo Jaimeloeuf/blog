@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "serve": "npx nodemon -x 'npm run build' -w './' -w '../posts/**/*' -e ts,md",
     "build": "npx ts-node ./src/index.ts"
   },
   "dependencies": {
@@ -11,6 +12,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.12.7",
+    "nodemon": "^3.1.0",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.14",
     "ts-node": "^10.9.2"
