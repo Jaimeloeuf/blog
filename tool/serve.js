@@ -11,3 +11,18 @@ function nodemonWatcher() {
 }
 
 nodemonWatcher();
+
+function chokidarWatcher() {
+  const { resolve } = require("path");
+  const chokidar = require("chokidar");
+
+  const watcher = chokidar.watch(resolve("../posts/**"), { persistent: true });
+
+  watcher
+    .on("change", (path) => {
+      // Find the parent folder!
+      console.log(resolve(path));
+    });
+}
+
+// chokidarWatcher();
