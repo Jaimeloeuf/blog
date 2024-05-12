@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "serve": "node ./serve.js",
+    "serve": "npx ts-node ./serve.ts",
     "build": "npx ts-node ./src/index.ts"
   },
   "dependencies": {
