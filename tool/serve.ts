@@ -10,18 +10,25 @@ function nodemonWatcher() {
     .on("restart", () => console.log("Rebuild..."));
 }
 
-nodemonWatcher();
+// nodemonWatcher();
+
+import { resolve, relative } from "path";
+import chokidar from "chokidar";
+import { buildPost } from "./src/buildPost";
 
 function chokidarWatcher() {
-  const { resolve } = require("path");
-  const chokidar = require("chokidar");
+  const watcher = chokidar.watch(resolve("../posts/"), { persistent: true });
 
-  const watcher = chokidar.watch(resolve("../posts/**"), { persistent: true });
+  watcher.on("change", async (path: string) => {
+    const postFolderName = relative("../posts/", path).split("/")[0];
 
-  watcher.on("change", (path: string) => {
-    // Find the parent folder!
-    console.log(resolve(path));
+    if (postFolderName === undefined || postFolderName === "") {
+      console.log(`Invalid 'postFolderName' parsed from '${path}'`);
+      return;
+    }
+
+    await buildPost(resolve(`../docs`), postFolderName);
   });
 }
 
-// chokidarWatcher();
+chokidarWatcher();
