@@ -18,6 +18,9 @@ import { build } from "./src/build";
 import { buildPost } from "./src/buildPost";
 
 async function chokidarWatcher() {
+  // @todo Switch depending on user flag
+  const verboseLogger = console.log;
+
   // Run initial full build first
   await build();
 
@@ -28,14 +31,16 @@ async function chokidarWatcher() {
       const postFolderName = relative("../posts/", path).split("/")[0];
 
       if (postFolderName === undefined || postFolderName === "") {
-        console.log(`Invalid 'postFolderName' parsed from '${path}'`);
+        verboseLogger(
+          `[Change] Invalid 'postFolderName' parsed from '${path}'`,
+        );
         return;
       }
 
       await buildPost(resolve(`../docs`), postFolderName);
     })
     .on("ready", () => {
-      console.log("Initial build complete. Watching files for changes...");
+      verboseLogger("Initial build complete. Watching files for changes...");
     });
 }
 
