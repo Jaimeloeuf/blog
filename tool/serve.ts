@@ -24,9 +24,20 @@ async function chokidarWatcher() {
   // Run initial full build first
   await build();
 
-  const watcher = chokidar.watch(resolve("../posts/"), { persistent: true });
+  const watcher = chokidar.watch(resolve("../posts/"), {
+    persistent: true,
+    ignoreInitial: true,
+  });
 
   watcher
+    .on("add", (path) => {
+      verboseLogger(`[Added] '${path}'`);
+      build();
+    })
+    .on("unlink", (path) => {
+      verboseLogger(`[Removed] '${path}'`);
+      build();
+    })
     .on("change", async (path: string) => {
       const postFolderName = relative("../posts/", path).split("/")[0];
 
