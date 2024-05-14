@@ -14,9 +14,13 @@ function nodemonWatcher() {
 
 import { resolve, relative } from "path";
 import chokidar from "chokidar";
+import { build } from "./src/build";
 import { buildPost } from "./src/buildPost";
 
-function chokidarWatcher() {
+async function chokidarWatcher() {
+  // Run initial full build first
+  await build();
+
   const watcher = chokidar.watch(resolve("../posts/"), { persistent: true });
 
   watcher
