@@ -36,6 +36,9 @@ async function chokidarWatcher() {
 
       await buildPost(resolve(`../docs`), postFolderName);
     })
+
+    .on("error", (error) => console.error(error))
+
     .on("ready", () => {
       verboseLogger("Initial build complete. Watching files for changes...");
     });
