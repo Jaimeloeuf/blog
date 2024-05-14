@@ -19,16 +19,20 @@ import { buildPost } from "./src/buildPost";
 function chokidarWatcher() {
   const watcher = chokidar.watch(resolve("../posts/"), { persistent: true });
 
-  watcher.on("change", async (path: string) => {
-    const postFolderName = relative("../posts/", path).split("/")[0];
+  watcher
+    .on("change", async (path: string) => {
+      const postFolderName = relative("../posts/", path).split("/")[0];
 
-    if (postFolderName === undefined || postFolderName === "") {
-      console.log(`Invalid 'postFolderName' parsed from '${path}'`);
-      return;
-    }
+      if (postFolderName === undefined || postFolderName === "") {
+        console.log(`Invalid 'postFolderName' parsed from '${path}'`);
+        return;
+      }
 
-    await buildPost(resolve(`../docs`), postFolderName);
-  });
+      await buildPost(resolve(`../docs`), postFolderName);
+    })
+    .on("ready", () => {
+      console.log("Initial build complete. Watching files for changes...");
+    });
 }
 
 chokidarWatcher();
