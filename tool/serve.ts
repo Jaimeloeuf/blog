@@ -2,6 +2,7 @@ import { resolve, relative } from "path";
 import chokidar from "chokidar";
 import { build } from "./src/build";
 import { buildPost } from "./src/buildPost";
+import { isInvalidPostFolder } from "./src/utils/isInvalidPostFolder";
 
 async function chokidarWatcher() {
   // @todo Switch depending on user flag
@@ -26,6 +27,10 @@ async function chokidarWatcher() {
     })
     .on("change", async (path: string) => {
       const postFolderName = relative("../posts/", path).split("/")[0];
+
+      if (await isInvalidPostFolder(postFolderName)) {
+        return;
+      }
 
       if (postFolderName === undefined || postFolderName === "") {
         verboseLogger(
