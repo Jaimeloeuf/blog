@@ -2,6 +2,7 @@ import { resolve, relative } from "path";
 import chokidar from "chokidar";
 import { build } from "./src/build";
 import { buildPost } from "./src/buildPost";
+import { postsDirPath } from "./src/utils/postsDirPath";
 import { isInvalidPostFolder } from "./src/utils/isInvalidPostFolder";
 
 async function chokidarWatcher() {
@@ -26,7 +27,7 @@ async function chokidarWatcher() {
       build();
     })
     .on("change", async (path: string) => {
-      const postFolderName = relative("../posts/", path).split("/")[0];
+      const postFolderName = relative(postsDirPath, path).split("/")[0];
 
       if (await isInvalidPostFolder(postFolderName)) {
         return;
