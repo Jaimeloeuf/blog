@@ -9,7 +9,7 @@ async function chokidarWatcher() {
   const verboseLogger = console.log;
 
   // Run initial full build first
-  await build();
+  const { buildOutputFolderPath } = await build();
 
   const watcher = chokidar.watch(resolve("../posts/"), {
     persistent: true,
@@ -39,7 +39,14 @@ async function chokidarWatcher() {
         return;
       }
 
-      await buildPost(resolve(`../docs`), postFolderName);
+      verboseLogger(`[Change] rebuilding '${postFolderName}'`);
+
+      const post = await buildPost(buildOutputFolderPath, postFolderName);
+
+      // If post failed to build, ignore it
+      if (post === undefined) {
+        return;
+      }
     })
 
     .on("error", (error) => console.error(error))

@@ -34,4 +34,6 @@ export async function build() {
     ...assetFilePaths,
     ...posts.map((post) => post.outputPaths).flat(),
   );
+
+  return { buildOutputFolderPath };
 }
