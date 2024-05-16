@@ -1,5 +1,6 @@
 import { resolve, relative } from "path";
 import chokidar from "chokidar";
+import { startDevServer } from "./devServer";
 import { build } from "./src/build";
 import { buildPost } from "./src/buildPost";
 import { postsDirPath } from "./src/utils/postsDirPath";
@@ -58,8 +59,9 @@ async function chokidarWatcher() {
 
     .on("error", (error) => console.error(error))
 
-    .on("ready", () => {
+    .on("ready", async () => {
       verboseLogger("Initial build complete. Watching files for changes...");
+      await startDevServer(buildOutputFolderPath);
     });
 }
 
