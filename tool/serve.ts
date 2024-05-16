@@ -15,6 +15,12 @@ async function chokidarWatcher() {
   const watcher = chokidar.watch(resolve("../posts/"), {
     persistent: true,
     ignoreInitial: true,
+
+    // Ensure entire file has been written before reading it
+    awaitWriteFinish: {
+      stabilityThreshold: 200,
+      pollInterval: 100,
+    },
   });
 
   watcher
