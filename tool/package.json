@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "serve": "npx vite --port 8080 --host & npx ts-node ./serve.ts",
+    "serve": "npx ts-node ./serve.ts",
     "build": "npx ts-node ./src/index.ts"
   },
   "dependencies": {
