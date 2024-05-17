@@ -1,10 +1,10 @@
 import { resolve, relative } from "path";
 import chokidar from "chokidar";
 import { startDevServer } from "./devServer";
-import { build } from "./src/build";
-import { buildPost } from "./src/buildPost";
-import { postsDirPath } from "./src/utils/postsDirPath";
-import { isInvalidPostFolder } from "./src/utils/isInvalidPostFolder";
+import { build } from "../src/build";
+import { buildPost } from "../src/buildPost";
+import { postsDirPath } from "../src/utils/postsDirPath";
+import { isInvalidPostFolder } from "../src/utils/isInvalidPostFolder";
 
 async function chokidarWatcher() {
   // @todo Switch depending on user flag
