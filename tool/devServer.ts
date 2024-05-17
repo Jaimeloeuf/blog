@@ -12,6 +12,7 @@ export async function startDevServer(buildOutputFolderPath: string) {
     server: {
       port: 8080,
       host: true,
+      strictPort: true,
     },
 
     // All configs will be defined here, prevent automatic config file search
