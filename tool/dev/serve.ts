@@ -23,14 +23,19 @@ async function chokidarWatcher() {
   });
 
   watcher
+    // File added
     .on("add", (path) => {
       logger.verbose(`${chokidarWatcher.name}:added`, path);
       build();
     })
+
+    // File deleted
     .on("unlink", (path) => {
       logger.verbose(`${chokidarWatcher.name}:removed`, path);
       build();
     })
+
+    // Files updated
     .on("change", async (path: string) => {
       const postFolderName = relative(postsDirPath, path).split("/")[0];
 
