@@ -1,4 +1,5 @@
 import path from "path";
+import { logger } from "../../shared/logger";
 import { createFolderIfDoesNotExist } from "./createFolderIfDoesNotExist";
 
 /**
@@ -9,9 +10,15 @@ export async function createBuildOutputFolder() {
   const buildOutputFolderPath = path.resolve(`../docs`);
 
   if (await createFolderIfDoesNotExist(buildOutputFolderPath)) {
-    console.log(`Created build output folder '${buildOutputFolderPath}'`);
+    logger.info(
+      createBuildOutputFolder.name,
+      `Created build output folder '${buildOutputFolderPath}'`,
+    );
   } else {
-    console.log(`Build output folder already exists, reusing it.`);
+    logger.info(
+      createBuildOutputFolder.name,
+      `Build output folder already exists, reusing it.`,
+    );
   }
 
   return buildOutputFolderPath;

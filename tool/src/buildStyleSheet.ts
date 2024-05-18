@@ -1,6 +1,7 @@
 import path from "path";
 import util from "util";
 import { exec } from "child_process";
+import { logger } from "../shared/logger";
 
 const asyncExec = util.promisify(exec);
 
@@ -16,8 +17,10 @@ export async function buildStyleSheet(buildOutputFolderPath: string) {
   );
 
   // Print out *entire* stdout and stderr (buffered) if any
-  stdout !== "" && console.log(`[tailwind-stdout] ${stdout}`);
-  stderr !== "" && console.log(`[tailwind-stderr] ${stderr}`);
+  stdout !== "" &&
+    logger.info(`${buildStyleSheet.name}:tailwind-stdout`, stdout);
+  stderr !== "" &&
+    logger.info(`${buildStyleSheet.name}:tailwind-stderr`, stderr);
 
   return path.resolve(buildOutputFolderPath, outputItemName);
 }
