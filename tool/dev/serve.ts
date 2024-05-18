@@ -37,6 +37,8 @@ async function chokidarWatcher() {
 
     // Files updated
     .on("change", async (path: string) => {
+      logger.verbose(`${chokidarWatcher.name}:changed`, path);
+
       const postFolderName = relative(postsDirPath, path).split("/")[0];
 
       if (await isInvalidPostFolder(postFolderName)) {
