@@ -1,5 +1,6 @@
 import { resolve, relative } from "path";
 import chokidar from "chokidar";
+import { logger } from "../shared/logger";
 import { startDevServer } from "./devServer";
 import { build } from "../src/build";
 import { buildPost } from "../src/buildPost";
@@ -7,9 +8,6 @@ import { postsDirPath } from "../src/utils/postsDirPath";
 import { isInvalidPostFolder } from "../src/utils/isInvalidPostFolder";
 
 async function chokidarWatcher() {
-  // @todo Switch depending on user flag
-  const verboseLogger = console.log;
-
   // Run initial full build first
   const { buildOutputFolderPath } = await build();
 
@@ -26,11 +24,11 @@ async function chokidarWatcher() {
 
   watcher
     .on("add", (path) => {
-      verboseLogger(`[Added] '${path}'`);
+      logger.verbose(`${chokidarWatcher.name}:added`, path);
       build();
     })
     .on("unlink", (path) => {
-      verboseLogger(`[Removed] '${path}'`);
+      logger.verbose(`${chokidarWatcher.name}:removed`, path);
       build();
     })
     .on("change", async (path: string) => {
@@ -41,13 +39,17 @@ async function chokidarWatcher() {
       }
 
       if (postFolderName === undefined || postFolderName === "") {
-        verboseLogger(
-          `[Change] Invalid 'postFolderName' parsed from '${path}'`,
+        logger.verbose(
+          `${chokidarWatcher.name}:change`,
+          `Invalid 'postFolderName' parsed from '${path}'`,
         );
         return;
       }
 
-      verboseLogger(`[Change] rebuilding '${postFolderName}'`);
+      logger.verbose(
+        `${chokidarWatcher.name}:change`,
+        `Rebuilding '${postFolderName}'`,
+      );
 
       const post = await buildPost(buildOutputFolderPath, postFolderName);
 
@@ -60,7 +62,10 @@ async function chokidarWatcher() {
     .on("error", (error) => console.error(error))
 
     .on("ready", async () => {
-      verboseLogger("Initial build complete. Watching files for changes...");
+      logger.verbose(
+        chokidarWatcher.name,
+        "Initial build complete. Watching files for changes...",
+      );
       await startDevServer(buildOutputFolderPath);
     });
 }
