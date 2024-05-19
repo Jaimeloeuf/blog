@@ -1,5 +1,6 @@
 import { resolve, relative } from "path";
 import chokidar from "chokidar";
+import { chokidarOptions } from "./chokidarOptions";
 import { logger } from "../shared/logger";
 import { startDevServer } from "./devServer";
 import { build } from "../src/build";
@@ -13,16 +14,7 @@ async function chokidarWatcher() {
   const { buildOutputFolderPath } = await build();
 
   chokidar
-    .watch(resolve("../posts/"), {
-      persistent: true,
-      ignoreInitial: true,
-
-      // Ensure entire file has been written before reading it
-      awaitWriteFinish: {
-        stabilityThreshold: 200,
-        pollInterval: 100,
-      },
-    })
+    .watch(resolve("../posts/"), chokidarOptions)
 
     // File added
     .on("add", async (path) => {
@@ -76,16 +68,7 @@ async function chokidarWatcher() {
     });
 
   chokidar
-    .watch(resolve("./src/"), {
-      persistent: true,
-      ignoreInitial: true,
-
-      // Ensure entire file has been written before reading it
-      awaitWriteFinish: {
-        stabilityThreshold: 200,
-        pollInterval: 100,
-      },
-    })
+    .watch(resolve("./src/"), chokidarOptions)
     .on("add", fullRebuildOnToolChange)
     .on("unlink", fullRebuildOnToolChange)
     .on("change", fullRebuildOnToolChange)
