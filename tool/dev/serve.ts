@@ -6,6 +6,7 @@ import { build } from "../src/build";
 import { buildPost } from "../src/buildPost";
 import { postsDirPath } from "../src/utils/postsDirPath";
 import { isInvalidPostFolder } from "../src/utils/isInvalidPostFolder";
+import { fullRebuildOnToolChange } from "./fullRebuildOnToolChange";
 
 async function chokidarWatcher() {
   // Run initial full build first
@@ -73,6 +74,28 @@ async function chokidarWatcher() {
       );
       await startDevServer(buildOutputFolderPath);
     });
+
+  chokidar
+    .watch(resolve("./src/"), {
+      persistent: true,
+      ignoreInitial: true,
+
+      // Ensure entire file has been written before reading it
+      awaitWriteFinish: {
+        stabilityThreshold: 200,
+        pollInterval: 100,
+      },
+    })
+    .on("add", fullRebuildOnToolChange)
+    .on("unlink", fullRebuildOnToolChange)
+    .on("change", fullRebuildOnToolChange)
+    .on("error", (error) => console.error(error))
+    .on("ready", () =>
+      logger.verbose(
+        `${chokidarWatcher.name}:tool-watcher`,
+        "Initial scan complete. Watching for tool changes...",
+      ),
+    );
 }
 
 chokidarWatcher();
