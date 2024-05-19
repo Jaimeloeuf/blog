@@ -11,18 +11,18 @@ async function chokidarWatcher() {
   // Run initial full build first
   const { buildOutputFolderPath } = await build();
 
-  const watcher = chokidar.watch(resolve("../posts/"), {
-    persistent: true,
-    ignoreInitial: true,
+  chokidar
+    .watch(resolve("../posts/"), {
+      persistent: true,
+      ignoreInitial: true,
 
-    // Ensure entire file has been written before reading it
-    awaitWriteFinish: {
-      stabilityThreshold: 200,
-      pollInterval: 100,
-    },
-  });
+      // Ensure entire file has been written before reading it
+      awaitWriteFinish: {
+        stabilityThreshold: 200,
+        pollInterval: 100,
+      },
+    })
 
-  watcher
     // File added
     .on("add", async (path) => {
       logger.verbose(`${chokidarWatcher.name}:added`, path);
