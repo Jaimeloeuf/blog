@@ -34,5 +34,5 @@ export async function build() {
 
   await deleteRemovedFilesInOutputFolder(buildOutputFolderPath, validPaths);
 
-  return { buildOutputFolderPath };
+  return { buildOutputFolderPath, validPaths };
 }

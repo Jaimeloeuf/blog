@@ -9,7 +9,7 @@ import { isInvalidPostFolder } from "../src/utils/isInvalidPostFolder";
 
 async function chokidarWatcher() {
   // Run initial full build first
-  const { buildOutputFolderPath } = await build();
+  const { buildOutputFolderPath, validPaths } = await build();
 
   const watcher = chokidar.watch(resolve("../posts/"), {
     persistent: true,
@@ -24,9 +24,15 @@ async function chokidarWatcher() {
 
   watcher
     // File added
-    .on("add", (path) => {
+    .on("add", async (path) => {
       logger.verbose(`${chokidarWatcher.name}:added`, path);
-      build();
+
+      const post = await buildPostFolder(buildOutputFolderPath, path);
+      if (post === undefined) {
+        return;
+      }
+
+      post.outputPaths.forEach((outputPath) => validPaths.add(outputPath));
     })
 
     // File deleted
@@ -78,3 +84,29 @@ async function chokidarWatcher() {
 }
 
 chokidarWatcher();
+
+async function buildPostFolder(
+  buildOutputFolderPath: string,
+  filePath: string,
+) {
+  const postFolderName = relative(postsDirPath, filePath).split("/")[0];
+
+  if (await isInvalidPostFolder(postFolderName)) {
+    return;
+  }
+
+  if (postFolderName === undefined || postFolderName === "") {
+    logger.verbose(
+      `${chokidarWatcher.name}:change`,
+      `Invalid 'postFolderName' parsed from '${filePath}'`,
+    );
+    return;
+  }
+
+  logger.verbose(
+    `${chokidarWatcher.name}:change`,
+    `Rebuilding '${postFolderName}'`,
+  );
+
+  return buildPost(buildOutputFolderPath, postFolderName);
+}
