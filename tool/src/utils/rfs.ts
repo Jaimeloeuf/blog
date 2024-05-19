@@ -20,3 +20,7 @@ export function rfs(file: string) {
 
   return content;
 }
+
+export function resetCache() {
+  cache.clear();
+}

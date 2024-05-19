@@ -1,11 +1,12 @@
 import { logger } from "../shared/logger";
 import { build } from "../src/build";
-import { chokidarWatcher } from "./serve";
+import { resetCache } from "../src/utils/rfs";
 
 export function fullRebuildOnToolChange() {
   logger.verbose(
-    `${chokidarWatcher.name}:tool-change`,
+    `chokidarWatcher:tool-change`,
     "Running full re-build on tool change...",
   );
+  resetCache();
   build();
 }
