@@ -7,10 +7,8 @@ import { resolve } from "path";
  */
 export async function deleteRemovedFilesInOutputFolder(
   buildOutputFolderPath: string,
-  ...validItemNames: Array<string>
+  validItems: Set<string>,
 ) {
-  const validItems = new Set(validItemNames);
-
   // Remove delete posts or posts whose titles/folder-name have changed
   const buildOutputFolderItems = await readdir(buildOutputFolderPath, {
     withFileTypes: true,

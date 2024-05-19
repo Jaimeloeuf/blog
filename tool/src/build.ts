@@ -23,17 +23,16 @@ export async function build() {
   const assetFilePaths = await buildAssets(buildOutputFolderPath);
   const styleSheetPath = await buildStyleSheet(buildOutputFolderPath);
 
-  await deleteRemovedFilesInOutputFolder(
-    buildOutputFolderPath,
-
-    /* All the valid paths to keep */
+  const validPaths = new Set<string>([
     homePagePath,
     notFoundPagePath,
     styleSheetPath,
     ...tagPagePaths,
     ...assetFilePaths,
     ...posts.map((post) => post.outputPaths).flat(),
-  );
+  ]);
+
+  await deleteRemovedFilesInOutputFolder(buildOutputFolderPath, validPaths);
 
   return { buildOutputFolderPath };
 }
