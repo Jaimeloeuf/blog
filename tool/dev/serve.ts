@@ -17,7 +17,7 @@ async function chokidarWatcher() {
     .watch(resolve("../posts/"), chokidarOptions)
 
     // File added
-    .on("add", async (path) => {
+    .on("add", (path) => {
       logger.verbose(`${chokidarWatcher.name}:added`, path);
       build();
     })
