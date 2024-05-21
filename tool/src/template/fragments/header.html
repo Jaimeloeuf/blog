@@ -4,7 +4,7 @@
   <a href="/" class="no-underline">JJ's blog</a>
 
   <div>
-    <button id="subscribe-button" class="text-base outline-none">
+    <button id="open-subscribe-modal-button" class="text-base outline-none">
       subscribe
     </button>
     <dialog
@@ -14,7 +14,7 @@
       <div id="subscribe-modal-content">
         <div class="flex flex-row items-center justify-between">
           <p class="pb-2 text-3xl font-bold text-zinc-700">Hello!</p>
-          <button class="pb-4 text-zinc-600">X</button>
+          <button class="pb-4 text-zinc-600 outline-none">X</button>
         </div>
 
         <p>My name is JJ and I'm a builder at heart.</p>
@@ -49,11 +49,13 @@
     </dialog>
 
     <script>
-      const subscribeButton = document.getElementById("subscribe-button");
+      const openSubscribeModalButton = document.getElementById(
+        "open-subscribe-modal-button",
+      );
       const subscribeModal = document.getElementById("subscribe-modal");
-      const closeButton = document.querySelector("dialog button");
+      const closeSubscribeModalButton = document.querySelector("dialog button");
 
-      subscribeButton.onclick = function () {
+      openSubscribeModalButton.onclick = function () {
         subscribeModal.showModal();
       };
 
@@ -64,7 +66,7 @@
         }
       };
 
-      closeButton.onclick = function () {
+      closeSubscribeModalButton.onclick = function () {
         subscribeModal.close();
       };
     </script>
