@@ -1,3 +1,72 @@
-<p class="pb-6 text-2xl font-normal text-zinc-700">
+<div
+  class="flex flex-row items-center justify-between pb-6 text-2xl font-normal text-zinc-700"
+>
   <a href="/" class="no-underline">JJ's blog</a>
-</p>
+
+  <div>
+    <button id="subscribe-button" class="text-base outline-none">
+      subscribe
+    </button>
+    <dialog
+      id="subscribe-modal"
+      class="w-full max-w-screen-sm rounded-lg p-4 outline-none backdrop:bg-black backdrop:opacity-70 sm:p-8"
+    >
+      <div id="subscribe-modal-content">
+        <div class="flex flex-row items-center justify-between">
+          <p class="pb-2 text-3xl font-bold text-zinc-700">Hello!</p>
+          <button class="pb-4 text-zinc-600">X</button>
+        </div>
+
+        <p>My name is JJ and I'm a builder at heart.</p>
+        <p>
+          I'm currently working as a Senior Software Engineer and dabble in
+          Engineering Management.
+        </p>
+        <p>
+          You are reading my best attempt at penning down the constant flow of
+          inspirations that comes to my mind, from Software Engineering to Life
+          and everything in between that inspires.
+        </p>
+        <p>Life is Bananas, therefore you should subscribe.</p>
+
+        <div class="flex flex-col items-end gap-4 md:flex-row">
+          <label class="w-full">
+            <p class="pb-0">Email</p>
+            <input
+              type="text"
+              class="w-full rounded-sm border border-zinc-200 px-3 py-1 text-lg font-extralight outline-zinc-300"
+              placeholder="cookiemonster@gmail.com"
+            />
+          </label>
+
+          <button
+            class="h-full w-full rounded-sm bg-black px-3 py-1 text-lg text-white md:w-max"
+          >
+            SUBSCRIBE
+          </button>
+        </div>
+      </div>
+    </dialog>
+
+    <script>
+      const subscribeButton = document.getElementById("subscribe-button");
+      const subscribeModal = document.getElementById("subscribe-modal");
+      const closeButton = document.querySelector("dialog button");
+
+      subscribeButton.onclick = function () {
+        subscribeModal.showModal();
+      };
+
+      // Close modal if user clicks outside of the main modal content
+      subscribeModal.onclick = function (event) {
+        if (event.target.id === subscribeModal.id) {
+          subscribeModal.close();
+        }
+      };
+
+      closeButton.onclick = function () {
+        subscribeModal.close();
+      };
+    </script>
+  </div>
+</div>
