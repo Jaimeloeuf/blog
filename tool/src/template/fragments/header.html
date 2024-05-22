@@ -33,6 +33,7 @@
           <label class="w-full">
             <p class="pb-0">Email</p>
             <input
+              id="subscribe-modal-email-input"
               type="text"
               class="w-full rounded-sm border border-zinc-200 px-3 py-1 text-lg font-extralight outline-zinc-300"
               placeholder="cookiemonster@gmail.com"
@@ -40,6 +41,7 @@
           </label>
 
           <button
+            id="subscribe-button"
             class="h-full w-full rounded-sm bg-black px-3 py-1 text-lg text-white md:w-max"
           >
             SUBSCRIBE
@@ -54,6 +56,10 @@
       );
       const subscribeModal = document.getElementById("subscribe-modal");
       const closeSubscribeModalButton = document.querySelector("dialog button");
+      const subscribeModalEmailInput = document.getElementById(
+        "subscribe-modal-email-input",
+      );
+      const subscribeButton = document.getElementById("subscribe-button");
 
       openSubscribeModalButton.onclick = function () {
         subscribeModal.showModal();
@@ -68,6 +74,62 @@
 
       closeSubscribeModalButton.onclick = function () {
         subscribeModal.close();
+      };
+
+      class Subscribe {
+        static singletonInstance = null;
+
+        /**
+         * @return {Subscribe}
+         */
+        static get singleton() {
+          if (Subscribe.singletonInstance === null) {
+            Subscribe.singletonInstance = new Subscribe();
+          }
+          return Subscribe.singletonInstance;
+        }
+
+        isLoading = false;
+
+        loadingStart() {
+          this.isLoading = true;
+          subscribeButton.setAttribute("disabled", true);
+        }
+
+        loadingEnd() {
+          this.isLoading = false;
+          subscribeButton.removeAttribute("disabled");
+          subscribeModal.close();
+        }
+
+        async subscribe() {
+          // If subscribe function is already running, ignore subsequent requests
+          if (this.isLoading) {
+            return;
+          }
+
+          this.loadingStart();
+
+          try {
+            // @todo Call API
+          } catch (error) {
+            alert(`Failed to subscribe: ${error}`);
+            console.error(error);
+          }
+
+          this.loadingEnd();
+        }
+      }
+
+      subscribeButton.onclick = function () {
+        Subscribe.singleton.subscribe();
+      };
+
+      subscribeModalEmailInput.onkeydown = function () {
+        // Enter key
+        if (event.keyCode === 13) {
+          Subscribe.singleton.subscribe();
+        }
       };
     </script>
   </div>
