@@ -7,8 +7,7 @@ const subscribeModalEmailInput = document.getElementById(
   "subscribe-modal-email-input",
 );
 const subscribeButton = document.getElementById("subscribe-button");
-
-console.log("in linked", openSubscribeModalButton);
+const loadingSpinner = document.getElementById("loading-spinner");
 
 openSubscribeModalButton.onclick = function () {
   subscribeModal.showModal();
@@ -43,11 +42,13 @@ class Subscribe {
   loadingStart() {
     this.isLoading = true;
     subscribeButton.setAttribute("disabled", true);
+    loadingSpinner.style.display = "flex";
   }
 
   loadingEnd() {
     this.isLoading = false;
     subscribeButton.removeAttribute("disabled");
+    loadingSpinner.style.display = "none";
     subscribeModal.close();
   }
 
