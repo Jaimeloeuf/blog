@@ -60,6 +60,12 @@ class Subscribe {
     this.loadingStart();
 
     try {
+      const email = subscribeModalEmailInput?.value;
+
+      if (typeof email !== "string" || email === "") {
+        throw new Error("Invalid email!");
+      }
+
       // @todo Call API
     } catch (error) {
       alert(`Failed to subscribe: ${error}`);
