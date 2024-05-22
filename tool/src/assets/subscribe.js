@@ -11,6 +11,8 @@ const loadingSpinner = document.getElementById("loading-spinner");
 const loadingModal = document.getElementById("loading-modal");
 
 openSubscribeModalButton.onclick = function () {
+  // Clear input to ensure that on every new open, this is always empty
+  subscribeModalEmailInput.value = "";
   subscribeModal.showModal();
 };
 
@@ -84,7 +86,7 @@ subscribeButton.onclick = function () {
   Subscribe.singleton.subscribe();
 };
 
-subscribeModalEmailInput.onkeydown = function () {
+subscribeModalEmailInput.onkeydown = function (event) {
   // Enter key
   if (event.keyCode === 13) {
     Subscribe.singleton.subscribe();
