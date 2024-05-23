@@ -1,6 +1,10 @@
 import { rfs } from "./utils/rfs";
 
-export const generateHeaderFragment = () => rfs("fragments/header.html");
+export const generateHeaderFragment = () =>
+  rfs("fragments/header.html").replace(
+    "${subscribeModalFragment}",
+    generateSubscribeModalFragment(),
+  );
 
 export const generateHighlightJsFragment = () =>
   rfs("fragments/highlightJS.html");
@@ -34,3 +38,6 @@ export const generatePostTagsFragment = (tag: string, rawTag: string) =>
 
 export const generateScrollToTopButtonFragment = () =>
   rfs("fragments/scrollToTopButton.html");
+
+export const generateSubscribeModalFragment = () =>
+  rfs("fragments/subscribeModal.html");
