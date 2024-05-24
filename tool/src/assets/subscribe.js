@@ -1,4 +1,4 @@
-const openSubscribeModalButton = document.getElementById(
+const openSubscribeModalButtons = document.getElementsByClassName(
   "open-subscribe-modal-button",
 );
 const subscribeModal = document.getElementById("subscribe-modal");
@@ -10,11 +10,16 @@ const subscribeButton = document.getElementById("subscribe-button");
 const loadingSpinner = document.getElementById("loading-spinner");
 const loadingModal = document.getElementById("loading-modal");
 
-openSubscribeModalButton.onclick = function () {
-  // Clear input to ensure that on every new open, this is always empty
-  subscribeModalEmailInput.value = "";
-  subscribeModal.showModal();
-};
+// Can have more than one subscribe button for every single page, e.g. one in
+// the headerFragment one in the footer.
+Array.from(openSubscribeModalButtons).forEach(
+  (openSubscribeModalButton) =>
+    (openSubscribeModalButton.onclick = function () {
+      // Clear input to ensure that on every new open, this is always empty
+      subscribeModalEmailInput.value = "";
+      subscribeModal.showModal();
+    }),
+);
 
 // Close modal if user clicks outside of the main modal content
 subscribeModal.onclick = function (event) {
