@@ -3,6 +3,7 @@ import {
   generateHeaderFragment,
   generateHighlightJsFragment,
   generateScrollToTopButtonFragment,
+  generateSubscribeModalFragment,
 } from "./generateFragment";
 
 export const generateNotFoundPage = () =>
@@ -26,6 +27,7 @@ export const generateHomePage = (
   tagCount: number,
 ) =>
   rfs("pages/home.html")
+    .replace("${subscribeModalFragment}", generateSubscribeModalFragment())
     .replace("${scrollToTopButton}", generateScrollToTopButtonFragment())
     .replace("${postLinks}", postCardFragment)
     .replace("${headerFragment}", generateHeaderFragment())
