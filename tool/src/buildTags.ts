@@ -1,7 +1,8 @@
 import type { Post } from "./types/Post";
+import type { Tags } from "./types/Tags";
 
-export function buildTags(posts: Array<Post>) {
-  const tags = Object.values(posts)
+export function buildTags(posts: Array<Post>): Tags {
+  return Object.values(posts)
     .map((post) => post.tags)
     .flat()
     .reduce((map, { tag, rawTag }) => {
@@ -9,6 +10,4 @@ export function buildTags(posts: Array<Post>) {
       tagObject.count++;
       return map.set(tag, tagObject);
     }, new Map<string, { rawTag: string; count: number }>());
-
-  return tags;
 }
