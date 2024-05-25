@@ -63,6 +63,7 @@ export const generateTagsPage = (
 ) =>
   rfs("pages/tag.html")
     .replaceAll("${tag}", rawTag)
+    .replace("${subscribeModalFragment}", generateSubscribeModalFragment())
     .replace("${scrollToTopButton}", generateScrollToTopButtonFragment())
     .replace("${count}", count.toString())
     .replace("${posts}", postCardFragment)
