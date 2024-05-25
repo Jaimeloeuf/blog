@@ -15,6 +15,7 @@ export const generateAllTagsPage = (
   tagCount: number,
 ) =>
   rfs("pages/allTags.html")
+    .replace("${subscribeModalFragment}", generateSubscribeModalFragment())
     .replace("${scrollToTopButton}", generateScrollToTopButtonFragment())
     .replace("${tags}", tagCardFragment)
     .replace("${headerFragment}", generateHeaderFragment())
