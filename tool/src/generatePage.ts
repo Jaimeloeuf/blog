@@ -49,6 +49,7 @@ export const generatePostPage = (
       "${highlightJS}",
       postContainsCodeblock ? generateHighlightJsFragment() : "",
     )
+    .replace("${subscribeModalFragment}", generateSubscribeModalFragment())
     .replace("${scrollToTopButton}", generateScrollToTopButtonFragment())
     .replace("${postContent}", postContent)
     .replace("${tags}", tagFragment)
