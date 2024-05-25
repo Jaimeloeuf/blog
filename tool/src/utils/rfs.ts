@@ -1,5 +1,6 @@
 import { readFileSync } from "fs";
 import { resolve } from "path";
+import { templateDirPath } from "./templateDirPath";
 
 const cache = new Map<string, string>();
 
@@ -15,7 +16,7 @@ export function rfs(file: string) {
     return content;
   }
 
-  content = readFileSync(resolve("./src/template", file), { encoding: "utf8" });
+  content = readFileSync(resolve(templateDirPath, file), { encoding: "utf8" });
   cache.set(file, content);
 
   return content;
