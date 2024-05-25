@@ -22,6 +22,10 @@ export function rfs(file: string) {
   return content;
 }
 
+export function removeFileFromRfsCache(fileName: string) {
+  cache.delete(fileName);
+}
+
 export function resetRfsCache() {
   cache.clear();
 }

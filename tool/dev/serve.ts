@@ -6,8 +6,10 @@ import { startDevServer } from "./devServer";
 import { build } from "../src/build";
 import { buildPost } from "../src/buildPost";
 import { postsDirPath } from "../src/utils/postsDirPath";
+import { templateDirPath } from "../src/utils/templateDirPath";
 import { isInvalidPostFolder } from "../src/utils/isInvalidPostFolder";
 import { fullRebuildOnToolChange } from "./fullRebuildOnToolChange";
+import { removeFileFromRfsCache } from "../src/utils/rfs";
 
 async function chokidarWatcher() {
   // Run initial full build first
@@ -71,7 +73,24 @@ async function chokidarWatcher() {
     .watch(resolve("./src/"), chokidarOptions)
     .on("add", fullRebuildOnToolChange)
     .on("unlink", fullRebuildOnToolChange)
-    .on("change", fullRebuildOnToolChange)
+    .on("change", (path: string) => {
+      if (path.includes("/template/")) {
+        const templateFileName = relative(templateDirPath, path);
+
+        logger.verbose(
+          `chokidarWatcher:tool-change:template`,
+          `Clearing template cache for '${templateFileName}' and rebuilding`,
+        );
+
+        removeFileFromRfsCache(templateFileName);
+        build();
+
+        return;
+      }
+
+      // If it is some other source file change, run the full rebuild
+      fullRebuildOnToolChange();
+    })
     .on("error", (error) => console.error(error))
     .on("ready", () =>
       logger.verbose(
