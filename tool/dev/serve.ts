@@ -68,7 +68,7 @@ async function chokidarWatcher() {
     .on("ready", async () => {
       logger.verbose(
         chokidarWatcher.name,
-        "Initial build complete. Watching files for changes...",
+        "Initial build complete. Watching for Post changes...",
       );
       await startDevServer(buildOutputFolderPath);
     });
@@ -78,6 +78,7 @@ async function chokidarWatcher() {
     .on("add", fullRebuildOnToolChange)
     .on("unlink", fullRebuildOnToolChange)
     .on("change", (path: string) => {
+      // If file is a template, only clear `rfs` cache for this file and rebuild
       if (path.includes("/template/")) {
         const templateFileName = relative(templateDirPath, path);
 
@@ -92,6 +93,7 @@ async function chokidarWatcher() {
         return;
       }
 
+      // If file is a static asset, rebuild assets ONLY
       if (path.includes("/assets/")) {
         const assetFileName = relative(assetsDirPath, path);
 
