@@ -1,6 +1,6 @@
 import path from "path";
 import { stat } from "fs/promises";
-import { postsDirPath } from "./postsDirPath";
+import { postsDirPath } from "./dirPaths";
 
 /**
  * Checks if the given item within posts/ folder is valid. Returns true if

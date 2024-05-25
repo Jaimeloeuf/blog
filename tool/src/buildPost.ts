@@ -9,7 +9,7 @@ import {
   generatePostTagsFragment,
 } from "./generateFragment";
 import { createFolderIfDoesNotExist } from "./utils/createFolderIfDoesNotExist";
-import { postsDirPath } from "./utils/postsDirPath";
+import { postsDirPath } from "./utils/dirPaths";
 import { getSafeTagName } from "./utils/getSafeTagName";
 import { getOutputFolderName } from "./utils/getOutputFolderName";
 import { PostSchema, type Post } from "./types/Post";

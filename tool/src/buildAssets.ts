@@ -1,6 +1,6 @@
 import path from "path";
 import { readdir, copyFile } from "fs/promises";
-import { assetsDirPath } from "./utils/assetsDirPath";
+import { assetsDirPath } from "./utils/dirPaths";
 
 /**
  * Build static assets content by copying them into build output folder.

@@ -1,6 +1,6 @@
 import { readFileSync } from "fs";
 import { resolve } from "path";
-import { templateDirPath } from "./templateDirPath";
+import { templateDirPath } from "./dirPaths";
 
 const cache = new Map<string, string>();
 
