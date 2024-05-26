@@ -12,14 +12,21 @@ import { deleteRemovedFilesInOutputFolder } from "./deleteRemovedFilesInOutputFo
 import type { Tags } from "./types/Tags";
 
 export async function build({
+  buildOutputFolderPath: cachedBuildOutputFolderPath,
   cachedTags,
 }: {
+  /**
+   * Pass in to skip buildOutputFolder creation if it is already done before.
+   */
+  buildOutputFolderPath?: string;
+
   /**
    * Pass in to skip rebuilding tags if it is already cached and unchanged.
    */
   cachedTags?: Tags;
 } = {}) {
-  const buildOutputFolderPath = await createBuildOutputFolder();
+  const buildOutputFolderPath =
+    cachedBuildOutputFolderPath ?? (await createBuildOutputFolder());
   const postFolderItems = await readdir(postsDirPath);
 
   const posts = await buildPosts(buildOutputFolderPath, postFolderItems);

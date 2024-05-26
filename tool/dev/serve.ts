@@ -27,14 +27,14 @@ async function chokidarWatcher() {
     // File added
     .on("add", async (path) => {
       logger.verbose(`${chokidarWatcher.name}:added`, path);
-      const { tags } = await build();
+      const { tags } = await build({ buildOutputFolderPath });
       cachedTags = tags;
     })
 
     // File deleted
     .on("unlink", async (path) => {
       logger.verbose(`${chokidarWatcher.name}:removed`, path);
-      const { tags } = await build();
+      const { tags } = await build({ buildOutputFolderPath });
       cachedTags = tags;
     })
 
@@ -92,7 +92,7 @@ async function chokidarWatcher() {
         );
 
         removeFileFromRfsCache(templateFileName);
-        build({ cachedTags });
+        build({ buildOutputFolderPath, cachedTags });
 
         return;
       }
