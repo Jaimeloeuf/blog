@@ -17,7 +17,9 @@ import { removeFileFromRfsCache } from "../src/utils/rfs";
 
 async function chokidarWatcher() {
   // Run initial full build first
-  const { buildOutputFolderPath } = await build();
+  const { buildOutputFolderPath, tags } = await build();
+
+  let cachedTags = tags;
 
   chokidar
     .watch(resolve("../posts/"), chokidarOptions)
@@ -88,7 +90,7 @@ async function chokidarWatcher() {
         );
 
         removeFileFromRfsCache(templateFileName);
-        build();
+        build({ cachedTags });
 
         return;
       }

@@ -9,13 +9,21 @@ import { buildTagPages } from "./buildTagPages";
 import { buildNotFoundPage } from "./buildNotFoundPage";
 import { buildAssets } from "./buildAssets";
 import { deleteRemovedFilesInOutputFolder } from "./deleteRemovedFilesInOutputFolder";
+import type { Tags } from "./types/Tags";
 
-export async function build() {
+export async function build({
+  cachedTags,
+}: {
+  /**
+   * Pass in to skip rebuilding tags if it is already cached and unchanged.
+   */
+  cachedTags?: Tags;
+} = {}) {
   const buildOutputFolderPath = await createBuildOutputFolder();
   const postFolderItems = await readdir(postsDirPath);
 
   const posts = await buildPosts(buildOutputFolderPath, postFolderItems);
-  const tags = buildTags(posts);
+  const tags = cachedTags ?? buildTags(posts);
 
   const homePagePath = await buildHomePage(buildOutputFolderPath, posts, tags);
   const tagPagePaths = await buildTagPages(buildOutputFolderPath, posts, tags);
@@ -34,5 +42,5 @@ export async function build() {
 
   await deleteRemovedFilesInOutputFolder(buildOutputFolderPath, validPaths);
 
-  return { buildOutputFolderPath };
+  return { buildOutputFolderPath, tags };
 }
