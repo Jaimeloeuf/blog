@@ -13,6 +13,7 @@ import type { Tags } from "./types/Tags";
 
 export async function build({
   buildOutputFolderPath: cachedBuildOutputFolderPath,
+  cachedPostFolderItems,
   cachedTags,
 }: {
   /**
@@ -21,13 +22,19 @@ export async function build({
   buildOutputFolderPath?: string;
 
   /**
+   * Pass in to skip reading `postFolderItems` if it is unchanged.
+   */
+  cachedPostFolderItems?: Array<string>;
+
+  /**
    * Pass in to skip rebuilding tags if it is already cached and unchanged.
    */
   cachedTags?: Tags;
 } = {}) {
   const buildOutputFolderPath =
     cachedBuildOutputFolderPath ?? (await createBuildOutputFolder());
-  const postFolderItems = await readdir(postsDirPath);
+  const postFolderItems =
+    cachedPostFolderItems ?? (await readdir(postsDirPath));
 
   const posts = await buildPosts(buildOutputFolderPath, postFolderItems);
   const tags = cachedTags ?? buildTags(posts);
@@ -49,5 +56,5 @@ export async function build({
 
   await deleteRemovedFilesInOutputFolder(buildOutputFolderPath, validPaths);
 
-  return { buildOutputFolderPath, tags };
+  return { buildOutputFolderPath, postFolderItems, tags };
 }
