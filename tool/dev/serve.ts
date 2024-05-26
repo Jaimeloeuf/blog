@@ -25,15 +25,17 @@ async function chokidarWatcher() {
     .watch(resolve("../posts/"), chokidarOptions)
 
     // File added
-    .on("add", (path) => {
+    .on("add", async (path) => {
       logger.verbose(`${chokidarWatcher.name}:added`, path);
-      build();
+      const { tags } = await build();
+      cachedTags = tags;
     })
 
     // File deleted
-    .on("unlink", (path) => {
+    .on("unlink", async (path) => {
       logger.verbose(`${chokidarWatcher.name}:removed`, path);
-      build();
+      const { tags } = await build();
+      cachedTags = tags;
     })
 
     // Files updated
