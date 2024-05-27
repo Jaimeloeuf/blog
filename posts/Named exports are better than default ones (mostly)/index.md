@@ -1,6 +1,7 @@
 ---
 title: Named exports are better than default ones (mostly)
 date: 2022-08-11
+pinned: true
 tags:
     - Software Engineering
     - Programming Langauge Design

@@ -1,6 +1,7 @@
 ---
 title: Errors vs Exceptions
 date: 2023-05-31
+pinned: true
 tags:
     - Software Engineering
     - Programming Langauge Design
