@@ -93,3 +93,8 @@
     @apply mb-8 mt-4 aspect-video w-full sm:mb-12;
   }
 }
+
+/* Hide the recaptcha badge */
+.grecaptcha-badge {
+  visibility: hidden;
+}
