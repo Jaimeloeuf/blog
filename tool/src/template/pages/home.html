@@ -26,7 +26,22 @@
             </a>
           </div>
 
-          <div>${postLinks}</div>
+          <div class="pb-8 sm:pb-12">
+            <div class="flex flex-row items-center justify-between gap-4">
+              <p class="pb-0 text-lg font-medium text-zinc-700">Featured</p>
+              <div class="w-full border border-zinc-500"></div>
+            </div>
+            <div class="divide-y">${pinnedPostCardFragments}</div>
+          </div>
+
+          <div class="pb-4">
+            <div class="flex flex-row items-center justify-between gap-4">
+              <p class="pb-0 text-lg font-medium text-zinc-700">Recent</p>
+              <div class="w-full border border-zinc-500"></div>
+            </div>
+            <div class="divide-y">${postLinks}</div>
+          </div>
+
           ${scrollToTopButton}
           <div class="pt-12 text-center">${subscribeModalFragment}</div>
         </div>

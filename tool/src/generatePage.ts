@@ -23,14 +23,16 @@ export const generateAllTagsPage = (
     .replace("${tagCount}", tagCount.toString());
 
 export const generateHomePage = (
-  postCardFragment: string,
+  postCardFragments: string,
+  pinnedPostCardFragments: string,
   postCount: number,
   tagCount: number,
 ) =>
   rfs("pages/home.html")
     .replace("${subscribeModalFragment}", generateSubscribeModalFragment())
     .replace("${scrollToTopButton}", generateScrollToTopButtonFragment())
-    .replace("${postLinks}", postCardFragment)
+    .replace("${postLinks}", postCardFragments)
+    .replace("${pinnedPostCardFragments}", pinnedPostCardFragments)
     .replace("${headerFragment}", generateHeaderFragment())
     .replace("${postCount}", postCount.toString())
     .replace("${tagCount}", tagCount.toString());

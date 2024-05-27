@@ -10,17 +10,25 @@ export async function buildHomePage(
   posts: Array<Post>,
   tags: Tags,
 ) {
-  let postCardFragment = "";
+  let postCardFragments = "";
+  let pinnedPostCardFragments = "";
   for (const post of posts) {
-    postCardFragment += generatePostCardFragment(
+    const postCardFragment = generatePostCardFragment(
       post.folderName,
       post.title,
       post.date.toDateString(),
     );
+
+    if (post.pinned) {
+      pinnedPostCardFragments += postCardFragment;
+    } else {
+      postCardFragments += postCardFragment;
+    }
   }
 
   const fullHtmlPage = generateHomePage(
-    postCardFragment,
+    postCardFragments,
+    pinnedPostCardFragments,
     posts.length,
     tags.size,
   );
