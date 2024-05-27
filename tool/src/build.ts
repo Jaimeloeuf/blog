@@ -9,35 +9,16 @@ import { buildTagPages } from "./buildTagPages";
 import { buildNotFoundPage } from "./buildNotFoundPage";
 import { buildAssets } from "./buildAssets";
 import { deleteRemovedFilesInOutputFolder } from "./deleteRemovedFilesInOutputFolder";
-import type { Tags } from "./types/Tags";
+import type { BuildCache } from "./types/BuildCache";
 
-export async function build({
-  buildOutputFolderPath: cachedBuildOutputFolderPath,
-  cachedPostFolderItems,
-  cachedTags,
-}: {
-  /**
-   * Pass in to skip buildOutputFolder creation if it is already done before.
-   */
-  buildOutputFolderPath?: string;
-
-  /**
-   * Pass in to skip reading `postFolderItems` if it is unchanged.
-   */
-  cachedPostFolderItems?: Array<string>;
-
-  /**
-   * Pass in to skip rebuilding tags if it is already cached and unchanged.
-   */
-  cachedTags?: Tags;
-} = {}) {
+export async function build(buildCache?: BuildCache) {
   const buildOutputFolderPath =
-    cachedBuildOutputFolderPath ?? (await createBuildOutputFolder());
+    buildCache?.buildOutputFolderPath ?? (await createBuildOutputFolder());
   const postFolderItems =
-    cachedPostFolderItems ?? (await readdir(postsDirPath));
+    buildCache?.postFolderItems ?? (await readdir(postsDirPath));
 
   const posts = await buildPosts(buildOutputFolderPath, postFolderItems);
-  const tags = cachedTags ?? buildTags(posts);
+  const tags = buildCache?.tags ?? buildTags(posts);
 
   const homePagePath = await buildHomePage(buildOutputFolderPath, posts, tags);
   const tagPagePaths = await buildTagPages(buildOutputFolderPath, posts, tags);

@@ -17,10 +17,8 @@ import { removeFileFromRfsCache } from "../src/utils/rfs";
 
 async function chokidarWatcher() {
   // Run initial full build first
-  const { buildOutputFolderPath, postFolderItems, tags } = await build();
-
-  let cachedPostFolderItems = postFolderItems;
-  let cachedTags = tags;
+  let buildCache = await build();
+  const { buildOutputFolderPath } = buildCache;
 
   chokidar
     .watch(resolve("../posts/"), chokidarOptions)
@@ -28,17 +26,13 @@ async function chokidarWatcher() {
     // File added
     .on("add", async (path) => {
       logger.verbose(`${chokidarWatcher.name}:added`, path);
-      const { postFolderItems, tags } = await build({ buildOutputFolderPath });
-      cachedPostFolderItems = postFolderItems;
-      cachedTags = tags;
+      buildCache = await build({ buildOutputFolderPath });
     })
 
     // File deleted
     .on("unlink", async (path) => {
       logger.verbose(`${chokidarWatcher.name}:removed`, path);
-      const { postFolderItems, tags } = await build({ buildOutputFolderPath });
-      cachedPostFolderItems = postFolderItems;
-      cachedTags = tags;
+      buildCache = await build({ buildOutputFolderPath });
     })
 
     // Files updated
@@ -95,7 +89,7 @@ async function chokidarWatcher() {
         );
 
         removeFileFromRfsCache(templateFileName);
-        build({ buildOutputFolderPath, cachedPostFolderItems, cachedTags });
+        build(buildCache);
 
         return;
       }
