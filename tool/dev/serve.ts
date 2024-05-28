@@ -5,6 +5,7 @@ import { fullRebuildOnToolChange } from "./fullRebuildOnToolChange";
 import { logger } from "../shared/logger";
 import { resolve, relative } from "path";
 import {
+  setConfig,
   build,
   buildPost,
   buildAssets,
@@ -14,6 +15,10 @@ import {
   isInvalidPostFolder,
   removeFileFromRfsCache,
 } from "../src";
+
+setConfig({
+  baseUrl: "https://localhost:8080",
+});
 
 async function chokidarWatcher() {
   // Run initial full build first

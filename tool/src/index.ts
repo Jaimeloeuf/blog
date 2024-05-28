@@ -1,3 +1,4 @@
+export * from "./config";
 export * from "./build";
 export * from "./buildAssets";
 export * from "./buildHomePage";

@@ -1,10 +1,14 @@
-import { build } from "./src";
+import { setConfig, build } from "./src";
 
 /**
  * Function to bootstrap the build process and run it directly
  */
 async function bootStrap() {
   console.time("Build time");
+
+  setConfig({
+    baseUrl: "https://blog.jjss.quest",
+  });
 
   await build();
 
