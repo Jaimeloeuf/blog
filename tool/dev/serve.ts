@@ -1,19 +1,19 @@
-import { resolve, relative } from "path";
 import chokidar from "chokidar";
 import { chokidarOptions } from "./chokidarOptions";
-import { logger } from "../shared/logger";
 import { startDevServer } from "./devServer";
-import { build } from "../src/build";
-import { buildPost } from "../src/buildPost";
-import { buildAssets } from "../src/buildAssets";
+import { fullRebuildOnToolChange } from "./fullRebuildOnToolChange";
+import { logger } from "../shared/logger";
+import { resolve, relative } from "path";
 import {
+  build,
+  buildPost,
+  buildAssets,
   postsDirPath,
   templateDirPath,
   assetsDirPath,
-} from "../src/utils/dirPaths";
-import { isInvalidPostFolder } from "../src/utils/isInvalidPostFolder";
-import { fullRebuildOnToolChange } from "./fullRebuildOnToolChange";
-import { removeFileFromRfsCache } from "../src/utils/rfs";
+  isInvalidPostFolder,
+  removeFileFromRfsCache,
+} from "../src";
 
 async function chokidarWatcher() {
   // Run initial full build first

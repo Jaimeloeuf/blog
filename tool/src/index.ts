@@ -1,11 +1,14 @@
-import { build } from "./build";
-
-async function bootStrap() {
-  console.time("Build time");
-
-  await build();
-
-  console.timeEnd("Build time");
-}
-
-bootStrap();
+export * from "./build";
+export * from "./buildAssets";
+export * from "./buildHomePage";
+export * from "./buildNotFoundPage";
+export * from "./buildPosts";
+export * from "./post/buildPost";
+export * from "./buildStyleSheet";
+export * from "./buildTagPages";
+export * from "./buildTags";
+export * from "./buildTagsHomePage";
+export * from "./buildTagsIndividualPages";
+export * from "./utils/dirPaths";
+export * from "./utils/isInvalidPostFolder";
+export * from "./utils/rfs";

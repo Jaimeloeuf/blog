@@ -1,5 +1,5 @@
 import { isInvalidPostFolder } from "./utils/isInvalidPostFolder";
-import { buildPost } from "./buildPost";
+import { buildPost } from "./post/buildPost";
 import type { Post } from "./types/Post";
 
 /**

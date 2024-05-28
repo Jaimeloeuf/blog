@@ -1,7 +1,7 @@
 {
   "scripts": {
     "serve": "npx ts-node ./dev/serve.ts",
-    "build": "npx ts-node ./src/index.ts"
+    "build": "npx ts-node ./build.ts"
   },
   "dependencies": {
     "front-matter": "^4.0.2",
