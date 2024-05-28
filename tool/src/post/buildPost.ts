@@ -28,7 +28,7 @@ export async function buildPost(
     folderPath,
   );
 
-  const assetOutputPaths: Array<string> = await copyOverAssets(
+  const { assetOutputPaths, ogpImageMetaTag } = await copyOverAssets(
     postFolderPath,
     newFolderPath,
   );
@@ -56,6 +56,7 @@ export async function buildPost(
     tagFragment,
     postAsHtmlString,
     postContainsCodeblock,
+    ogpImageMetaTag,
   );
 
   return {

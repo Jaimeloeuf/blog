@@ -13,6 +13,7 @@ export async function generateAndSaveHtmlFile(
   tagFragment: string,
   postContent: string,
   postContainsCodeblock: boolean,
+  ogpImageMetaTag?: string,
 ) {
   const fullHtmlPage = generatePostPage(
     title,
@@ -21,6 +22,7 @@ export async function generateAndSaveHtmlFile(
     tagFragment,
     postContent,
     postContainsCodeblock,
+    ogpImageMetaTag,
   );
 
   const htmlFilePath = path.resolve(newFolderPath, `index.html`);

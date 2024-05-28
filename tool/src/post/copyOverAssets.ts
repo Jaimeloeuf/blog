@@ -10,15 +10,26 @@ export async function copyOverAssets(
 ) {
   const folderContents = await readdir(postFolderPath, { encoding: "utf8" });
 
-  const outputPaths: Array<string> = [];
+  const assetOutputPaths: Array<string> = [];
 
   for (const folderContent of folderContents) {
     if (folderContent !== "index.md") {
       const outputPath = path.resolve(newFolderPath, folderContent);
       await copyFile(path.resolve(postFolderPath, folderContent), outputPath);
-      outputPaths.push(outputPath);
+      assetOutputPaths.push(outputPath);
     }
   }
 
-  return outputPaths;
+  // Get the first image asset to be used as main OG image?
+  const keyImage = folderContents
+    .sort()
+    .filter((itemName) => itemName !== "index.md")[0];
+
+  return {
+    assetOutputPaths,
+    ogpImageMetaTag:
+      keyImage !== undefined
+        ? `<meta property="og:image" content="./${keyImage}" />`
+        : undefined,
+  };
 }
