@@ -15,12 +15,12 @@ export const generateAllTagsPage = (
   tagCount: number,
 ) =>
   rfs("pages/allTags.html")
-    .replace("${subscribeModalFragment}", generateSubscribeModalFragment())
     .replace("${scrollToTopButton}", generateScrollToTopButtonFragment())
     .replace("${tags}", tagCardFragment)
-    .replace("${headerFragment}", generateHeaderFragment())
+    .replace("${tagCount}", tagCount.toString())
     .replace("${postCount}", postCount.toString())
-    .replace("${tagCount}", tagCount.toString());
+    .replace("${headerFragment}", generateHeaderFragment())
+    .replace("${subscribeModalFragment}", generateSubscribeModalFragment());
 
 export const generateHomePage = (
   postCardFragments: string,
@@ -29,13 +29,13 @@ export const generateHomePage = (
   tagCount: number,
 ) =>
   rfs("pages/home.html")
-    .replace("${subscribeModalFragment}", generateSubscribeModalFragment())
     .replace("${scrollToTopButton}", generateScrollToTopButtonFragment())
     .replace("${postLinks}", postCardFragments)
     .replace("${pinnedPostCardFragments}", pinnedPostCardFragments)
-    .replace("${headerFragment}", generateHeaderFragment())
+    .replace("${tagCount}", tagCount.toString())
     .replace("${postCount}", postCount.toString())
-    .replace("${tagCount}", tagCount.toString());
+    .replace("${headerFragment}", generateHeaderFragment())
+    .replace("${subscribeModalFragment}", generateSubscribeModalFragment());
 
 export const generatePostPage = (
   title: string,
@@ -53,12 +53,12 @@ export const generatePostPage = (
       "${highlightJS}",
       postContainsCodeblock ? generateHighlightJsFragment() : "",
     )
-    .replace("${subscribeModalFragment}", generateSubscribeModalFragment())
     .replace("${scrollToTopButton}", generateScrollToTopButtonFragment())
     .replace("${postContent}", postContent)
     .replace("${tags}", tagFragment)
     .replace("${timeToRead}", timeToRead)
     .replace("${headerFragment}", generateHeaderFragment())
+    .replace("${subscribeModalFragment}", generateSubscribeModalFragment())
     .replace("${ogpImageMetaTags}", ogpImageMetaTag ?? "");
 
 export const generateTagsPage = (
@@ -68,8 +68,8 @@ export const generateTagsPage = (
 ) =>
   rfs("pages/tag.html")
     .replaceAll("${tag}", rawTag)
-    .replace("${subscribeModalFragment}", generateSubscribeModalFragment())
     .replace("${scrollToTopButton}", generateScrollToTopButtonFragment())
-    .replace("${count}", count.toString())
     .replace("${posts}", postCardFragment)
-    .replace("${headerFragment}", generateHeaderFragment());
+    .replace("${count}", count.toString())
+    .replace("${headerFragment}", generateHeaderFragment())
+    .replace("${subscribeModalFragment}", generateSubscribeModalFragment());

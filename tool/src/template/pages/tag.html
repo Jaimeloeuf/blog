@@ -10,7 +10,7 @@
   </head>
 
   <body>
-    ${headerFragment}
+    ${subscribeModalFragment} ${headerFragment}
     <div class="p-4 lg:p-8">
       <div class="flex w-full flex-col items-center">
         <div class="w-full max-w-screen-sm pb-8">
@@ -19,7 +19,11 @@
           </p>
           <div class="divide-y">${posts}</div>
           ${scrollToTopButton}
-          <div class="pt-12 text-center">${subscribeModalFragment}</div>
+          <div class="pt-12 text-center">
+            <button class="open-subscribe-modal-button text-base outline-none">
+              subscribe
+            </button>
+          </div>
         </div>
       </div>
     </div>
