@@ -7,6 +7,7 @@ import { getPost } from "./getPost";
 import { computeTimeToRead } from "./computeTimeToRead";
 import { copyOverAssets } from "./copyOverAssets";
 import { getNewFolderPath } from "./getNewFolderPath";
+import { generateOgpImageMetaTag } from "./generateOgpImageMetaTag";
 import { generateAndSaveHtmlFile } from "./generateAndSaveHtmlFile";
 
 /**
@@ -28,10 +29,12 @@ export async function buildPost(
     folderPath,
   );
 
-  const { assetOutputPaths, ogpImageMetaTag } = await copyOverAssets(
+  const { assetOutputPaths, keyImage } = await copyOverAssets(
     postFolderPath,
     newFolderPath,
   );
+
+  const ogpImageMetaTag = generateOgpImageMetaTag(folderName, keyImage);
 
   const timeToRead = computeTimeToRead(postAsMarkdownString);
 

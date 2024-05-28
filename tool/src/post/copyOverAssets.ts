@@ -1,6 +1,5 @@
 import path from "path";
 import { readdir, copyFile } from "fs/promises";
-import { getConfig } from "../config";
 
 /**
  * Copy over supporting assets like images and attachments.
@@ -26,11 +25,5 @@ export async function copyOverAssets(
     .sort()
     .filter((itemName) => itemName !== "index.md")[0];
 
-  return {
-    assetOutputPaths,
-    ogpImageMetaTag:
-      keyImage !== undefined
-        ? `<meta property="og:image" content="${getConfig().baseUrl}/${keyImage}" />`
-        : undefined,
-  };
+  return { assetOutputPaths, keyImage };
 }
