@@ -47,6 +47,7 @@ export const generatePostPage = (
 ) =>
   rfs("pages/post.html")
     .replaceAll("${title}", title)
+    .replaceAll("${date}", date)
     .replace(
       "${highlightJS}",
       postContainsCodeblock ? generateHighlightJsFragment() : "",
@@ -56,7 +57,6 @@ export const generatePostPage = (
     .replace("${postContent}", postContent)
     .replace("${tags}", tagFragment)
     .replace("${timeToRead}", timeToRead)
-    .replace("${date}", date)
     .replace("${headerFragment}", generateHeaderFragment());
 
 export const generateTagsPage = (
