@@ -7,7 +7,7 @@ tags:
 ---
 Man is stressed, send help please
 
-![Man is stressed, send help please](./header.webp)
+![Man is stressed, send help please](./1.webp)
 
 I am stuck. I want to write articles, but I am stuck. I start too many drafts on my medium account and work on them for a while before I give up on them. That sucks, and I want to change it. So I wrote this on a whim past midnight on a Saturday night.
 

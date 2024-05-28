@@ -5,7 +5,7 @@ tags:
     - Software Engineering
     - Climate Change
 ---
-![img](./header.webp)
+![img](./1.webp)
 
 As a concerned member of our species and a human who does not want to die, I also work as a Software Developer and consultant. What? How are those 2 related? Well it’s not just those 2, it is about every combination of not wanting to die and the job you hold. In this article, let us explore what we can do in order to help combat the impacts of Climate Change as concerned members of humanity even if it is just a little and how we can do that by just doing our jobs as usual!
 
@@ -44,7 +44,7 @@ If you are in a startup, more often than we would like to admit, once the code i
 
 Remember, We are not just writing better quality code to help combat the impacts of climate change, We are also writing better and more efficient code, to help us grow as software engineers further and potentially save some money!
 
-![img](./img2.webp)
+![img](./2.webp)
 
 > Think harder.
 >

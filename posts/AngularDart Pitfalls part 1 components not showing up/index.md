@@ -6,7 +6,7 @@ tags:
     - Web Development
     - Software Engineering
 ---
-![AngularDart](./header.webp)
+![AngularDart](./1.webp)
 
 So you just started learning how to build Single Page Applications in AngularDart. As you work on the tutorials, you want to create a new component or add some features to the existing ones, but after just 1 edit, the component just disappears!?!
 

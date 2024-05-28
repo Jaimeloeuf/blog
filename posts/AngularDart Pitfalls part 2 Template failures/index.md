@@ -6,7 +6,7 @@ tags:
     - Web Development
     - Software Engineering
 ---
-![AngularDart](./header.webp)
+![AngularDart](./1.webp)
 
 Most people like myself started learning AngularDart by following the official tutorial to build the "Tour of the Heroes" app. After following a few more code examples we get a bit more confident and start to experiment with things like creating new Components or editing the older ones, and that is where we face some issues where our component template fails…
 

@@ -6,11 +6,11 @@ tags:
     - Web Development
     - Software Engineering
 ---
-![AngularDart](./header.webp)
+![AngularDart](./1.webp)
 
 ### The heck is **"some_component.template.dart"** ???
 
-![whut](./img2.gif)
+![whut](./2.gif)
 
 When you are building your AngularDart web application, you may have noticed that you are required to import a generated template file. Which for a component named **my_component.dart** a corresponding file named **my_component.template.dart** will also be generated.
 
@@ -30,6 +30,6 @@ To go into more details, [click this link to read the full issue](https://github
 
 The Angular compiler generates component factories behind the scenes when you build the app. To access the factory you need to import the generated component template file. Until you’ve built the app, the generated files don’t exist. Use the thing in the link to disable the errors to calm your linters and static analyzers down!
 
-![img3](./img3.gif)
+![outstanding](./3.gif)
 
 Thanks for reading the articles from this series on AngularDart again! Hope you found this useful/helpful and saved you from pulling out all your hair!
