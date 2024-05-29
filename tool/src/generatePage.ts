@@ -44,7 +44,8 @@ export const generatePostPage = (
   tagFragment: string,
   postContent: string,
   postContainsCodeblock: boolean,
-  ogpImageMetaTag?: string,
+  ogpImageMetaTag: string,
+  ogpTagMetaTags: string,
 ) =>
   rfs("pages/post.html")
     .replaceAll("${title}", title)
@@ -59,7 +60,8 @@ export const generatePostPage = (
     .replace("${timeToRead}", timeToRead)
     .replace("${headerFragment}", generateHeaderFragment())
     .replace("${subscribeModalFragment}", generateSubscribeModalFragment())
-    .replace("${ogpImageMetaTags}", ogpImageMetaTag ?? "");
+    .replace("${ogpTagMetaTags}", ogpTagMetaTags)
+    .replace("${ogpImageMetaTags}", ogpImageMetaTag);
 
 export const generateTagsPage = (
   rawTag: string,
