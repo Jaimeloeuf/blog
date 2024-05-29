@@ -20,10 +20,12 @@ export async function copyOverAssets(
     }
   }
 
-  // Get the first image asset to be used as main OG image?
-  const keyImage = folderContents
-    .sort()
-    .filter((itemName) => itemName !== "index.md")[0];
+  // Get first asset (assume to always be image) to be used as main OG image and
+  // ensure it is not 'index.md'
+  let keyImage: string | undefined = folderContents.sort()[0];
+  if (keyImage === "index.md") {
+    keyImage = undefined;
+  }
 
   return { assetOutputPaths, keyImage };
 }
