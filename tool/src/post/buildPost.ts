@@ -6,6 +6,7 @@ import { type Post } from "../types/Post";
 import { getPost } from "./getPost";
 import { computeTimeToRead } from "./computeTimeToRead";
 import { copyOverAssets } from "./copyOverAssets";
+import { getKeyImage } from "./getKeyImage";
 import { getNewFolderPath } from "./getNewFolderPath";
 import { generateOgpImageMetaTagWithDefaultImage } from "./generateOgpImageMetaTagWithDefaultImage";
 import { generateOgpTagMetaTags } from "./generateOgpTagMetaTags";
@@ -30,10 +31,12 @@ export async function buildPost(
     folderPath,
   );
 
-  const { assetOutputPaths, keyImage } = await copyOverAssets(
+  const { assetOutputPaths } = await copyOverAssets(
     postFolderPath,
     newFolderPath,
   );
+
+  const keyImage = getKeyImage(assetOutputPaths);
 
   const ogpImageMetaTag = generateOgpImageMetaTagWithDefaultImage(
     folderName,
