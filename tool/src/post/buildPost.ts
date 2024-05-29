@@ -7,7 +7,7 @@ import { getPost } from "./getPost";
 import { computeTimeToRead } from "./computeTimeToRead";
 import { copyOverAssets } from "./copyOverAssets";
 import { getNewFolderPath } from "./getNewFolderPath";
-import { generateOgpImageMetaTag } from "./generateOgpImageMetaTag";
+import { generateOgpImageMetaTagWithDefaultImage } from "./generateOgpImageMetaTagWithDefaultImage";
 import { generateOgpTagMetaTags } from "./generateOgpTagMetaTags";
 import { generateAndSaveHtmlFile } from "./generateAndSaveHtmlFile";
 
@@ -35,7 +35,12 @@ export async function buildPost(
     newFolderPath,
   );
 
-  const ogpImageMetaTag = generateOgpImageMetaTag(folderName, keyImage);
+  const ogpImageMetaTag = generateOgpImageMetaTagWithDefaultImage(
+    folderName,
+    postFolderPath,
+    keyImage,
+  );
+
   const ogpTagMetaTags = generateOgpTagMetaTags(postAttributes.tags);
 
   const timeToRead = computeTimeToRead(postAsMarkdownString);
