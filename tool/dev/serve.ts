@@ -44,15 +44,15 @@ async function chokidarWatcher() {
     .on("change", async (path: string) => {
       const postFolderName = relative(postsDirPath, path).split("/")[0];
 
-      if (await isInvalidPostFolder(postFolderName)) {
-        return;
-      }
-
       if (postFolderName === undefined || postFolderName === "") {
         logger.verbose(
           `${chokidarWatcher.name}:change`,
           `Invalid 'postFolderName' parsed from '${path}'`,
         );
+        return;
+      }
+
+      if (await isInvalidPostFolder(postFolderName)) {
         return;
       }
 
