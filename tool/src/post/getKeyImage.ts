@@ -1,4 +1,8 @@
-import { basename } from "path";
+import { basename, extname } from "path";
+import { logger } from "../../shared/logger";
+
+// https://www.opengraph.xyz/blog/the-ultimate-guide-to-open-graph-images
+const allowedImageExtensions = [".jpg", ".png"];
 
 /**
  * Get first asset (assume to always be image) to be used as main OG image. This
@@ -10,10 +14,24 @@ export function getKeyImage(
    */
   assetOutputPaths: string[],
 ) {
-  const keyImage = assetOutputPaths.sort()[0];
-  if (keyImage === undefined) {
+  const keyImagePath = assetOutputPaths.sort()[0];
+
+  // If there is no assets / images
+  if (keyImagePath === undefined) {
     return;
   }
 
-  return basename(keyImage);
+  const keyImage = basename(keyImagePath);
+  const imageExtension = extname(keyImage);
+
+  // If keyImage's extension is not valid, treat it as if there is no key image.
+  if (!(imageExtension in allowedImageExtensions)) {
+    logger.info(
+      getKeyImage.name,
+      `Your Open Graph image '${keyImage}' is using ${imageExtension} which is not allowed. Only these extensions '${allowedImageExtensions.join("/")}' are allowed. Please change your image or else the default open graph image will be used instead.`,
+    );
+    return;
+  }
+
+  return keyImage;
 }
