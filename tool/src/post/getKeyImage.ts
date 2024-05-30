@@ -25,10 +25,10 @@ export function getKeyImage(
   const imageExtension = extname(keyImage);
 
   // If keyImage's extension is not valid, treat it as if there is no key image.
-  if (!(imageExtension in allowedImageExtensions)) {
+  if (!allowedImageExtensions.includes(imageExtension)) {
     logger.info(
       getKeyImage.name,
-      `Your Open Graph image '${keyImage}' is using ${imageExtension} which is not allowed. Only these extensions '${allowedImageExtensions.join("/")}' are allowed. Please change your image or else the default open graph image will be used instead.`,
+      `Your Open Graph image '${keyImagePath}' is using ${imageExtension} which is not allowed. Only these extensions '${allowedImageExtensions.join("/")}' are allowed. Please change your image or else the default open graph image will be used instead.`,
     );
     return;
   }
