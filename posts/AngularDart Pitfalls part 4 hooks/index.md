@@ -6,7 +6,7 @@ tags:
     - Web Development
     - Software Engineering
 ---
-![AngularDart](./1.webp)
+![AngularDart](./1.jpg)
 
 In this post, we will make sense of hooks (lifecycle hooks / router hooks / third party hooks), what are they and why are they needed?
 

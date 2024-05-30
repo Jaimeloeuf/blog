@@ -6,7 +6,7 @@ tags:
     - Web Development
     - Software Engineering
 ---
-![AngularDart](./1.webp)
+![AngularDart](./1.jpg)
 
 ### The heck is **"some_component.template.dart"** ???
 

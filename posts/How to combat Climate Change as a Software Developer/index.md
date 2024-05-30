@@ -5,7 +5,7 @@ tags:
     - Software Engineering
     - Climate Change
 ---
-![img](./1.webp)
+![img](./1.jpg)
 
 As a concerned member of our species and a human who does not want to die, I also work as a Software Developer and consultant. What? How are those 2 related? Well it’s not just those 2, it is about every combination of not wanting to die and the job you hold. In this article, let us explore what we can do in order to help combat the impacts of Climate Change as concerned members of humanity even if it is just a little and how we can do that by just doing our jobs as usual!
 
