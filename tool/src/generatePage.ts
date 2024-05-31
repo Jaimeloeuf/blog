@@ -5,9 +5,12 @@ import {
   generateScrollToTopButtonFragment,
   generateSubscribeModalFragment,
 } from "./generateFragment";
+import { defaultOgpImageMetaTag } from "./utils/defaultOgpImageMetaTag";
 
 export const generateNotFoundPage = () =>
-  rfs("pages/404.html").replace("${headerFragment}", generateHeaderFragment());
+  rfs("pages/404.html")
+    .replace("${headerFragment}", generateHeaderFragment())
+    .replace("${ogpImageMetaTags}", defaultOgpImageMetaTag);
 
 export const generateAllTagsPage = (
   tagCardFragment: string,
@@ -20,7 +23,8 @@ export const generateAllTagsPage = (
     .replace("${tagCount}", tagCount.toString())
     .replace("${postCount}", postCount.toString())
     .replace("${headerFragment}", generateHeaderFragment())
-    .replace("${subscribeModalFragment}", generateSubscribeModalFragment());
+    .replace("${subscribeModalFragment}", generateSubscribeModalFragment())
+    .replace("${ogpImageMetaTags}", defaultOgpImageMetaTag);
 
 export const generateHomePage = (
   postCardFragments: string,
@@ -35,7 +39,8 @@ export const generateHomePage = (
     .replace("${tagCount}", tagCount.toString())
     .replace("${postCount}", postCount.toString())
     .replace("${headerFragment}", generateHeaderFragment())
-    .replace("${subscribeModalFragment}", generateSubscribeModalFragment());
+    .replace("${subscribeModalFragment}", generateSubscribeModalFragment())
+    .replace("${ogpImageMetaTags}", defaultOgpImageMetaTag);
 
 export const generatePostPage = (
   title: string,
@@ -74,4 +79,5 @@ export const generateTagsPage = (
     .replace("${posts}", postCardFragment)
     .replace("${count}", count.toString())
     .replace("${headerFragment}", generateHeaderFragment())
-    .replace("${subscribeModalFragment}", generateSubscribeModalFragment());
+    .replace("${subscribeModalFragment}", generateSubscribeModalFragment())
+    .replace("${ogpImageMetaTags}", defaultOgpImageMetaTag);
