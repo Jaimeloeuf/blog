@@ -7,8 +7,10 @@ import { getPost } from "./getPost";
 import { computeTimeToRead } from "./computeTimeToRead";
 import { copyOverAssets } from "./copyOverAssets";
 import { getKeyImage } from "./getKeyImage";
+import { defaultOgpImageMetaTag } from "../utils/defaultOgpImageMetaTag";
+import { generateOgpImageMetaTag } from "../utils/generateOgpImageMetaTag";
+import { imageSize } from "image-size";
 import { getNewFolderPath } from "./getNewFolderPath";
-import { generateOgpImageMetaTagWithDefaultImage } from "./generateOgpImageMetaTagWithDefaultImage";
 import { generateOgpTagMetaTags } from "./generateOgpTagMetaTags";
 import { generateAndSaveHtmlFile } from "./generateAndSaveHtmlFile";
 
@@ -38,11 +40,13 @@ export async function buildPost(
 
   const keyImage = getKeyImage(assetOutputPaths);
 
-  const ogpImageMetaTag = generateOgpImageMetaTagWithDefaultImage(
-    folderName,
-    postFolderPath,
-    keyImage,
-  );
+  const ogpImageMetaTag =
+    keyImage === undefined
+      ? defaultOgpImageMetaTag
+      : generateOgpImageMetaTag(
+          `${folderName}/${keyImage}`,
+          imageSize(path.resolve(postFolderPath, keyImage)),
+        );
 
   const ogpTagMetaTags = generateOgpTagMetaTags(postAttributes.tags);
 
