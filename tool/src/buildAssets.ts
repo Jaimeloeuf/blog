@@ -1,5 +1,5 @@
 import path from "path";
-import { readdir, copyFile } from "fs/promises";
+import { readdir, cp } from "fs/promises";
 import { assetsDirPath } from "./utils/dirPaths";
 
 /**
@@ -7,19 +7,14 @@ import { assetsDirPath } from "./utils/dirPaths";
  */
 export async function buildAssets(buildOutputFolderPath: string) {
   // Copy over all other supporting static assets.
-  const folderContents = await readdir(assetsDirPath, {
-    encoding: "utf8",
+  await cp(path.resolve(assetsDirPath), buildOutputFolderPath, {
+    recursive: true,
   });
 
-  const assetFilePaths: Array<string> = [];
-
-  for (const folderContent of folderContents) {
-    const outputPath = path.resolve(buildOutputFolderPath, folderContent);
-
-    await copyFile(path.resolve(assetsDirPath, folderContent), outputPath);
-
-    assetFilePaths.push(outputPath);
-  }
+  // Get all the asset output file paths based on whats in the assets directory
+  const assetFilePaths = (
+    await readdir(assetsDirPath, { encoding: "utf8" })
+  ).map((item) => path.resolve(buildOutputFolderPath, item));
 
   return assetFilePaths;
 }
