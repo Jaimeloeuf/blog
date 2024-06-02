@@ -13,7 +13,7 @@ export async function buildAssets(buildOutputFolderPath: string) {
 
   // Get all the asset output file paths based on whats in the assets directory
   const assetFilePaths = (
-    await readdir(assetsDirPath, { encoding: "utf8" })
+    await readdir(assetsDirPath, { encoding: "utf8", recursive: true })
   ).map((item) => path.resolve(buildOutputFolderPath, item));
 
   return assetFilePaths;
