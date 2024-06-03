@@ -34,6 +34,3 @@ export const generatePostTagsFragment = (tag: string, rawTag: string) =>
 
 export const generateScrollToTopButtonFragment = () =>
   rfs("fragments/scrollToTopButton.html");
-
-export const generateSubscribeModalFragment = () =>
-  rfs("fragments/subscribeModal.html");

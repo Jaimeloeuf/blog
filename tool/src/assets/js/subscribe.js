@@ -27,39 +27,11 @@ const getRecaptchaToken = (action) =>
     ),
   );
 
-const openSubscribeModalButtons = document.getElementsByClassName(
-  "open-subscribe-modal-button",
-);
-const subscribeModal = document.getElementById("subscribe-modal");
-const closeSubscribeModalButton = document.querySelector("dialog button");
-const subscribeModalEmailInput = document.getElementById(
-  "subscribe-modal-email-input",
+const subscribeCardEmailInput = document.getElementById(
+  "subscribe-card-email-input",
 );
 const subscribeButton = document.getElementById("subscribe-button");
 const loadingSpinner = document.getElementById("loading-spinner");
-const loadingModal = document.getElementById("loading-modal");
-
-// Can have more than one subscribe button for every single page, e.g. one in
-// the headerFragment one in the footer.
-Array.from(openSubscribeModalButtons).forEach(
-  (openSubscribeModalButton) =>
-    (openSubscribeModalButton.onclick = function () {
-      // Clear input to ensure that on every new open, this is always empty
-      subscribeModalEmailInput.value = "";
-      subscribeModal.showModal();
-    }),
-);
-
-// Close modal if user clicks outside of the main modal content
-subscribeModal.onclick = function (event) {
-  if (event.target.id === subscribeModal.id) {
-    subscribeModal.close();
-  }
-};
-
-closeSubscribeModalButton.onclick = function () {
-  subscribeModal.close();
-};
 
 class Subscribe {
   static singletonInstance = null;
@@ -80,15 +52,12 @@ class Subscribe {
     this.isLoading = true;
     subscribeButton.setAttribute("disabled", true);
     loadingSpinner.style.display = "flex";
-    loadingModal.showModal();
   }
 
   loadingEnd() {
     this.isLoading = false;
     subscribeButton.removeAttribute("disabled");
     loadingSpinner.style.display = "none";
-    loadingModal.close();
-    subscribeModal.close();
   }
 
   async subscribe() {
@@ -100,7 +69,7 @@ class Subscribe {
     this.loadingStart();
 
     try {
-      const email = subscribeModalEmailInput?.value;
+      const email = subscribeCardEmailInput?.value;
 
       if (typeof email !== "string" || email === "") {
         throw new Error("Invalid email!");
@@ -144,7 +113,7 @@ subscribeButton.onclick = function () {
   Subscribe.singleton.subscribe();
 };
 
-subscribeModalEmailInput.onkeydown = function (event) {
+subscribeCardEmailInput.onkeydown = function (event) {
   // Enter key
   if (event.keyCode === 13) {
     Subscribe.singleton.subscribe();
