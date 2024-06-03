@@ -7,6 +7,7 @@ import { buildTags } from "./buildTags";
 import { buildHomePage } from "./buildHomePage";
 import { buildTagPages } from "./buildTagPages";
 import { buildNotFoundPage } from "./buildNotFoundPage";
+import { buildSubscribePage } from "./buildSubscribePage";
 import { buildAssets } from "./buildAssets";
 import { deleteRemovedFilesInOutputFolder } from "./deleteRemovedFilesInOutputFolder";
 import type { BuildCache } from "./types/BuildCache";
@@ -23,12 +24,14 @@ export async function build(buildCache?: BuildCache) {
   const homePagePath = await buildHomePage(buildOutputFolderPath, posts, tags);
   const tagPagePaths = await buildTagPages(buildOutputFolderPath, posts, tags);
   const notFoundPagePath = await buildNotFoundPage(buildOutputFolderPath);
+  const subscribePagePath = await buildSubscribePage(buildOutputFolderPath);
   const assetFilePaths = await buildAssets(buildOutputFolderPath);
   const styleSheetPath = await buildStyleSheet(buildOutputFolderPath);
 
   const validPaths = new Set<string>([
     homePagePath,
     notFoundPagePath,
+    subscribePagePath,
     styleSheetPath,
     ...tagPagePaths,
     ...assetFilePaths,

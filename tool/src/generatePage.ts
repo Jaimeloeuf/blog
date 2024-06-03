@@ -3,6 +3,7 @@ import {
   generateHeaderFragment,
   generateHighlightJsFragment,
   generateScrollToTopButtonFragment,
+  generateSubscribeCardFragment,
 } from "./generateFragment";
 import { defaultOgpImageMetaTag } from "./utils/defaultOgpImageMetaTag";
 
@@ -63,6 +64,12 @@ export const generatePostPage = (
     .replace("${headerFragment}", generateHeaderFragment())
     .replace("${ogpTagMetaTags}", ogpTagMetaTags)
     .replace("${ogpImageMetaTags}", ogpImageMetaTag);
+
+export const generateSubscribePage = () =>
+  rfs("pages/subscribe.html")
+    .replace("${subscribeCardFragment}", generateSubscribeCardFragment())
+    .replace("${headerFragment}", generateHeaderFragment())
+    .replace("${ogpImageMetaTags}", defaultOgpImageMetaTag);
 
 export const generateTagsPage = (
   rawTag: string,

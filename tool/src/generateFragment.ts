@@ -34,3 +34,6 @@ export const generatePostTagsFragment = (tag: string, rawTag: string) =>
 
 export const generateScrollToTopButtonFragment = () =>
   rfs("fragments/scrollToTopButton.html");
+
+export const generateSubscribeCardFragment = () =>
+  rfs("fragments/subscribeCard.html");
