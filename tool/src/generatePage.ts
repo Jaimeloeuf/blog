@@ -37,6 +37,7 @@ export const generateHomePage = (
     .replace("${pinnedPostCardFragments}", pinnedPostCardFragments)
     .replace("${tagCount}", tagCount.toString())
     .replace("${postCount}", postCount.toString())
+    .replace("${subscribeCardFragment}", generateSubscribeCardFragment())
     .replace("${headerFragment}", generateHeaderFragment())
     .replace("${ogpImageMetaTags}", defaultOgpImageMetaTag);
 

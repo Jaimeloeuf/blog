@@ -19,44 +19,39 @@
 
   <body>
     ${headerFragment}
-    <div class="p-4 lg:p-8">
-      <div class="flex w-full flex-col items-center">
-        <div class="w-full max-w-screen-sm pb-8">
-          <div class="flex flex-row gap-6 pb-4">
-            <p class="cursor-pointer text-xl font-bold text-zinc-800">
-              Posts (${postCount})
-            </p>
-            <a
-              href="/tags/"
-              class="text-xl font-light text-zinc-600 no-underline"
-            >
-              Tags (${tagCount})
-            </a>
-          </div>
+    <div class="flex w-full flex-col items-center px-4 lg:py-12">
+      <div class="w-full max-w-screen-sm pb-8">
+        <div class="pb-16">${subscribeCardFragment}</div>
 
-          <div class="pb-8 sm:pb-12">
-            <div class="flex flex-row items-center justify-between gap-4">
-              <p class="pb-0 text-lg font-medium text-zinc-700">Featured</p>
-              <div class="w-full border border-zinc-500"></div>
-            </div>
-            <div class="divide-y">${pinnedPostCardFragments}</div>
-          </div>
-
-          <div class="pb-4">
-            <div class="flex flex-row items-center justify-between gap-4">
-              <p class="pb-0 text-lg font-medium text-zinc-700">Recent</p>
-              <div class="w-full border border-zinc-500"></div>
-            </div>
-            <div class="divide-y">${postLinks}</div>
-          </div>
-
-          ${scrollToTopButton}
-          <div class="pt-12 text-center">
-            <button class="open-subscribe-modal-button text-base outline-none">
-              subscribe
-            </button>
-          </div>
+        <div class="flex flex-row gap-6 pb-4">
+          <p class="cursor-pointer text-xl font-bold text-zinc-800">
+            Posts (${postCount})
+          </p>
+          <a
+            href="/tags/"
+            class="text-xl font-light text-zinc-600 no-underline"
+          >
+            Tags (${tagCount})
+          </a>
         </div>
+
+        <div class="pb-8 sm:pb-12">
+          <div class="flex flex-row items-center justify-between gap-4">
+            <p class="pb-0 text-lg font-medium text-zinc-700">Featured</p>
+            <div class="w-full border border-zinc-500"></div>
+          </div>
+          <div class="divide-y">${pinnedPostCardFragments}</div>
+        </div>
+
+        <div class="pb-4">
+          <div class="flex flex-row items-center justify-between gap-4">
+            <p class="pb-0 text-lg font-medium text-zinc-700">Recent</p>
+            <div class="w-full border border-zinc-500"></div>
+          </div>
+          <div class="divide-y">${postLinks}</div>
+        </div>
+
+        ${scrollToTopButton}
       </div>
     </div>
   </body>
