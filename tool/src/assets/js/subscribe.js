@@ -1,6 +1,6 @@
 import { sf } from "https://cdn.jsdelivr.net/npm/simpler-fetch@10.4.0/+esm";
 
-// Initialise this asynchronously and only for the pages that load subscribeModal.
+// Initialise this asynchronously and only for the pages that load subscribeCard.
 (function initialiseRecaptcha() {
   const script = document.createElement("script");
   script.type = "text/javascript";
