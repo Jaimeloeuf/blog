@@ -1,5 +1,7 @@
 import { rfs } from "./utils/rfs";
 
+export const generateFooterFragment = () => rfs("fragments/footer.html");
+
 export const generateHeaderFragment = () => rfs("fragments/header.html");
 
 export const generateHighlightJsFragment = () =>

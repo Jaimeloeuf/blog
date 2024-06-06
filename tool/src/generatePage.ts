@@ -1,5 +1,6 @@
 import { rfs } from "./utils/rfs";
 import {
+  generateFooterFragment,
   generateHeaderFragment,
   generateHighlightJsFragment,
   generateScrollToTopButtonFragment,
@@ -9,6 +10,7 @@ import { defaultOgpImageMetaTag } from "./utils/defaultOgpImageMetaTag";
 
 export const generateNotFoundPage = () =>
   rfs("pages/404.html")
+    .replace("${footer}", generateFooterFragment())
     .replace("${headerFragment}", generateHeaderFragment())
     .replace("${ogpImageMetaTags}", defaultOgpImageMetaTag);
 
@@ -18,6 +20,7 @@ export const generateAllTagsPage = (
   tagCount: number,
 ) =>
   rfs("pages/allTags.html")
+    .replace("${footer}", generateFooterFragment())
     .replace("${scrollToTopButton}", generateScrollToTopButtonFragment())
     .replace("${tags}", tagCardFragment)
     .replace("${tagCount}", tagCount.toString())
@@ -32,6 +35,7 @@ export const generateHomePage = (
   tagCount: number,
 ) =>
   rfs("pages/home.html")
+    .replace("${footer}", generateFooterFragment())
     .replace("${scrollToTopButton}", generateScrollToTopButtonFragment())
     .replace("${postLinks}", postCardFragments)
     .replace("${pinnedPostCardFragments}", pinnedPostCardFragments)
@@ -58,6 +62,7 @@ export const generatePostPage = (
       "${highlightJS}",
       postContainsCodeblock ? generateHighlightJsFragment() : "",
     )
+    .replace("${footer}", generateFooterFragment())
     .replace("${scrollToTopButton}", generateScrollToTopButtonFragment())
     .replace("${postContent}", postContent)
     .replace("${tags}", tagFragment)
@@ -68,6 +73,7 @@ export const generatePostPage = (
 
 export const generateSubscribePage = () =>
   rfs("pages/subscribe.html")
+    .replace("${footer}", generateFooterFragment())
     .replace("${subscribeCardFragment}", generateSubscribeCardFragment())
     .replace("${headerFragment}", generateHeaderFragment())
     .replace("${ogpImageMetaTags}", defaultOgpImageMetaTag);
@@ -79,6 +85,7 @@ export const generateTagsPage = (
 ) =>
   rfs("pages/tag.html")
     .replaceAll("${tag}", rawTag)
+    .replace("${footer}", generateFooterFragment())
     .replace("${scrollToTopButton}", generateScrollToTopButtonFragment())
     .replace("${posts}", postCardFragment)
     .replace("${count}", count.toString())
