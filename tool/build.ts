@@ -7,6 +7,7 @@ async function bootStrap() {
   console.time("Build time");
 
   setConfig({
+    mode: "production",
     baseUrl: "https://blog.jjss.quest",
   });
 

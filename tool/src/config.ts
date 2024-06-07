@@ -1,5 +1,10 @@
 type Config = {
   /**
+   * The current mode of the program
+   */
+  mode: "production" | "development";
+
+  /**
    * This should be a full URL with the https:// scheme. Do not include the
    * ending trailing slash!
    */
@@ -7,6 +12,7 @@ type Config = {
 };
 
 let _config: Config = {
+  mode: "development",
   baseUrl: "",
 };
 

@@ -17,6 +17,7 @@ import {
 } from "../src";
 
 setConfig({
+  mode: "development",
   baseUrl: "https://localhost:8080",
 });
 
