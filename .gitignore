@@ -1,2 +1,5 @@
 # Deps
 node_modules/
+
+# Generated and cached HTTPS cert
+tool/_cert.pem

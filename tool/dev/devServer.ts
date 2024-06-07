@@ -7,7 +7,13 @@ import ssl from "@vitejs/plugin-basic-ssl";
 export async function startDevServer(buildOutputFolderPath: string) {
   const server = await createServer({
     root: buildOutputFolderPath,
-    plugins: [ssl()],
+    plugins: [
+      ssl({
+        // Cache and reuse cert so that on re-runs user do not need to re-accept
+        // "use of unsafe self signed cert" in browser everytime.
+        certDir: "./",
+      }),
+    ],
 
     server: {
       port: 8080,
