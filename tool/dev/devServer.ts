@@ -11,7 +11,8 @@ export async function startDevServer(buildOutputFolderPath: string) {
       ssl({
         // Cache and reuse cert so that on re-runs user do not need to re-accept
         // "use of unsafe self signed cert" in browser everytime.
-        certDir: "./",
+        // Cache it in the same /tool/dev/ dir instead of top level in tool/
+        certDir: "./dev",
       }),
     ],
 
