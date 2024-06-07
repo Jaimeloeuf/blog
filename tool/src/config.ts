@@ -1,12 +1,16 @@
-let _config = {
+type Config = {
   /**
    * This should be a full URL with the https:// scheme. Do not include the
    * ending trailing slash!
    */
+  baseUrl: string;
+};
+
+let _config: Config = {
   baseUrl: "",
 };
 
-export function setConfig(config: typeof _config) {
+export function setConfig(config: Config) {
   _config = config;
 }
 
