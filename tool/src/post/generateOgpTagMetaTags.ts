@@ -1,5 +1,3 @@
-import { getConfig } from "../config";
-
 /**
  * Generate Open Graph Protocol's article tags meta tags.
  */
