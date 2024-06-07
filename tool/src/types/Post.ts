@@ -4,6 +4,7 @@ export const PostSchema = z.object({
   title: z.string(),
   date: z.date(),
   pinned: z.boolean().default(false),
+  draft: z.boolean().default(false),
   tags: z.array(z.string()),
 });
 
