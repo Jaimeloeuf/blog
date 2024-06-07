@@ -1,4 +1,5 @@
 import path from "path";
+import { getConfig } from "../config";
 import { generatePostTagsFragment } from "../generateFragment";
 import { postsDirPath } from "../utils/dirPaths";
 import { getSafeTagName } from "../utils/getSafeTagName";
@@ -13,6 +14,7 @@ import { imageSize } from "image-size";
 import { getNewFolderPath } from "./getNewFolderPath";
 import { generateOgpTagMetaTags } from "./generateOgpTagMetaTags";
 import { generateAndSaveHtmlFile } from "./generateAndSaveHtmlFile";
+import { logger } from "../../shared/logger";
 
 /**
  * Builds a post's static HTML file from its markdown contents and return the
@@ -26,6 +28,14 @@ export async function buildPost(
 
   const { postAttributes, postAsMarkdownString, postAsHtmlString } =
     await getPost(postFolderPath);
+
+  if (getConfig().mode === "production" && postAttributes.draft) {
+    logger.info(
+      buildPost.name,
+      `Skipping draft post found in ${getConfig().mode} mode: ${postAttributes.title}`,
+    );
+    return;
+  }
 
   const { folderName, newFolderPath } = await getNewFolderPath(
     buildOutputFolderPath,
