@@ -48,6 +48,7 @@ export const generateHomePage = (
 export const generatePostPage = (
   title: string,
   date: string,
+  draft: boolean,
   timeToRead: string,
   tagFragment: string,
   postContent: string,
@@ -67,6 +68,12 @@ export const generatePostPage = (
     .replace("${postContent}", postContent)
     .replace("${tags}", tagFragment)
     .replace("${timeToRead}", timeToRead)
+    .replace(
+      "${draftModeNotice}",
+      draft
+        ? `<p class="pb-8 text-2xl font-extralight italic">*** this post is in draft mode ***</p>`
+        : "",
+    )
     .replace("${headerFragment}", generateHeaderFragment())
     .replace("${ogpTagMetaTags}", ogpTagMetaTags)
     .replace("${ogpImageMetaTags}", ogpImageMetaTag);

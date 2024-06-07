@@ -79,6 +79,7 @@ export async function buildPost(
     newFolderPath,
     postAttributes.title,
     postAttributes.date.toDateString(),
+    postAttributes.draft,
     timeToRead,
     tagFragment,
     postAsHtmlString,

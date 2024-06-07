@@ -9,6 +9,7 @@ export async function generateAndSaveHtmlFile(
   newFolderPath: string,
   title: string,
   date: string,
+  draft: boolean,
   timeToRead: string,
   tagFragment: string,
   postContent: string,
@@ -19,6 +20,7 @@ export async function generateAndSaveHtmlFile(
   const fullHtmlPage = generatePostPage(
     title,
     date,
+    draft,
     timeToRead,
     tagFragment,
     postContent,
