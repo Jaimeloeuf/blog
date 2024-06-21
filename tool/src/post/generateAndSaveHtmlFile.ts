@@ -17,7 +17,7 @@ export async function generateAndSaveHtmlFile(
   ogpImageMetaTag: string,
   ogpTagMetaTags: string,
 ) {
-  const fullHtmlPage = generatePostPage(
+  const fullHtmlPage = generatePostPage({
     title,
     date,
     draft,
@@ -27,7 +27,7 @@ export async function generateAndSaveHtmlFile(
     postContainsCodeblock,
     ogpImageMetaTag,
     ogpTagMetaTags,
-  );
+  });
 
   const htmlFilePath = path.resolve(newFolderPath, `index.html`);
   await writeFile(htmlFilePath, fullHtmlPage, { flag: "w" });

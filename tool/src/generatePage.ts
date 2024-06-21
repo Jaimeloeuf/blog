@@ -54,17 +54,27 @@ export const generateHomePage = ({
     .replace("${headerFragment}", generateHeaderFragment())
     .replace("${ogpImageMetaTags}", defaultOgpImageMetaTag);
 
-export const generatePostPage = (
-  title: string,
-  date: string,
-  draft: boolean,
-  timeToRead: string,
-  tagFragment: string,
-  postContent: string,
-  postContainsCodeblock: boolean,
-  ogpImageMetaTag: string,
-  ogpTagMetaTags: string,
-) =>
+export const generatePostPage = ({
+  title,
+  date,
+  draft,
+  timeToRead,
+  tagFragment,
+  postContent,
+  postContainsCodeblock,
+  ogpImageMetaTag,
+  ogpTagMetaTags,
+}: {
+  title: string;
+  date: string;
+  draft: boolean;
+  timeToRead: string;
+  tagFragment: string;
+  postContent: string;
+  postContainsCodeblock: boolean;
+  ogpImageMetaTag: string;
+  ogpTagMetaTags: string;
+}) =>
   rfs("pages/post.html")
     .replaceAll("${title}", title)
     .replaceAll("${date}", date)
