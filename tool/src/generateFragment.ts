@@ -21,11 +21,15 @@ export const generatePostCardFragment = ({
     .replace("${title}", title)
     .replace("${postDate}", postDate);
 
-export const generateHomeTagCardFragment = (
-  tag: string,
-  rawTag: string,
-  count: number,
-) =>
+export const generateHomeTagCardFragment = ({
+  tag,
+  rawTag,
+  count,
+}: {
+  tag: string;
+  rawTag: string;
+  count: number;
+}) =>
   rfs("fragments/homeTagCard.html")
     .replace("${tag}", tag)
     .replace("${rawTag}", rawTag)

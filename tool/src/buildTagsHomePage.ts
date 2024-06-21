@@ -12,7 +12,7 @@ export async function buildTagsHomePage(
   const tagCardFragment = new Array(...tags)
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([tag, { rawTag, count }]) =>
-      generateHomeTagCardFragment(tag, rawTag, count),
+      generateHomeTagCardFragment({ tag, rawTag, count }),
     )
     .join("");
 
