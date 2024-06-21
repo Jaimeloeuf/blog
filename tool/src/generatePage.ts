@@ -14,11 +14,15 @@ export const generateNotFoundPage = () =>
     .replace("${headerFragment}", generateHeaderFragment())
     .replace("${ogpImageMetaTags}", defaultOgpImageMetaTag);
 
-export const generateAllTagsPage = (
-  tagCardFragment: string,
-  postCount: number,
-  tagCount: number,
-) =>
+export const generateAllTagsPage = ({
+  tagCardFragment,
+  postCount,
+  tagCount,
+}: {
+  tagCardFragment: string;
+  postCount: number;
+  tagCount: number;
+}) =>
   rfs("pages/allTags.html")
     .replace("${footer}", generateFooterFragment())
     .replace("${scrollToTopButton}", generateScrollToTopButtonFragment())

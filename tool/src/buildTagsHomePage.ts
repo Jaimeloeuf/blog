@@ -16,7 +16,11 @@ export async function buildTagsHomePage(
     )
     .join("");
 
-  const allTagPage = generateAllTagsPage(tagCardFragment, postCount, tags.size);
+  const allTagPage = generateAllTagsPage({
+    tagCardFragment,
+    postCount,
+    tagCount: tags.size,
+  });
   const allTagPath = resolve(tagsFolderPath, `index.html`);
   await writeFile(allTagPath, allTagPage, { flag: "w" });
 
