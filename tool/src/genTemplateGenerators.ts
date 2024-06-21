@@ -12,7 +12,10 @@ export async function genTemplateGenerators() {
   );
 
   for (const template of templates) {
-    const templateFileName = template.split("/").pop();
+    const [templateType, templateFileName] = template.split("/");
+    if (templateType === undefined) {
+      throw new Error("Unable to get template's file type");
+    }
     if (templateFileName === undefined) {
       throw new Error("Unable to get template's file name");
     }
@@ -26,7 +29,9 @@ export async function genTemplateGenerators() {
     const generatedFunctionName =
       "generated" +
       templateFileNameWithoutHtml[0]?.toUpperCase() +
-      templateFileNameWithoutHtml.slice(1);
+      templateFileNameWithoutHtml.slice(1) +
+      templateType[0]?.toUpperCase() +
+      templateType.slice(1);
 
     let generatedCode = `export const ${generatedFunctionName} = () =>
 rfs("${template}")`;
