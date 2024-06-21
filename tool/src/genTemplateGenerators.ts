@@ -12,10 +12,15 @@ export async function genTemplateGenerators() {
   );
 
   for (const template of templates) {
-    const [templateType, templateFileName] = template.split("/");
+    const templatePathComponents = template.split("/");
+
+    const templateType = templatePathComponents[0];
     if (templateType === undefined) {
       throw new Error("Unable to get template's file type");
     }
+
+    const templateFileName =
+      templatePathComponents[templatePathComponents.length - 1];
     if (templateFileName === undefined) {
       throw new Error("Unable to get template's file name");
     }
