@@ -3,7 +3,6 @@ import { getConfig } from "../config";
 import { generatePostTagsFragment } from "../generateFragment";
 import { postsDirPath } from "../utils/dirPaths";
 import { getSafeTagName } from "../utils/getSafeTagName";
-import { type Post } from "../types/Post";
 import { getPost } from "./getPost";
 import { computeTimeToRead } from "./computeTimeToRead";
 import { copyOverAssets } from "./copyOverAssets";
@@ -15,6 +14,7 @@ import { getNewFolderPath } from "./getNewFolderPath";
 import { generateOgpTagMetaTags } from "./generateOgpTagMetaTags";
 import { generateAndSaveHtmlFile } from "./generateAndSaveHtmlFile";
 import { logger } from "../../shared/logger";
+import type { Post } from "../types/Post";
 
 /**
  * Builds a post's static HTML file from its markdown contents and return the
