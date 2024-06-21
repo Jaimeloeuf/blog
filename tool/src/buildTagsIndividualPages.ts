@@ -25,7 +25,7 @@ export async function buildTagsIndividualPages(
       )
       .join("");
 
-    const tagHTML = generateTagsPage(rawTag, count, postCardFragment);
+    const tagHTML = generateTagsPage({ rawTag, count, postCardFragment });
 
     const htmlFilePath = resolve(tagsFolderPath, `${tag}.html`);
     await writeFile(htmlFilePath, tagHTML, { flag: "w" });

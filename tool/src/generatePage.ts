@@ -94,11 +94,15 @@ export const generateSubscribePage = () =>
     .replace("${headerFragment}", generateHeaderFragment())
     .replace("${ogpImageMetaTags}", defaultOgpImageMetaTag);
 
-export const generateTagsPage = (
-  rawTag: string,
-  count: number,
-  postCardFragment: string,
-) =>
+export const generateTagsPage = ({
+  rawTag,
+  count,
+  postCardFragment,
+}: {
+  rawTag: string;
+  count: number;
+  postCardFragment: string;
+}) =>
   rfs("pages/tag.html")
     .replaceAll("${tag}", rawTag)
     .replace("${footer}", generateFooterFragment())
