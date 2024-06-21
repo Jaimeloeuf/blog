@@ -32,12 +32,17 @@ export const generateAllTagsPage = ({
     .replace("${headerFragment}", generateHeaderFragment())
     .replace("${ogpImageMetaTags}", defaultOgpImageMetaTag);
 
-export const generateHomePage = (
-  postCardFragments: string,
-  pinnedPostCardFragments: string,
-  postCount: number,
-  tagCount: number,
-) =>
+export const generateHomePage = ({
+  postCardFragments,
+  pinnedPostCardFragments,
+  postCount,
+  tagCount,
+}: {
+  postCardFragments: string;
+  pinnedPostCardFragments: string;
+  postCount: number;
+  tagCount: number;
+}) =>
   rfs("pages/home.html")
     .replace("${footer}", generateFooterFragment())
     .replace("${scrollToTopButton}", generateScrollToTopButtonFragment())

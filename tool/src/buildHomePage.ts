@@ -26,12 +26,12 @@ export async function buildHomePage(
     }
   }
 
-  const fullHtmlPage = generateHomePage(
+  const fullHtmlPage = generateHomePage({
     postCardFragments,
     pinnedPostCardFragments,
-    posts.length,
-    tags.size,
-  );
+    postCount: posts.length,
+    tagCount: tags.size,
+  });
 
   const homePagePath = path.resolve(buildOutputFolderPath, "index.html");
   await writeFile(homePagePath, fullHtmlPage, { flag: "w" });
