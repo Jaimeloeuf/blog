@@ -7,11 +7,15 @@ export const generateHeaderFragment = () => rfs("fragments/header.html");
 export const generateHighlightJsFragment = () =>
   rfs("fragments/highlightJS.html");
 
-export const generatePostCardFragment = (
-  folderName: string,
-  title: string,
-  postDate: string,
-) =>
+export const generatePostCardFragment = ({
+  folderName,
+  title,
+  postDate,
+}: {
+  folderName: string;
+  title: string;
+  postDate: string;
+}) =>
   rfs("fragments/postCard.html")
     .replace("${folderName}", folderName)
     .replace("${title}", title)

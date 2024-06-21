@@ -17,11 +17,11 @@ export async function buildTagsIndividualPages(
     const postCardFragment = posts
       .filter((post) => post.tags.some((postTag) => postTag.tag === tag))
       .map((post) =>
-        generatePostCardFragment(
-          post.folderName,
-          post.title,
-          post.date.toDateString(),
-        ),
+        generatePostCardFragment({
+          folderName: post.folderName,
+          title: post.title,
+          postDate: post.date.toDateString(),
+        }),
       )
       .join("");
 

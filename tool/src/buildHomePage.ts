@@ -13,11 +13,11 @@ export async function buildHomePage(
   let postCardFragments = "";
   let pinnedPostCardFragments = "";
   for (const post of posts) {
-    const postCardFragment = generatePostCardFragment(
-      post.folderName,
-      post.title,
-      post.date.toDateString(),
-    );
+    const postCardFragment = generatePostCardFragment({
+      folderName: post.folderName,
+      title: post.title,
+      postDate: post.date.toDateString(),
+    });
 
     if (post.pinned) {
       pinnedPostCardFragments += postCardFragment;
