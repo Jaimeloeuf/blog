@@ -37,7 +37,13 @@ export const generateHomeTagCardFragment = ({
 
 export const generateHrFragment = () => rfs("fragments/hr.html");
 
-export const generatePostTagsFragment = (tag: string, rawTag: string) =>
+export const generatePostTagsFragment = ({
+  tag,
+  rawTag,
+}: {
+  tag: string;
+  rawTag: string;
+}) =>
   rfs("fragments/postTags.html")
     .replace("${tag}", tag)
     .replace("${rawTag}", rawTag);
