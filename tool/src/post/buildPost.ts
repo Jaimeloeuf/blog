@@ -67,9 +67,7 @@ export async function buildPost(
     tag: getSafeTagName(rawTag),
   }));
 
-  const tagFragment = tags
-    .map(({ tag, rawTag }) => generatePostTagsFragment({ tag, rawTag }))
-    .join("");
+  const tagFragment = tags.map(generatePostTagsFragment).join("");
 
   const postContainsCodeblock = postAsHtmlString.includes(
     '<code class="language-',
