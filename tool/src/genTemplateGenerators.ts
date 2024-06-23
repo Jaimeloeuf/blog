@@ -14,7 +14,15 @@ export async function genTemplateGenerators() {
   for (const template of templates) {
     const templatePathComponents = template.split("/");
 
-    const templateType = templatePathComponents[0];
+    // Generate template type by camel casing the path components
+    const templateType =
+      (templatePathComponents[0] ?? "") +
+      templatePathComponents
+        .slice(1, templatePathComponents.length - 1)
+        .map(
+          (pathComponent) =>
+            pathComponent[0]?.toUpperCase() + pathComponent.slice(1),
+        );
     if (templateType === undefined) {
       throw new Error("Unable to get template's file type");
     }
