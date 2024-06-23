@@ -2,7 +2,7 @@ import path from "path";
 import { getConfig } from "../config";
 import { generatePostTagsFragment } from "../generateFragment";
 import { postsDirPath } from "../utils/dirPaths";
-import { getSafeTagName } from "../utils/getSafeTagName";
+import { createSafeTagName } from "../utils/createSafeTagName";
 import { getPost } from "./getPost";
 import { computeTimeToRead } from "./computeTimeToRead";
 import { copyOverAssets } from "./copyOverAssets";
@@ -64,7 +64,7 @@ export async function buildPost(
 
   const tags = postAttributes.tags.map((rawTag) => ({
     rawTag,
-    tag: getSafeTagName(rawTag),
+    tag: createSafeTagName(rawTag),
   }));
 
   const tagFragment = tags.map(generatePostTagsFragment).join("");
