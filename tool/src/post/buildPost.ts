@@ -10,7 +10,7 @@ import { getKeyImage } from "./getKeyImage";
 import { defaultOgpImageMetaTag } from "../utils/defaultOgpImageMetaTag";
 import { generateOgpImageMetaTag } from "../utils/generateOgpImageMetaTag";
 import { imageSize } from "image-size";
-import { getNewFolderPath } from "./getNewFolderPath";
+import { createNewFolderPath } from "./createNewFolderPath";
 import { generateOgpTagMetaTags } from "./generateOgpTagMetaTags";
 import { generateAndSaveHtmlFile } from "./generateAndSaveHtmlFile";
 import { logger } from "../../shared/logger";
@@ -37,7 +37,7 @@ export async function buildPost(
     return;
   }
 
-  const { folderName, newFolderPath } = await getNewFolderPath(
+  const { folderName, newFolderPath } = await createNewFolderPath(
     buildOutputFolderPath,
     postAttributes,
     folderPath,
