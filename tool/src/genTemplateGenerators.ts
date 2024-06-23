@@ -2,9 +2,9 @@ import { readdir } from "fs/promises";
 import { templateDirPath } from "./utils/dirPaths";
 
 /**
- * Generate a single 'template generator' function code using template file path
+ * Generate a single 'template creator' function code using template file path
  */
-function genTemplateGenerator(templatePath: string) {
+function genTemplateCreator(templatePath: string) {
   const templatePathComponents = templatePath.split("/");
 
   // Generate template type by camel casing the path components
@@ -31,22 +31,22 @@ function genTemplateGenerator(templatePath: string) {
     templateFileName.length - ".html".length,
   );
 
-  // Capitalise this for camel case with the 'generate' prefix
-  const generatedFunctionName =
-    "generated" +
+  // Capitalise this for camel case with the 'create' prefix
+  const functionName =
+    "create" +
     templateFileNameWithoutHtml[0]?.toUpperCase() +
     templateFileNameWithoutHtml.slice(1) +
     templateType[0]?.toUpperCase() +
     templateType.slice(1);
 
-  return `export const ${generatedFunctionName} = () =>
+  return `export const ${functionName} = () =>
 rfs("${templatePath}")`;
 }
 
 /**
- * Generate 'template generator' functions for all templates
+ * Generate 'template creator' functions for all templates
  */
-export async function genTemplateGenerators() {
+export async function genTemplateCreators() {
   const templateDirItems = await readdir(templateDirPath, { recursive: true });
 
   const templatePaths = templateDirItems.filter((path) =>
@@ -54,8 +54,8 @@ export async function genTemplateGenerators() {
   );
 
   for (const templatePath of templatePaths) {
-    const generatedCode = genTemplateGenerator(templatePath);
+    const generatedCode = genTemplateCreator(templatePath);
   }
 }
 
-genTemplateGenerators();
+genTemplateCreators();
