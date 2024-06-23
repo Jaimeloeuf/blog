@@ -7,9 +7,7 @@ import { templateDirPath } from "./utils/dirPaths";
 export async function genTemplateGenerators() {
   const templateDirItems = await readdir(templateDirPath, { recursive: true });
 
-  const templates = templateDirItems.filter((template) =>
-    template.endsWith(".html"),
-  );
+  const templates = templateDirItems.filter((path) => path.endsWith(".html"));
 
   for (const template of templates) {
     const templatePathComponents = template.split("/");
