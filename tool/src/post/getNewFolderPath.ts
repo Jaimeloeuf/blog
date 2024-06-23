@@ -1,6 +1,6 @@
 import path from "path";
 import { createFolderIfDoesNotExist } from "../utils/createFolderIfDoesNotExist";
-import { getOutputFolderName } from "../utils/getOutputFolderName";
+import { createOutputFolderName } from "../utils/createOutputFolderName";
 import { type PostSchemaType } from "../types/Post";
 
 /**
@@ -12,7 +12,7 @@ export async function getNewFolderPath(
   postAttributes: PostSchemaType,
   folderPath: string,
 ) {
-  const folderName = getOutputFolderName(postAttributes, folderPath);
+  const folderName = createOutputFolderName(postAttributes, folderPath);
   const newFolderPath = path.resolve(buildOutputFolderPath, folderName);
   await createFolderIfDoesNotExist(newFolderPath);
   return { folderName, newFolderPath };

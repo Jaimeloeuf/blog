@@ -1,10 +1,13 @@
 import { PostSchemaType } from "../types/Post";
 
 /**
- * Get the output folder name generated from the original path and post date,
+ * Create the output folder name using the original path and post date,
  * this ensures that the name is safe to use as a file path.
  */
-export function getOutputFolderName(post: PostSchemaType, folderPath: string) {
+export function createOutputFolderName(
+  post: PostSchemaType,
+  folderPath: string,
+) {
   const month =
     post.date.getUTCMonth() > 9
       ? post.date.getUTCMonth()
