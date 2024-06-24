@@ -8,7 +8,7 @@ import { computeTimeToRead } from "./computeTimeToRead";
 import { copyOverAssets } from "./copyOverAssets";
 import { getKeyImage } from "./getKeyImage";
 import { defaultOgpImageMetaTag } from "../utils/defaultOgpImageMetaTag";
-import { generateOgpImageMetaTag } from "../utils/generateOgpImageMetaTag";
+import { createOgpImageMetaTag } from "../utils/createOgpImageMetaTag";
 import { imageSize } from "image-size";
 import { createNewFolderPath } from "./createNewFolderPath";
 import { generateOgpTagMetaTags } from "./generateOgpTagMetaTags";
@@ -53,7 +53,7 @@ export async function buildPost(
   const ogpImageMetaTag =
     keyImage === undefined
       ? defaultOgpImageMetaTag
-      : generateOgpImageMetaTag(
+      : createOgpImageMetaTag(
           `${folderName}/${keyImage}`,
           imageSize(path.resolve(postFolderPath, keyImage)),
         );

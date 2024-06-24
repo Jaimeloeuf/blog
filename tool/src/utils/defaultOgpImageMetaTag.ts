@@ -1,5 +1,5 @@
 import { imageSize } from "image-size";
-import { generateOgpImageMetaTag } from "./generateOgpImageMetaTag";
+import { createOgpImageMetaTag } from "./createOgpImageMetaTag";
 
 /**
  * Compute the default OGP image's dimensions only once on startup as we assume
@@ -13,7 +13,7 @@ const defaultOpenGraphImageDimensions = imageSize(
  * Compute the default OGP image tag only once on startup as we assume it does
  * not change for the lifetime of the program.
  */
-export const defaultOgpImageMetaTag = generateOgpImageMetaTag(
+export const defaultOgpImageMetaTag = createOgpImageMetaTag(
   "defaultOpenGraphImage.jpg",
   defaultOpenGraphImageDimensions,
 );
