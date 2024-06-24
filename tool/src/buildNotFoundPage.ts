@@ -1,6 +1,6 @@
 import path from "path";
 import { writeFile } from "fs/promises";
-import { createNotFoundPage } from "./generatePage";
+import { createNotFoundPage } from "./createPage";
 
 // @todo Might make this a copy operation instead
 export async function buildNotFoundPage(buildOutputFolderPath: string) {

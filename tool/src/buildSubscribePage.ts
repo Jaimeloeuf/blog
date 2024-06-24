@@ -1,6 +1,6 @@
 import path from "path";
 import { writeFile } from "fs/promises";
-import { createSubscribePage } from "./generatePage";
+import { createSubscribePage } from "./createPage";
 
 export async function buildSubscribePage(buildOutputFolderPath: string) {
   const subscribePagePath = path.resolve(

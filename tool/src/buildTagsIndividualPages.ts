@@ -1,7 +1,7 @@
 import { resolve } from "path";
 import { writeFile } from "fs/promises";
 import { createPostCardFragment } from "./generateFragment";
-import { createTagsPage } from "./generatePage";
+import { createTagsPage } from "./createPage";
 import type { Post } from "./types/Post";
 import type { Tags } from "./types/Tags";
 

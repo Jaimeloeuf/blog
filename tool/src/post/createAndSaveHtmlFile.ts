@@ -1,6 +1,6 @@
 import path from "path";
 import { writeFile } from "fs/promises";
-import { createPostPage } from "../generatePage";
+import { createPostPage } from "../createPage";
 
 /**
  * Create and save the HTML file in the output folder and return its path.

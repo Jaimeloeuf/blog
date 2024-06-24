@@ -1,7 +1,7 @@
 import { resolve } from "path";
 import { writeFile } from "fs/promises";
 import { createHomeTagCardFragment } from "./generateFragment";
-import { createAllTagsPage } from "./generatePage";
+import { createAllTagsPage } from "./createPage";
 import type { Tags } from "./types/Tags";
 
 export async function buildTagsHomePage(
