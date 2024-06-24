@@ -3,9 +3,9 @@ import { writeFile } from "fs/promises";
 import { generatePostPage } from "../generatePage";
 
 /**
- * Generates and saves the HTML file in the output folder and return its path.
+ * Create and save the HTML file in the output folder and return its path.
  */
-export async function generateAndSaveHtmlFile(
+export async function createAndSaveHtmlFile(
   newFolderPath: string,
   title: string,
   date: string,

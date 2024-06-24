@@ -12,7 +12,7 @@ import { createOgpImageMetaTag } from "../utils/createOgpImageMetaTag";
 import { imageSize } from "image-size";
 import { createNewFolderPath } from "./createNewFolderPath";
 import { generateOgpTagMetaTags } from "./generateOgpTagMetaTags";
-import { generateAndSaveHtmlFile } from "./generateAndSaveHtmlFile";
+import { createAndSaveHtmlFile } from "./createAndSaveHtmlFile";
 import { logger } from "../../shared/logger";
 import type { Post } from "../types/Post";
 
@@ -73,7 +73,7 @@ export async function buildPost(
     '<code class="language-',
   );
 
-  const htmlFilePath = await generateAndSaveHtmlFile(
+  const htmlFilePath = await createAndSaveHtmlFile(
     newFolderPath,
     postAttributes.title,
     postAttributes.date.toDateString(),
