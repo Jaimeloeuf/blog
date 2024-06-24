@@ -1,6 +1,6 @@
 import path from "path";
 import { writeFile } from "fs/promises";
-import { generatePostPage } from "../generatePage";
+import { createPostPage } from "../generatePage";
 
 /**
  * Create and save the HTML file in the output folder and return its path.
@@ -17,7 +17,7 @@ export async function createAndSaveHtmlFile(
   ogpImageMetaTag: string,
   ogpTagMetaTags: string,
 ) {
-  const fullHtmlPage = generatePostPage({
+  const fullHtmlPage = createPostPage({
     title,
     date,
     draft,

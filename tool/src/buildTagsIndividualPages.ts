@@ -1,7 +1,7 @@
 import { resolve } from "path";
 import { writeFile } from "fs/promises";
 import { createPostCardFragment } from "./generateFragment";
-import { generateTagsPage } from "./generatePage";
+import { createTagsPage } from "./generatePage";
 import type { Post } from "./types/Post";
 import type { Tags } from "./types/Tags";
 
@@ -25,7 +25,7 @@ export async function buildTagsIndividualPages(
       )
       .join("");
 
-    const tagHTML = generateTagsPage({ rawTag, count, postCardFragment });
+    const tagHTML = createTagsPage({ rawTag, count, postCardFragment });
 
     const htmlFilePath = resolve(tagsFolderPath, `${tag}.html`);
     await writeFile(htmlFilePath, tagHTML, { flag: "w" });

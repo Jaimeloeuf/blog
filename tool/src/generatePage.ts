@@ -8,13 +8,13 @@ import {
 } from "./generateFragment";
 import { defaultOgpImageMetaTag } from "./utils/defaultOgpImageMetaTag";
 
-export const generateNotFoundPage = () =>
+export const createNotFoundPage = () =>
   rfs("pages/404.html")
     .replace("${footer}", createFooterFragment())
     .replace("${headerFragment}", createHeaderFragment())
     .replace("${ogpImageMetaTags}", defaultOgpImageMetaTag);
 
-export const generateAllTagsPage = ({
+export const createAllTagsPage = ({
   tagCardFragment,
   postCount,
   tagCount,
@@ -32,7 +32,7 @@ export const generateAllTagsPage = ({
     .replace("${headerFragment}", createHeaderFragment())
     .replace("${ogpImageMetaTags}", defaultOgpImageMetaTag);
 
-export const generateHomePage = ({
+export const createHomePage = ({
   postCardFragments,
   pinnedPostCardFragments,
   postCount,
@@ -54,7 +54,7 @@ export const generateHomePage = ({
     .replace("${headerFragment}", createHeaderFragment())
     .replace("${ogpImageMetaTags}", defaultOgpImageMetaTag);
 
-export const generatePostPage = ({
+export const createPostPage = ({
   title,
   date,
   draft,
@@ -97,14 +97,14 @@ export const generatePostPage = ({
     .replace("${ogpTagMetaTags}", ogpTagMetaTags)
     .replace("${ogpImageMetaTags}", ogpImageMetaTag);
 
-export const generateSubscribePage = () =>
+export const createSubscribePage = () =>
   rfs("pages/subscribe.html")
     .replace("${footer}", createFooterFragment())
     .replace("${subscribeCardFragment}", createSubscribeCardFragment())
     .replace("${headerFragment}", createHeaderFragment())
     .replace("${ogpImageMetaTags}", defaultOgpImageMetaTag);
 
-export const generateTagsPage = ({
+export const createTagsPage = ({
   rawTag,
   count,
   postCardFragment,

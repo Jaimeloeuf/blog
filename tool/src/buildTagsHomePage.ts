@@ -1,7 +1,7 @@
 import { resolve } from "path";
 import { writeFile } from "fs/promises";
 import { createHomeTagCardFragment } from "./generateFragment";
-import { generateAllTagsPage } from "./generatePage";
+import { createAllTagsPage } from "./generatePage";
 import type { Tags } from "./types/Tags";
 
 export async function buildTagsHomePage(
@@ -16,7 +16,7 @@ export async function buildTagsHomePage(
     )
     .join("");
 
-  const allTagPage = generateAllTagsPage({
+  const allTagPage = createAllTagsPage({
     tagCardFragment,
     postCount,
     tagCount: tags.size,

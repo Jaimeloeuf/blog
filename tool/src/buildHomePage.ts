@@ -1,6 +1,6 @@
 import path from "path";
 import { writeFile } from "fs/promises";
-import { generateHomePage } from "./generatePage";
+import { createHomePage } from "./generatePage";
 import { createPostCardFragment } from "./generateFragment";
 import type { Post } from "./types/Post";
 import type { Tags } from "./types/Tags";
@@ -26,7 +26,7 @@ export async function buildHomePage(
     }
   }
 
-  const fullHtmlPage = generateHomePage({
+  const fullHtmlPage = createHomePage({
     postCardFragments,
     pinnedPostCardFragments,
     postCount: posts.length,

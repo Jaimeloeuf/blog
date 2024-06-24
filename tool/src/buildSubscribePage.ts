@@ -1,13 +1,13 @@
 import path from "path";
 import { writeFile } from "fs/promises";
-import { generateSubscribePage } from "./generatePage";
+import { createSubscribePage } from "./generatePage";
 
 export async function buildSubscribePage(buildOutputFolderPath: string) {
   const subscribePagePath = path.resolve(
     buildOutputFolderPath,
     "subscribe.html",
   );
-  await writeFile(subscribePagePath, generateSubscribePage(), { flag: "w" });
+  await writeFile(subscribePagePath, createSubscribePage(), { flag: "w" });
 
   return subscribePagePath;
 }
