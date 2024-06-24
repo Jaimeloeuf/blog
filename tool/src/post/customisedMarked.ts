@@ -1,9 +1,9 @@
 import { marked } from "marked";
-import { generateHrFragment } from "../generateFragment";
+import { createHrFragment } from "../generateFragment";
 
 marked.use({
   renderer: {
-    hr: generateHrFragment,
+    hr: createHrFragment,
   },
 });
 

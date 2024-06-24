@@ -1,6 +1,6 @@
 import path from "path";
 import { getConfig } from "../config";
-import { generatePostTagsFragment } from "../generateFragment";
+import { createPostTagsFragment } from "../generateFragment";
 import { postsDirPath } from "../utils/dirPaths";
 import { createSafeTagName } from "../utils/createSafeTagName";
 import { getPost } from "./getPost";
@@ -67,7 +67,7 @@ export async function buildPost(
     tag: createSafeTagName(rawTag),
   }));
 
-  const tagFragment = tags.map(generatePostTagsFragment).join("");
+  const tagFragment = tags.map(createPostTagsFragment).join("");
 
   const postContainsCodeblock = postAsHtmlString.includes(
     '<code class="language-',

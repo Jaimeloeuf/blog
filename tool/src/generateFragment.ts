@@ -1,13 +1,13 @@
 import { rfs } from "./utils/rfs";
 
-export const generateFooterFragment = () => rfs("fragments/footer.html");
+export const createFooterFragment = () => rfs("fragments/footer.html");
 
-export const generateHeaderFragment = () => rfs("fragments/header.html");
+export const createHeaderFragment = () => rfs("fragments/header.html");
 
-export const generateHighlightJsFragment = () =>
+export const createHighlightJsFragment = () =>
   rfs("fragments/highlightJS.html");
 
-export const generatePostCardFragment = ({
+export const createPostCardFragment = ({
   folderName,
   title,
   postDate,
@@ -21,7 +21,7 @@ export const generatePostCardFragment = ({
     .replace("${title}", title)
     .replace("${postDate}", postDate);
 
-export const generateHomeTagCardFragment = ({
+export const createHomeTagCardFragment = ({
   tag,
   rawTag,
   count,
@@ -35,9 +35,9 @@ export const generateHomeTagCardFragment = ({
     .replace("${rawTag}", rawTag)
     .replace("${count}", count.toString());
 
-export const generateHrFragment = () => rfs("fragments/hr.html");
+export const createHrFragment = () => rfs("fragments/hr.html");
 
-export const generatePostTagsFragment = ({
+export const createPostTagsFragment = ({
   tag,
   rawTag,
 }: {
@@ -48,8 +48,8 @@ export const generatePostTagsFragment = ({
     .replace("${tag}", tag)
     .replace("${rawTag}", rawTag);
 
-export const generateScrollToTopButtonFragment = () =>
+export const createScrollToTopButtonFragment = () =>
   rfs("fragments/scrollToTopButton.html");
 
-export const generateSubscribeCardFragment = () =>
+export const createSubscribeCardFragment = () =>
   rfs("fragments/subscribeCard.html");

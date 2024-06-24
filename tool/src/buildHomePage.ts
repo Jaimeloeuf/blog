@@ -1,7 +1,7 @@
 import path from "path";
 import { writeFile } from "fs/promises";
 import { generateHomePage } from "./generatePage";
-import { generatePostCardFragment } from "./generateFragment";
+import { createPostCardFragment } from "./generateFragment";
 import type { Post } from "./types/Post";
 import type { Tags } from "./types/Tags";
 
@@ -13,7 +13,7 @@ export async function buildHomePage(
   let postCardFragments = "";
   let pinnedPostCardFragments = "";
   for (const post of posts) {
-    const postCardFragment = generatePostCardFragment({
+    const postCardFragment = createPostCardFragment({
       folderName: post.folderName,
       title: post.title,
       postDate: post.date.toDateString(),

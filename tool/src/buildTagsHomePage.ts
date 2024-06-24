@@ -1,6 +1,6 @@
 import { resolve } from "path";
 import { writeFile } from "fs/promises";
-import { generateHomeTagCardFragment } from "./generateFragment";
+import { createHomeTagCardFragment } from "./generateFragment";
 import { generateAllTagsPage } from "./generatePage";
 import type { Tags } from "./types/Tags";
 
@@ -12,7 +12,7 @@ export async function buildTagsHomePage(
   const tagCardFragment = new Array(...tags)
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([tag, { rawTag, count }]) =>
-      generateHomeTagCardFragment({ tag, rawTag, count }),
+      createHomeTagCardFragment({ tag, rawTag, count }),
     )
     .join("");
 

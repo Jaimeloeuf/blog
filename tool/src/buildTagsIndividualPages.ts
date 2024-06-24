@@ -1,6 +1,6 @@
 import { resolve } from "path";
 import { writeFile } from "fs/promises";
-import { generatePostCardFragment } from "./generateFragment";
+import { createPostCardFragment } from "./generateFragment";
 import { generateTagsPage } from "./generatePage";
 import type { Post } from "./types/Post";
 import type { Tags } from "./types/Tags";
@@ -17,7 +17,7 @@ export async function buildTagsIndividualPages(
     const postCardFragment = posts
       .filter((post) => post.tags.some((postTag) => postTag.tag === tag))
       .map((post) =>
-        generatePostCardFragment({
+        createPostCardFragment({
           folderName: post.folderName,
           title: post.title,
           postDate: post.date.toDateString(),
