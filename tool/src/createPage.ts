@@ -5,7 +5,7 @@ import {
   createHighlightJsFragment,
   createScrollToTopButtonFragment,
   createSubscribeCardFragment,
-} from "./generateFragment";
+} from "./createFragment";
 import { defaultOgpImageMetaTag } from "./utils/defaultOgpImageMetaTag";
 
 export const createNotFoundPage = () =>

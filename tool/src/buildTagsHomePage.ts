@@ -1,6 +1,6 @@
 import { resolve } from "path";
 import { writeFile } from "fs/promises";
-import { createHomeTagCardFragment } from "./generateFragment";
+import { createHomeTagCardFragment } from "./createFragment";
 import { createAllTagsPage } from "./createPage";
 import type { Tags } from "./types/Tags";
 
