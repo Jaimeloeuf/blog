@@ -11,7 +11,7 @@ import { defaultOgpImageMetaTag } from "../utils/defaultOgpImageMetaTag";
 import { createOgpImageMetaTag } from "../utils/createOgpImageMetaTag";
 import { imageSize } from "image-size";
 import { createNewFolderPath } from "./createNewFolderPath";
-import { generateOgpTagMetaTags } from "./generateOgpTagMetaTags";
+import { createOgpTagMetaTags } from "./createOgpTagMetaTags";
 import { createAndSaveHtmlFile } from "./createAndSaveHtmlFile";
 import { logger } from "../../shared/logger";
 import type { Post } from "../types/Post";
@@ -58,7 +58,7 @@ export async function buildPost(
           imageSize(path.resolve(postFolderPath, keyImage)),
         );
 
-  const ogpTagMetaTags = generateOgpTagMetaTags(postAttributes.tags);
+  const ogpTagMetaTags = createOgpTagMetaTags(postAttributes.tags);
 
   const timeToRead = computeTimeToRead(postAsMarkdownString);
 
