@@ -5,4 +5,4 @@ node_modules/
 tool/dev/_cert.pem
 
 # Ignore generated source code
-tool/src/__generated
+tool/src/__generated/*.ts

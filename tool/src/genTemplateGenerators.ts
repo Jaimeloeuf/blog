@@ -2,7 +2,6 @@ import path from "path";
 import { readdir, writeFile } from "fs/promises";
 import { templateDirPath, generatedSrcDirPath } from "./utils/dirPaths";
 import { logger } from "../shared/logger";
-import { createFolderIfDoesNotExist } from "./utils/createFolderIfDoesNotExist";
 
 /**
  * Generate a single 'template creator' function code using template file path
@@ -50,8 +49,6 @@ rfs("${templatePath}")`;
  * Generate 'template creator' functions for all templates
  */
 export async function genTemplateCreators() {
-  await createFolderIfDoesNotExist(generatedSrcDirPath);
-
   const templateDirItems = await readdir(templateDirPath, { recursive: true });
 
   const templatePaths = templateDirItems.filter((path) =>
