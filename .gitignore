@@ -3,3 +3,6 @@ node_modules/
 
 # Generated and cached HTTPS cert
 tool/dev/_cert.pem
+
+# Ignore generated source code
+tool/src/__generated

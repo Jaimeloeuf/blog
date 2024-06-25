@@ -1,5 +1,8 @@
-import { readdir } from "fs/promises";
-import { templateDirPath } from "./utils/dirPaths";
+import path from "path";
+import { readdir, writeFile } from "fs/promises";
+import { templateDirPath, generatedSrcDirPath } from "./utils/dirPaths";
+import { logger } from "../shared/logger";
+import { createFolderIfDoesNotExist } from "./utils/createFolderIfDoesNotExist";
 
 /**
  * Generate a single 'template creator' function code using template file path
@@ -47,15 +50,26 @@ rfs("${templatePath}")`;
  * Generate 'template creator' functions for all templates
  */
 export async function genTemplateCreators() {
+  await createFolderIfDoesNotExist(generatedSrcDirPath);
+
   const templateDirItems = await readdir(templateDirPath, { recursive: true });
 
   const templatePaths = templateDirItems.filter((path) =>
     path.endsWith(".html"),
   );
 
-  for (const templatePath of templatePaths) {
-    const generatedCode = genTemplateCreator(templatePath);
-  }
+  const generatedCode = templatePaths
+    .map((templatePath) => genTemplateCreator(templatePath))
+    .join("\n\n");
+
+  const generatedFilePath = path.resolve(
+    generatedSrcDirPath,
+    `templateCreators.ts`,
+  );
+
+  await writeFile(generatedFilePath, generatedCode, { flag: "w" });
+
+  logger.info(genTemplateCreator.name, `Generated '${generatedFilePath}'`);
 }
 
 genTemplateCreators();
