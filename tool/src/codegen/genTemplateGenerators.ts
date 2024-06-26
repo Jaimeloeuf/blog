@@ -1,7 +1,7 @@
 import path from "path";
 import { readdir, writeFile } from "fs/promises";
-import { templateDirPath, generatedSrcDirPath } from "./utils/dirPaths";
-import { logger } from "../shared/logger";
+import { templateDirPath, generatedSrcDirPath } from "../utils/dirPaths";
+import { logger } from "../../shared/logger";
 
 /**
  * Generate a single 'template creator' function code using template file path
