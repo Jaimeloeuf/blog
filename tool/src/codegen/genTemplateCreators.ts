@@ -17,6 +17,7 @@ export async function genTemplateCreators() {
 
   const generatedCode =
     genGeneratedNotice(genTemplateCreators) +
+    'import { rfs } from "../utils/rfs";\n\n' +
     templatePaths
       .map((templatePath) => genTemplateCreator(templatePath))
       .join("\n\n");
