@@ -3,6 +3,7 @@ import { readdir, writeFile } from "fs/promises";
 import { templateDirPath, generatedSrcDirPath } from "../utils/dirPaths";
 import { logger } from "../../shared/logger";
 import { genTemplateCreator } from "./genTemplateCreator";
+import { genGeneratedNotice } from "./genGeneratedNotice";
 
 /**
  * Generate 'template creator' functions for all templates
@@ -14,9 +15,11 @@ export async function genTemplateCreators() {
     path.endsWith(".html"),
   );
 
-  const generatedCode = templatePaths
-    .map((templatePath) => genTemplateCreator(templatePath))
-    .join("\n\n");
+  const generatedCode =
+    genGeneratedNotice(genTemplateCreators) +
+    templatePaths
+      .map((templatePath) => genTemplateCreator(templatePath))
+      .join("\n\n");
 
   const generatedFilePath = path.resolve(
     generatedSrcDirPath,
