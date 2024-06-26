@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "codegen": "npx ts-node ./src/codegen/genTemplateGenerators.ts",
+    "codegen": "npx ts-node ./src/codegen/genTemplateCreators.ts",
     "serve": "npx ts-node ./dev/serve.ts",
     "build": "npx ts-node ./build.ts"
   },
