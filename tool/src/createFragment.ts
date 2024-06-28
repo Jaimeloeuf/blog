@@ -1,11 +1,10 @@
 import { rfs } from "./utils/rfs";
 
-export const createFooterFragment = () => rfs("fragments/footer.html");
+export const createFooterFragment = () => rfs("fragment/footer.html");
 
-export const createHeaderFragment = () => rfs("fragments/header.html");
+export const createHeaderFragment = () => rfs("fragment/header.html");
 
-export const createHighlightJsFragment = () =>
-  rfs("fragments/highlightJS.html");
+export const createHighlightJsFragment = () => rfs("fragment/highlightJS.html");
 
 export const createPostCardFragment = ({
   folderName,
@@ -16,7 +15,7 @@ export const createPostCardFragment = ({
   title: string;
   postDate: string;
 }) =>
-  rfs("fragments/postCard.html")
+  rfs("fragment/postCard.html")
     .replace("${folderName}", folderName)
     .replace("${title}", title)
     .replace("${postDate}", postDate);
@@ -30,12 +29,12 @@ export const createHomeTagCardFragment = ({
   rawTag: string;
   count: number;
 }) =>
-  rfs("fragments/homeTagCard.html")
+  rfs("fragment/homeTagCard.html")
     .replace("${tag}", tag)
     .replace("${rawTag}", rawTag)
     .replace("${count}", count.toString());
 
-export const createHrFragment = () => rfs("fragments/hr.html");
+export const createHrFragment = () => rfs("fragment/hr.html");
 
 export const createPostTagsFragment = ({
   tag,
@@ -44,12 +43,12 @@ export const createPostTagsFragment = ({
   tag: string;
   rawTag: string;
 }) =>
-  rfs("fragments/postTags.html")
+  rfs("fragment/postTags.html")
     .replace("${tag}", tag)
     .replace("${rawTag}", rawTag);
 
 export const createScrollToTopButtonFragment = () =>
-  rfs("fragments/scrollToTopButton.html");
+  rfs("fragment/scrollToTopButton.html");
 
 export const createSubscribeCardFragment = () =>
-  rfs("fragments/subscribeCard.html");
+  rfs("fragment/subscribeCard.html");
