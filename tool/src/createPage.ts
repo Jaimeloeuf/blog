@@ -9,7 +9,7 @@ import {
 import { defaultOgpImageMetaTag } from "./utils/defaultOgpImageMetaTag";
 
 export const createNotFoundPage = () =>
-  rfs("pages/404.html")
+  rfs("page/404.html")
     .replace("${footer}", createFooterFragment())
     .replace("${headerFragment}", createHeaderFragment())
     .replace("${ogpImageMetaTags}", defaultOgpImageMetaTag);
@@ -23,7 +23,7 @@ export const createAllTagsPage = ({
   postCount: number;
   tagCount: number;
 }) =>
-  rfs("pages/allTags.html")
+  rfs("page/allTags.html")
     .replace("${footer}", createFooterFragment())
     .replace("${scrollToTopButton}", createScrollToTopButtonFragment())
     .replace("${tags}", tagCardFragment)
@@ -43,7 +43,7 @@ export const createHomePage = ({
   postCount: number;
   tagCount: number;
 }) =>
-  rfs("pages/home.html")
+  rfs("page/home.html")
     .replace("${footer}", createFooterFragment())
     .replace("${scrollToTopButton}", createScrollToTopButtonFragment())
     .replace("${postLinks}", postCardFragments)
@@ -75,7 +75,7 @@ export const createPostPage = ({
   ogpImageMetaTag: string;
   ogpTagMetaTags: string;
 }) =>
-  rfs("pages/post.html")
+  rfs("page/post.html")
     .replaceAll("${title}", title)
     .replaceAll("${date}", date)
     .replace(
@@ -98,7 +98,7 @@ export const createPostPage = ({
     .replace("${ogpImageMetaTags}", ogpImageMetaTag);
 
 export const createSubscribePage = () =>
-  rfs("pages/subscribe.html")
+  rfs("page/subscribe.html")
     .replace("${footer}", createFooterFragment())
     .replace("${subscribeCardFragment}", createSubscribeCardFragment())
     .replace("${headerFragment}", createHeaderFragment())
@@ -113,7 +113,7 @@ export const createTagsPage = ({
   count: number;
   postCardFragment: string;
 }) =>
-  rfs("pages/tag.html")
+  rfs("page/tag.html")
     .replaceAll("${tag}", rawTag)
     .replace("${footer}", createFooterFragment())
     .replace("${scrollToTopButton}", createScrollToTopButtonFragment())
