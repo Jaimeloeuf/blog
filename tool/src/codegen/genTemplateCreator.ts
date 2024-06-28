@@ -1,7 +1,7 @@
 /**
  * Generate a single 'template creator' function code using template file path
  */
-export function genTemplateCreator(templatePath: string) {
+export async function genTemplateCreator(templatePath: string) {
   const templatePathComponents = templatePath.split("/");
 
   // Generate template type by camel casing the path components

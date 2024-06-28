@@ -15,11 +15,13 @@ export async function genTemplateCreators() {
     path.endsWith(".html"),
   );
 
-  const generatedCode =
-    'import { rfs } from "../utils/rfs";\n\n' +
-    templatePaths
-      .map((templatePath) => genTemplateCreator(templatePath))
-      .join("\n\n");
+  const requiredImports = 'import { rfs } from "../utils/rfs";\n\n';
+
+  const generatedTemplateCreators = await Promise.all(
+    templatePaths.map((templatePath) => genTemplateCreator(templatePath)),
+  ).then((generatedTemplateCreators) => generatedTemplateCreators.join("\n\n"));
+
+  const generatedCode = requiredImports + generatedTemplateCreators;
 
   const generatedCodeFile = genGeneratedCodeFile(
     genTemplateCreators,
