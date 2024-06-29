@@ -17,8 +17,11 @@ export async function genTemplateCreator(templatePath: string) {
     new Set(file.match(/\$\{([^}]+)\}/g)).values(),
   ).map((templateVariable) => templateVariable.slice(2, -1));
 
-  const param = `{${templateVariables.join()}}`;
-  const paramTypes = `{${templateVariables.map((variable) => variable + ": string|number;").join("")}}`;
+  // Create destructured object params if there are template variables
+  const params =
+    templateVariables.length === 0
+      ? ""
+      : `{${templateVariables.join()}}: {${templateVariables.map((variable) => variable + ": string|number;").join("")}}`;
 
-  return `export const ${functionName} = (${param}: ${paramTypes}) => \`${file}\``;
+  return `export const ${functionName} = (${params}) => \`${file}\``;
 }
