@@ -4,7 +4,6 @@ import { templateDirPath, generatedSrcDirPath } from "../utils/dirPaths";
 import { logger } from "../../shared/logger";
 import { genTemplateCreator } from "./genTemplateCreator";
 import { genGeneratedCodeFile } from "./genGeneratedCodeFile";
-import * as prettier from "prettier";
 
 /**
  * Generate 'template creator' functions for all templates
@@ -25,14 +24,9 @@ export async function genTemplateCreators() {
     templatePaths.map((templatePath) => genTemplateCreator(templatePath)),
   ).then((generatedTemplateCreators) => generatedTemplateCreators.join("\n\n"));
 
-  const generatedCodeAfterFormatting = await prettier.format(generatedCode, {
-    filepath: generatedFilePath, // Define this for prettier to choose parser
-    plugins: ["prettier-plugin-tailwindcss"],
-  });
-
-  const generatedCodeFile = genGeneratedCodeFile(
+  const generatedCodeFile = await genGeneratedCodeFile(
     genTemplateCreators,
-    generatedCodeAfterFormatting,
+    generatedCode,
   );
 
   await writeFile(generatedFilePath, generatedCodeFile, { flag: "w" });
