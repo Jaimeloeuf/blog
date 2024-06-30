@@ -32,4 +32,6 @@ export async function genTemplateCreators() {
   await writeFile(generatedFilePath, generatedCodeFile, { flag: "w" });
 
   logger.info(genTemplateCreator.name, `Generated '${generatedFilePath}'`);
+
+  return generatedFilePath;
 }
