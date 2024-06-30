@@ -33,5 +33,3 @@ export async function genTemplateCreators() {
 
   logger.info(genTemplateCreator.name, `Generated '${generatedFilePath}'`);
 }
-
-genTemplateCreators();
