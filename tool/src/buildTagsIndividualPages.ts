@@ -1,7 +1,13 @@
 import { resolve } from "path";
 import { writeFile } from "fs/promises";
-import { createPostCardFragment } from "./__generated";
-import { createTagsPage } from "./createPage";
+import {
+  createTagPage,
+  createFooterFragment,
+  createHeaderFragment,
+  createPostCardFragment,
+  createScrollToTopButtonFragment,
+} from "./__generated";
+import { defaultOgpImageMetaTag } from "./utils/defaultOgpImageMetaTag";
 import type { Post } from "./types/Post";
 import type { Tags } from "./types/Tags";
 
@@ -25,7 +31,15 @@ export async function buildTagsIndividualPages(
       )
       .join("");
 
-    const tagHTML = createTagsPage({ rawTag, count, postCardFragment });
+    const tagHTML = createTagPage({
+      count,
+      tag: rawTag,
+      posts: postCardFragment,
+      ogpImageMetaTags: defaultOgpImageMetaTag,
+      headerFragment: createHeaderFragment(),
+      scrollToTopButton: createScrollToTopButtonFragment(),
+      footer: createFooterFragment(),
+    });
 
     const htmlFilePath = resolve(tagsFolderPath, `${tag}.html`);
     await writeFile(htmlFilePath, tagHTML, { flag: "w" });

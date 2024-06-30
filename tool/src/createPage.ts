@@ -90,21 +90,3 @@ export const createPostPage = ({
     .replace("${headerFragment}", createHeaderFragment())
     .replace("${ogpTagMetaTags}", ogpTagMetaTags)
     .replace("${ogpImageMetaTags}", ogpImageMetaTag);
-
-export const createTagsPage = ({
-  rawTag,
-  count,
-  postCardFragment,
-}: {
-  rawTag: string;
-  count: number;
-  postCardFragment: string;
-}) =>
-  rfs("page/tag.html")
-    .replaceAll("${tag}", rawTag)
-    .replace("${footer}", createFooterFragment())
-    .replace("${scrollToTopButton}", createScrollToTopButtonFragment())
-    .replace("${posts}", postCardFragment)
-    .replace("${count}", count.toString())
-    .replace("${headerFragment}", createHeaderFragment())
-    .replace("${ogpImageMetaTags}", defaultOgpImageMetaTag);
