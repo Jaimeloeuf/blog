@@ -1,6 +1,6 @@
 import path from "path";
 import { getConfig } from "../config";
-import { createPostTagsFragment } from "../createFragment";
+import { createPostTagsFragment } from "../__generated";
 import { postsDirPath } from "../utils/dirPaths";
 import { createSafeTagName } from "../utils/createSafeTagName";
 import { getPost } from "./getPost";

@@ -1,6 +1,6 @@
 import { resolve } from "path";
 import { writeFile } from "fs/promises";
-import { createPostCardFragment } from "./createFragment";
+import { createPostCardFragment } from "./__generated";
 import { createTagsPage } from "./createPage";
 import type { Post } from "./types/Post";
 import type { Tags } from "./types/Tags";

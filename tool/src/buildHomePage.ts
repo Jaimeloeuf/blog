@@ -1,7 +1,7 @@
 import path from "path";
 import { writeFile } from "fs/promises";
 import { createHomePage } from "./createPage";
-import { createPostCardFragment } from "./createFragment";
+import { createPostCardFragment } from "./__generated";
 import type { Post } from "./types/Post";
 import type { Tags } from "./types/Tags";
 
