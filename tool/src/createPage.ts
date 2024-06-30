@@ -8,24 +8,6 @@ import {
 } from "./createFragment";
 import { defaultOgpImageMetaTag } from "./utils/defaultOgpImageMetaTag";
 
-export const createAllTagsPage = ({
-  tagCardFragment,
-  postCount,
-  tagCount,
-}: {
-  tagCardFragment: string;
-  postCount: number;
-  tagCount: number;
-}) =>
-  rfs("page/allTags.html")
-    .replace("${footer}", createFooterFragment())
-    .replace("${scrollToTopButton}", createScrollToTopButtonFragment())
-    .replace("${tags}", tagCardFragment)
-    .replace("${tagCount}", tagCount.toString())
-    .replace("${postCount}", postCount.toString())
-    .replace("${headerFragment}", createHeaderFragment())
-    .replace("${ogpImageMetaTags}", defaultOgpImageMetaTag);
-
 export const createHomePage = ({
   postCardFragments,
   pinnedPostCardFragments,
