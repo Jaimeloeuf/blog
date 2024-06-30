@@ -8,12 +8,6 @@ import {
 } from "./createFragment";
 import { defaultOgpImageMetaTag } from "./utils/defaultOgpImageMetaTag";
 
-export const createNotFoundPage = () =>
-  rfs("page/404.html")
-    .replace("${footer}", createFooterFragment())
-    .replace("${headerFragment}", createHeaderFragment())
-    .replace("${ogpImageMetaTags}", defaultOgpImageMetaTag);
-
 export const createAllTagsPage = ({
   tagCardFragment,
   postCount,
