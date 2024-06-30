@@ -91,13 +91,6 @@ export const createPostPage = ({
     .replace("${ogpTagMetaTags}", ogpTagMetaTags)
     .replace("${ogpImageMetaTags}", ogpImageMetaTag);
 
-export const createSubscribePage = () =>
-  rfs("page/subscribe.html")
-    .replace("${footer}", createFooterFragment())
-    .replace("${subscribeCardFragment}", createSubscribeCardFragment())
-    .replace("${headerFragment}", createHeaderFragment())
-    .replace("${ogpImageMetaTags}", defaultOgpImageMetaTag);
-
 export const createTagsPage = ({
   rawTag,
   count,
