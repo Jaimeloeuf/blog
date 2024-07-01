@@ -27,7 +27,9 @@ export async function genTemplateCreator(templatePath: string) {
 
       // Get variable type from variable definition if any, else default to string
       // type since anything that is string or have .toString() is supported
-      const [variableName = "", variableType = "string"] = variable.split(":");
+      const [variableName = "", variableType = "string"] = variable
+        .replaceAll(" ", "")
+        .split(":");
 
       // Save the template variable found, using a Set to guarantee uniqueness
       templateVariables.add(variableName);
