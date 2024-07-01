@@ -4,31 +4,7 @@ import {
   createHeaderFragment,
   createHighlightJsFragment,
   createScrollToTopButtonFragment,
-  createSubscribeCardFragment,
 } from "./createFragment";
-import { defaultOgpImageMetaTag } from "./utils/defaultOgpImageMetaTag";
-
-export const createHomePage = ({
-  postCardFragments,
-  pinnedPostCardFragments,
-  postCount,
-  tagCount,
-}: {
-  postCardFragments: string;
-  pinnedPostCardFragments: string;
-  postCount: number;
-  tagCount: number;
-}) =>
-  rfs("page/home.html")
-    .replace("${footer}", createFooterFragment())
-    .replace("${scrollToTopButton}", createScrollToTopButtonFragment())
-    .replace("${postLinks}", postCardFragments)
-    .replace("${pinnedPostCardFragments}", pinnedPostCardFragments)
-    .replace("${tagCount}", tagCount.toString())
-    .replace("${postCount}", postCount.toString())
-    .replace("${subscribeCardFragment}", createSubscribeCardFragment())
-    .replace("${headerFragment}", createHeaderFragment())
-    .replace("${ogpImageMetaTags}", defaultOgpImageMetaTag);
 
 export const createPostPage = ({
   title,

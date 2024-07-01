@@ -1,7 +1,14 @@
 import path from "path";
 import { writeFile } from "fs/promises";
-import { createHomePage } from "./createPage";
-import { createPostCardFragment } from "./__generated";
+import {
+  createPostCardFragment,
+  createHomePage,
+  createHeaderFragment,
+  createSubscribeCardFragment,
+  createScrollToTopButtonFragment,
+  createFooterFragment,
+} from "./__generated";
+import { defaultOgpImageMetaTag } from "./utils/defaultOgpImageMetaTag";
 import type { Post } from "./types/Post";
 import type { Tags } from "./types/Tags";
 
@@ -27,10 +34,15 @@ export async function buildHomePage(
   }
 
   const fullHtmlPage = createHomePage({
-    postCardFragments,
+    postLinks: postCardFragments,
     pinnedPostCardFragments,
     postCount: posts.length,
     tagCount: tags.size,
+    ogpImageMetaTags: defaultOgpImageMetaTag,
+    headerFragment: createHeaderFragment(),
+    subscribeCardFragment: createSubscribeCardFragment(),
+    scrollToTopButton: createScrollToTopButtonFragment(),
+    footer: createFooterFragment(),
   });
 
   const homePagePath = path.resolve(buildOutputFolderPath, "index.html");

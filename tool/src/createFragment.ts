@@ -8,6 +8,3 @@ export const createHighlightJsFragment = () => rfs("fragment/highlightJS.html");
 
 export const createScrollToTopButtonFragment = () =>
   rfs("fragment/scrollToTopButton.html");
-
-export const createSubscribeCardFragment = () =>
-  rfs("fragment/subscribeCard.html");
