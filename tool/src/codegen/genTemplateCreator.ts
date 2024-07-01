@@ -13,33 +13,41 @@ export async function genTemplateCreator(templatePath: string) {
     encoding: "utf8",
   });
 
-  const templateVariables = Array.from(
-    new Set(file.match(/\$\{([^}]+)\}/g)).values(),
-  ).map((templateVariable) => templateVariable.slice(2, -1));
+  const templateVariables = new Set<string>();
+  const templateVariableParamTypes = new Set<string>();
+
+  // Strip variable types from file to use it as JS string template, and also
+  // saves the variables and types to generate the parameter types of the
+  // creator functions later.
+  const newFileWithoutTypes = file.replaceAll(
+    /\$\{([^}]+)\}/g,
+    (rawVariableString) => {
+      // Slice out the surrounding ${ }
+      const variable = rawVariableString.slice(2, -1);
+
+      // Get variable type from variable definition if any, else default to string
+      // type since anything that is string or have .toString() is supported
+      const [variableName = "", variableType = "string"] = variable.split(":");
+
+      // Save the template variable found, using a Set to guarantee uniqueness
+      templateVariables.add(variableName);
+
+      // Create the creator function parameter type
+      templateVariableParamTypes.add(`${variableName}: ${variableType};`);
+
+      // Add back ${ } but without variable type to use in JS string template
+      return `\${${variableName}}`;
+    },
+  );
 
   // Create destructured object params if there are template variables
-  const params = templateVariablesParser(templateVariables);
+  const params =
+    templateVariables.size === 0
+      ? ""
+      : `{${Array.from(templateVariables).join()}}: {${Array.from(templateVariableParamTypes).join("")}}`;
 
   const JSDoc = `/**\n * Template: src/template/${templatePath}\n */\n`;
-  const code = `export const ${functionName} = (${params}) => \`${file}\``;
+  const code = `export const ${functionName} = (${params}) => \`${newFileWithoutTypes}\``;
 
   return JSDoc + code;
-}
-
-/**
- * Create destructured object params for each variable found in template
- */
-function templateVariablesParser(templateVariables: Array<string>) {
-  if (templateVariables.length === 0) {
-    return "";
-  }
-
-  const paramType = templateVariables
-    .map((variable) => {
-      const [variableName, type = "string"] = variable.split(":");
-      return `${variableName}: ${type};`;
-    })
-    .join("");
-
-  return `{${templateVariables.join()}}: {${paramType}}`;
 }
