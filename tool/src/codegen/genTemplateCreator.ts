@@ -23,5 +23,8 @@ export async function genTemplateCreator(templatePath: string) {
       ? ""
       : `{${templateVariables.join()}}: {${templateVariables.map((variable) => variable + ": string|number;").join("")}}`;
 
-  return `export const ${functionName} = (${params}) => \`${file}\``;
+  const JSDoc = `/**\n * Template: src/template/${templatePath}\n */\n`;
+  const code = `export const ${functionName} = (${params}) => \`${file}\``;
+
+  return JSDoc + code;
 }
