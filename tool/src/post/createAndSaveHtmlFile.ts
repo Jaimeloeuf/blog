@@ -1,6 +1,12 @@
 import path from "path";
 import { writeFile } from "fs/promises";
-import { createPostPage } from "../createPage";
+import {
+  createFooterFragment,
+  createHeaderFragment,
+  createHighlightJSFragment,
+  createPostPage,
+  createScrollToTopButtonFragment,
+} from "../__generated";
 
 /**
  * Create and save the HTML file in the output folder and return its path.
@@ -14,19 +20,24 @@ export async function createAndSaveHtmlFile(
   tagFragment: string,
   postContent: string,
   postContainsCodeblock: boolean,
-  ogpImageMetaTag: string,
+  ogpImageMetaTags: string,
   ogpTagMetaTags: string,
 ) {
   const fullHtmlPage = createPostPage({
     title,
     date,
-    draft,
+    draftModeNotice: draft
+      ? `<p class="pb-8 text-2xl font-extralight italic">*** this post is in draft mode ***</p>`
+      : "",
     timeToRead,
-    tagFragment,
+    tags: tagFragment,
     postContent,
-    postContainsCodeblock,
-    ogpImageMetaTag,
+    highlightJS: postContainsCodeblock ? createHighlightJSFragment() : "",
+    ogpImageMetaTags,
     ogpTagMetaTags,
+    headerFragment: createHeaderFragment(),
+    scrollToTopButton: createScrollToTopButtonFragment(),
+    footer: createFooterFragment(),
   });
 
   const htmlFilePath = path.resolve(newFolderPath, `index.html`);
