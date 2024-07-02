@@ -26,7 +26,10 @@ export async function genGeneratedCodeFile(
     .digest()
     .toString("hex");
 
-  const notice = genGeneratedNotice(generator, codeHash);
+  // Wrap it so that it is easy to parse out with regex when needed
+  const wrappedCodeHash = `sha256<${codeHash}>`;
+
+  const notice = genGeneratedNotice(generator, wrappedCodeHash);
 
   return notice + generatedCodeAfterFormatting;
 }
