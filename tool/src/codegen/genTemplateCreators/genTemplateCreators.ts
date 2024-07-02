@@ -1,9 +1,9 @@
 import path from "path";
 import { readdir, writeFile } from "fs/promises";
-import { templateDirPath, generatedSrcDirPath } from "../utils/dirPaths";
-import { logger } from "../../shared/logger";
+import { templateDirPath, generatedSrcDirPath } from "../../utils/dirPaths";
+import { logger } from "../../../shared/logger";
 import { genTemplateCreator } from "./genTemplateCreator";
-import { genGeneratedCodeFile } from "./genGeneratedCodeFile";
+import { genGeneratedCodeFile } from "../genGeneratedCodeFile";
 
 /**
  * Generate 'template creator' functions for all templates

@@ -1,6 +1,6 @@
 import { resolve } from "path";
 import { readFile } from "fs/promises";
-import { templateDirPath } from "../utils/dirPaths";
+import { templateDirPath } from "../../utils/dirPaths";
 import { genTemplateCreatorFunctionName } from "./genTemplateCreatorFunctionName";
 import { parseTemplateForTemplateAndVariables } from "./parseTemplateForTemplateAndVariables";
 

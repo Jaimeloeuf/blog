@@ -1,5 +1,5 @@
 import { logger } from "../../shared/logger";
-import { genTemplateCreators } from "./genTemplateCreators";
+import { genTemplateCreators } from "./genTemplateCreators/genTemplateCreators";
 import { genCodegenBarrelFile } from "./genCodegenBarrelFile";
 
 async function codegenEntrypoint() {

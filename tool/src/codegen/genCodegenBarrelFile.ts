@@ -2,7 +2,6 @@ import path from "path";
 import { writeFile } from "fs/promises";
 import { generatedSrcDirPath } from "../utils/dirPaths";
 import { logger } from "../../shared/logger";
-import { genTemplateCreator } from "./genTemplateCreator";
 import { genGeneratedCodeFile } from "./genGeneratedCodeFile";
 
 /**
@@ -34,5 +33,5 @@ export async function genCodegenBarrelFile(...paths: Array<string>) {
 
   await writeFile(generatedFilePath, generatedCodeFile, { flag: "w" });
 
-  logger.info(genTemplateCreator.name, `Generated '${generatedFilePath}'`);
+  logger.info(genCodegenBarrelFile.name, `Generated '${generatedFilePath}'`);
 }
