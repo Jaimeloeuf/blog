@@ -2,6 +2,7 @@ import { resolve } from "path";
 import { readFile } from "fs/promises";
 import { templateDirPath } from "../utils/dirPaths";
 import { genTemplateCreatorFunctionName } from "./genTemplateCreatorFunctionName";
+import { logger } from "../../shared/logger";
 
 /**
  * Generate a single 'template creator' function code using template file path
@@ -30,6 +31,20 @@ export async function genTemplateCreator(templatePath: string) {
       const [variableName = "", variableType = "string"] = variable
         .replaceAll(" ", "")
         .split(":");
+
+      const validTemplateVariableTypes = ["string", "number", "boolean"];
+      if (!validTemplateVariableTypes.includes(variableType)) {
+        logger.info(
+          genTemplateCreator.name,
+          `Found invalid template variable type: ${variableType}`,
+        );
+        logger.info(
+          genTemplateCreator.name,
+          `Template variable: '${variable}'`,
+        );
+        logger.info(genTemplateCreator.name, `Found in: ${templatePath}`);
+        throw new Error(`Invalid template variable type`);
+      }
 
       // Save the template variable found, using a Set to guarantee uniqueness
       templateVariables.add(variableName);
