@@ -32,6 +32,7 @@ jobs:
           cd tool
           NODE_ENV=production
           npm ci
+          npm run codegen
           npm run build
 
       - name: Upload artifact
