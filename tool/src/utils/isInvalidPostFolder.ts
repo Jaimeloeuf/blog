@@ -1,6 +1,7 @@
 import path from "path";
 import { stat } from "fs/promises";
 import { postsDirPath } from "./dirPaths";
+import { logger } from "../../shared/logger";
 
 /**
  * Checks if the given item within posts/ folder is valid. Returns true if
@@ -12,7 +13,7 @@ export async function isInvalidPostFolder(postFolderItemName: string) {
     .catch(() => new Error(`Failed to read stat of: ${postFolderItemName}`));
 
   if (itemStat instanceof Error) {
-    console.error(itemStat);
+    logger.error(isInvalidPostFolder.name, itemStat);
     return true;
   }
 

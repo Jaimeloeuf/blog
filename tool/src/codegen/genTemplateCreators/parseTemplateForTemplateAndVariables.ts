@@ -30,12 +30,11 @@ export function parseTemplateForTemplateAndVariables(
         .split(":");
 
       if (!validTemplateVariableTypes.includes(variableType)) {
-        logger.info(
+        logger.error(
           genTemplateCreator.name,
-          `Found invalid template variable type: ${rawVariableString}`,
+          `Found invalid template variable type '${rawVariableString}' in ${templatePath}`,
         );
-        logger.info(genTemplateCreator.name, `Found in: ${templatePath}`);
-        throw new Error(`Invalid template variable type`);
+        throw new Error();
       }
 
       // Save the template variable found, using a Set to guarantee uniqueness

@@ -1,3 +1,5 @@
+import { logger } from "../../../shared/logger";
+
 export function genTemplateCreatorFunctionName(templatePath: string) {
   const templatePathComponents = templatePath.split("/");
 
@@ -11,13 +13,21 @@ export function genTemplateCreatorFunctionName(templatePath: string) {
           pathComponent[0]?.toUpperCase() + pathComponent.slice(1),
       );
   if (templateType === undefined) {
-    throw new Error("Unable to get template's file type");
+    logger.error(
+      genTemplateCreatorFunctionName.name,
+      "Unable to get template's file type",
+    );
+    throw new Error();
   }
 
   const templateFileName =
     templatePathComponents[templatePathComponents.length - 1];
   if (templateFileName === undefined) {
-    throw new Error("Unable to get template's file name");
+    logger.error(
+      genTemplateCreatorFunctionName.name,
+      "Unable to get template's file name",
+    );
+    throw new Error();
   }
 
   const templateFileNameWithoutHtml = templateFileName.slice(
