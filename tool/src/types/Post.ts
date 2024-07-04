@@ -12,9 +12,9 @@ export type PostSchemaType = z.infer<typeof PostSchema>;
 
 export interface Post extends Omit<PostSchemaType, "tags"> {
   /**
-   * Name of the folder, not the full path!
+   * The generated URL path, which is also the output folder path.
    */
-  folderName: string;
+  urlPath: string;
 
   /**
    * Paths of all the things that are put into the build output folder.

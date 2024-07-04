@@ -24,7 +24,7 @@ export async function buildTagsIndividualPages(
       .filter((post) => post.tags.some((postTag) => postTag.tag === tag))
       .map((post) =>
         createPostCardFragment({
-          folderName: post.folderName,
+          urlPath: post.urlPath,
           title: post.title,
           postDate: post.date.toDateString(),
         }),

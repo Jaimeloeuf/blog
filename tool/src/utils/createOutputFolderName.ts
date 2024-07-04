@@ -2,7 +2,7 @@ import { PostSchemaType } from "../types/Post";
 
 /**
  * Create the output folder name using the original path and post date,
- * this ensures that the name is safe to use as a file path.
+ * this ensures that the name is safe to use as both file path and URL path.
  */
 export function createOutputFolderName(
   post: PostSchemaType,

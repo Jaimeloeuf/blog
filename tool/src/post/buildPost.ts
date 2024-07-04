@@ -1,4 +1,4 @@
-import path from "path";
+import { resolve } from "path";
 import { getConfig } from "../config";
 import { createPostTagsFragment } from "../__generated";
 import { postsDirPath } from "../utils/dirPaths";
@@ -10,7 +10,7 @@ import { getKeyImage } from "./getKeyImage";
 import { defaultOgpImageMetaTag } from "../utils/defaultOgpImageMetaTag";
 import { createOgpImageMetaTag } from "../utils/createOgpImageMetaTag";
 import { imageSize } from "image-size";
-import { createNewFolderPath } from "./createNewFolderPath";
+import { createUrlAndFolderPath } from "./createUrlAndFolderPath";
 import { createOgpTagMetaTags } from "./createOgpTagMetaTags";
 import { createAndSaveHtmlFile } from "./createAndSaveHtmlFile";
 import { logger } from "../../shared/logger";
@@ -24,7 +24,7 @@ export async function buildPost(
   buildOutputFolderPath: string,
   folderPath: string,
 ): Promise<Post | void> {
-  const postFolderPath = path.resolve(postsDirPath, folderPath);
+  const postFolderPath = resolve(postsDirPath, folderPath);
 
   const { postAttributes, postAsMarkdownString, postAsHtmlString } =
     await getPost(postFolderPath);
@@ -37,7 +37,7 @@ export async function buildPost(
     return;
   }
 
-  const { folderName, newFolderPath } = await createNewFolderPath(
+  const { urlPath, newFolderPath } = await createUrlAndFolderPath(
     buildOutputFolderPath,
     postAttributes,
     folderPath,
@@ -48,14 +48,15 @@ export async function buildPost(
     newFolderPath,
   );
 
-  const keyImage = getKeyImage(assetOutputPaths);
+  const keyImageName = getKeyImage(assetOutputPaths);
+  const keyImageUrlPath = `${urlPath}/${keyImageName}`;
 
   const ogpImageMetaTag =
-    keyImage === undefined
+    keyImageName === undefined
       ? defaultOgpImageMetaTag
       : createOgpImageMetaTag(
-          `${folderName}/${keyImage}`,
-          imageSize(path.resolve(postFolderPath, keyImage)),
+          keyImageUrlPath,
+          imageSize(resolve(postFolderPath, keyImageName)),
         );
 
   const ogpTagMetaTags = createOgpTagMetaTags(postAttributes.tags);
@@ -88,8 +89,8 @@ export async function buildPost(
 
   return {
     ...postAttributes,
-    folderName,
-    outputPaths: [htmlFilePath, ...assetOutputPaths],
+    urlPath,
     tags,
+    outputPaths: [htmlFilePath, ...assetOutputPaths],
   };
 }

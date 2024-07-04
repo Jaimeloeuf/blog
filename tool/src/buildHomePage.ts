@@ -21,7 +21,7 @@ export async function buildHomePage(
   let pinnedPostCardFragments = "";
   for (const post of posts) {
     const postCardFragment = createPostCardFragment({
-      folderName: post.folderName,
+      urlPath: post.urlPath,
       title: post.title,
       postDate: post.date.toDateString(),
     });
