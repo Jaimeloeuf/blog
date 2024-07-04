@@ -6,10 +6,7 @@ import { createSafeTagName } from "../utils/createSafeTagName";
 import { getPost } from "./getPost";
 import { computeTimeToRead } from "./computeTimeToRead";
 import { copyOverAssets } from "./copyOverAssets";
-import { getKeyImage } from "./getKeyImage";
-import { defaultOgpImageMetaTag } from "../utils/defaultOgpImageMetaTag";
-import { createOgpImageMetaTag } from "../utils/createOgpImageMetaTag";
-import { imageSize } from "image-size";
+import { getKeyImageAndOgpMetaTag } from "./getKeyImageAndOgpMetaTag";
 import { createUrlAndFolderPath } from "./createUrlAndFolderPath";
 import { createOgpTagMetaTags } from "./createOgpTagMetaTags";
 import { createAndSaveHtmlFile } from "./createAndSaveHtmlFile";
@@ -48,16 +45,10 @@ export async function buildPost(
     newFolderPath,
   );
 
-  const keyImageName = getKeyImage(assetOutputPaths);
-  const keyImageUrlPath = `${urlPath}/${keyImageName}`;
-
-  const ogpImageMetaTag =
-    keyImageName === undefined
-      ? defaultOgpImageMetaTag
-      : createOgpImageMetaTag(
-          keyImageUrlPath,
-          imageSize(resolve(postFolderPath, keyImageName)),
-        );
+  const { keyImageUrlPath, ogpImageMetaTag } = getKeyImageAndOgpMetaTag(
+    assetOutputPaths,
+    urlPath,
+  );
 
   const ogpTagMetaTags = createOgpTagMetaTags(postAttributes.tags);
 
