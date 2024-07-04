@@ -80,8 +80,10 @@ export async function buildPost(
 
   return {
     ...postAttributes,
-    urlPath,
     tags,
+    urlPath,
+    absoluteUrl: `${getConfig().baseUrl}/${urlPath}`,
+    keyImageAbsoluteUrl: `${getConfig().baseUrl}/${keyImageUrlPath}`,
     outputPaths: [htmlFilePath, ...assetOutputPaths],
   };
 }
