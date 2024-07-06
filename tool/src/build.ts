@@ -6,6 +6,7 @@ import { buildPosts } from "./buildPosts";
 import { buildTags } from "./buildTags";
 import { buildHomePage } from "./buildHomePage";
 import { buildTagPages } from "./buildTagPages";
+import { buildRssFeed } from "./buildRssFeed";
 import { buildNotFoundPage } from "./buildNotFoundPage";
 import { buildSubscribePage } from "./buildSubscribePage";
 import { buildAssets } from "./buildAssets";
@@ -23,6 +24,7 @@ export async function build(buildCache?: BuildCache) {
 
   const homePagePath = await buildHomePage(buildOutputFolderPath, posts, tags);
   const tagPagePaths = await buildTagPages(buildOutputFolderPath, posts, tags);
+  const rssFeedPaths = await buildRssFeed(buildOutputFolderPath, posts, tags);
   const notFoundPagePath = await buildNotFoundPage(buildOutputFolderPath);
   const subscribePagePath = await buildSubscribePage(buildOutputFolderPath);
   const assetFilePaths = await buildAssets(buildOutputFolderPath);
@@ -33,6 +35,7 @@ export async function build(buildCache?: BuildCache) {
     notFoundPagePath,
     subscribePagePath,
     styleSheetPath,
+    ...rssFeedPaths,
     ...tagPagePaths,
     ...assetFilePaths,
     ...posts.map((post) => post.outputPaths).flat(),
