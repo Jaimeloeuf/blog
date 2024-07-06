@@ -1,6 +1,8 @@
 # blog
 My blog at <https://blog.jjss.quest>
 
+Also using this repo as an excuse to try, build and experiment with ideas like doing my own static site generation, code generation from templates and etc...
+
 
 ## dirs
 1. [.github](./.github/)
