@@ -5,7 +5,7 @@ import { sf } from "https://cdn.jsdelivr.net/npm/simpler-fetch@10.4.0/+esm";
   const script = document.createElement("script");
   script.type = "text/javascript";
   script.src =
-    "https://www.recaptcha.net/recaptcha/api.js?render=6Ldwb4InAAAAAP8Z6U1JnGq3WQ9pguOtWGh3kuHL";
+    "https://www.recaptcha.net/recaptcha/api.js?render=6LdSsh4qAAAAAJgCceyn4aUuGBzj4R973rmFtxL0";
   document.getElementsByTagName("head")[0].appendChild(script);
 
   const recaptchaInterval = setInterval(function () {
@@ -21,7 +21,7 @@ const getRecaptchaToken = (action) =>
   new Promise((resolve, reject) =>
     window.grecaptcha.ready(() =>
       window.grecaptcha
-        .execute("6Ldwb4InAAAAAP8Z6U1JnGq3WQ9pguOtWGh3kuHL", { action })
+        .execute("6LdSsh4qAAAAAJgCceyn4aUuGBzj4R973rmFtxL0", { action })
         .then(resolve)
         .catch(reject),
     ),
@@ -79,12 +79,10 @@ class Subscribe {
       }
 
       const { res, err } = await sf
-        .useOnce(
-          "https://prod-api.gcp-cr.thepmftool.com/v1/landing/contact-form/submit",
-        )
+        .useOnce("https://api.jjss.quest/blog/subscribe")
         .POST()
         .useHeader({
-          "x-recaptcha-token": await getRecaptchaToken("contactUs"),
+          "x-recaptcha-token": await getRecaptchaToken("subscribeToBlog"),
         })
         .bodyJSON({
           name: "blog.JJSS.quest",
@@ -96,13 +94,13 @@ class Subscribe {
       if (err) {
         throw err;
       }
-      if (!res.ok) {
+
+      // If it is 409 "already subscribed", treat it the same as a successful subscription
+      if (!res.ok && res.status !== 409) {
         throw new Error(JSON.stringify(res, null, 2));
       }
 
-      if (res.status === 201) {
-        alert("Subscribed, you will get new posts in your inbox directly!");
-      }
+      alert("Subscribed, you will get new posts in your inbox directly!");
     } catch (error) {
       alert(`Failed to subscribe: ${error}`);
       console.error(error);
