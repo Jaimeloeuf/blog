@@ -84,11 +84,7 @@ class Subscribe {
         .useHeader({
           "x-recaptcha-token": await getRecaptchaToken("subscribeToBlog"),
         })
-        .bodyJSON({
-          name: "blog.JJSS.quest",
-          email,
-          message: "blog subscription",
-        })
+        .bodyJSON({ email })
         .runJSON();
 
       if (err) {
