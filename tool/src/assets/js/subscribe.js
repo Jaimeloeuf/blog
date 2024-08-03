@@ -71,37 +71,44 @@ class Subscribe {
 
     this.loadingStart();
 
-    try {
-      const email = subscribeCardEmailInput?.value;
+    const email = subscribeCardEmailInput?.value;
 
-      if (typeof email !== "string" || email === "") {
-        throw new Error("Invalid email!");
-      }
+    if (typeof email !== "string" || email === "") {
+      alert("Invalid email!");
+      this.loadingEnd();
 
-      const { res, err } = await sf
-        .useOnce("https://api.jjss.quest/blog/subscribe")
-        .POST()
-        .useHeader({
-          "x-recaptcha-token": await getRecaptchaToken("subscribeToBlog"),
-        })
-        .bodyJSON({ email })
-        .runJSON();
-
-      if (err) {
-        throw err;
-      }
-
-      // If it is 409 "already subscribed", treat it the same as a successful subscription
-      if (!res.ok && res.status !== 409) {
-        throw new Error(JSON.stringify(res, null, 2));
-      }
-
-      alert("Subscribed, you will get new posts in your inbox directly!");
-    } catch (error) {
-      alert(`Failed to subscribe: ${error}`);
-      console.error(error);
+      return;
     }
 
+    const { res, err } = await sf
+      .useOnce("https://api.jjss.quest/blog/subscribe")
+      .POST()
+      .useHeader({
+        "x-recaptcha-token": await getRecaptchaToken("subscribeToBlog"),
+      })
+      .bodyJSON({ email })
+      .runJSON();
+
+    if (err) {
+      alert(`Failed to subscribe: ${err}`);
+      console.error(err);
+      this.loadingEnd();
+
+      return;
+    }
+
+    // If it is 409 "already subscribed", ignore it and let it be treated the
+    // same as a successful subscription
+    if (!res.ok && res.status !== 409) {
+      const error = Error(JSON.stringify(res, null, 2));
+      alert(`Failed to subscribe: ${error}`);
+      console.error(error);
+      this.loadingEnd();
+
+      return;
+    }
+
+    alert("Subscribed, you will get new posts in your inbox directly!");
     this.loadingEnd();
   }
 }
