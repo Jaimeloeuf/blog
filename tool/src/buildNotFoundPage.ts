@@ -17,7 +17,7 @@ export async function buildNotFoundPage(buildOutputFolderPath: string) {
     ogpImageMetaTags: defaultOgpImageMetaTag,
   });
 
-  await writeFile(notFoundPagePath, file, { flag: "w" });
+  await writeFile(notFoundPagePath, file);
 
   return notFoundPagePath;
 }

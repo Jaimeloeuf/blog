@@ -41,6 +41,6 @@ export async function createAndSaveHtmlFile(
   });
 
   const htmlFilePath = path.resolve(newFolderPath, `index.html`);
-  await writeFile(htmlFilePath, fullHtmlPage, { flag: "w" });
+  await writeFile(htmlFilePath, fullHtmlPage);
   return htmlFilePath;
 }

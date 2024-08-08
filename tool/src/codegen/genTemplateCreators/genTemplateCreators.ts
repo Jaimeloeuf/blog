@@ -29,7 +29,7 @@ export async function genTemplateCreators() {
     generatedCode,
   );
 
-  await writeFile(generatedFilePath, generatedCodeFile, { flag: "w" });
+  await writeFile(generatedFilePath, generatedCodeFile);
 
   logger.info(genTemplateCreator.name, `Generated '${generatedFilePath}'`);
 

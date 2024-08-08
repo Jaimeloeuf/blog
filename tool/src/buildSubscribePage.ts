@@ -21,7 +21,7 @@ export async function buildSubscribePage(buildOutputFolderPath: string) {
     footer: createFooterFragment(),
   });
 
-  await writeFile(subscribePagePath, file, { flag: "w" });
+  await writeFile(subscribePagePath, file);
 
   return subscribePagePath;
 }

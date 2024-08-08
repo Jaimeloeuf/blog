@@ -42,7 +42,7 @@ export async function buildTagsIndividualPages(
     });
 
     const htmlFilePath = resolve(tagsFolderPath, `${tag}.html`);
-    await writeFile(htmlFilePath, tagHTML, { flag: "w" });
+    await writeFile(htmlFilePath, tagHTML);
 
     tagPagePaths.push(htmlFilePath);
   }

@@ -33,7 +33,7 @@ export async function buildTagsHomePage(
   });
 
   const allTagPath = resolve(tagsFolderPath, `index.html`);
-  await writeFile(allTagPath, allTagPage, { flag: "w" });
+  await writeFile(allTagPath, allTagPage);
 
   return allTagPath;
 }

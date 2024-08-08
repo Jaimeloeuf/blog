@@ -46,7 +46,7 @@ export async function buildHomePage(
   });
 
   const homePagePath = path.resolve(buildOutputFolderPath, "index.html");
-  await writeFile(homePagePath, fullHtmlPage, { flag: "w" });
+  await writeFile(homePagePath, fullHtmlPage);
 
   return homePagePath;
 }

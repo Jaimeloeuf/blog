@@ -62,10 +62,10 @@ export async function buildRssFeed(
   await createFolderIfDoesNotExist(feedFolderPath);
 
   const rssFeedXmlPagePath = resolve(feedFolderPath, "rss2.rss");
-  await writeFile(rssFeedXmlPagePath, feed.rss2(), { flag: "w" });
+  await writeFile(rssFeedXmlPagePath, feed.rss2());
 
   const rssFeedAtomPagePath = resolve(feedFolderPath, "atom.rss");
-  await writeFile(rssFeedAtomPagePath, feed.atom1(), { flag: "w" });
+  await writeFile(rssFeedAtomPagePath, feed.atom1());
 
   return [rssFeedXmlPagePath, rssFeedAtomPagePath];
 }

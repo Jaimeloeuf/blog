@@ -31,7 +31,7 @@ export async function genCodegenBarrelFile(...paths: Array<string>) {
     generatedCode,
   );
 
-  await writeFile(generatedFilePath, generatedCodeFile, { flag: "w" });
+  await writeFile(generatedFilePath, generatedCodeFile);
 
   logger.info(genCodegenBarrelFile.name, `Generated '${generatedFilePath}'`);
 }
