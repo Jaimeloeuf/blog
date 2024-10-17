@@ -81,7 +81,7 @@ class Subscribe {
     }
 
     const { res, err } = await sf
-      .useOnce("https://api.jjss.quest/blog/subscribe")
+      .useOnce("https://api.jjss.quest/api/v1/blog/subscribe")
       .POST()
       .useHeader({
         "x-recaptcha-token": await getRecaptchaToken("subscribeToBlog"),
